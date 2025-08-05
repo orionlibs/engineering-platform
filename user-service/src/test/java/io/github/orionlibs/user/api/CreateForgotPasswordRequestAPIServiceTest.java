@@ -86,4 +86,16 @@ public class CreateForgotPasswordRequestAPIServiceTest
         assertThat(body.message()).isEqualTo("Validation failed for one or more fields");
         assertThat(body.fieldErrors().get(0).message()).isEqualTo("Invalid email address format");
     }
+
+
+    @Test
+    void createForgotPasswordRequest_authenticatedUser()
+    {
+        RestAssured.baseURI = basePath;
+        CreateForgotPasswordRequestRequest request = CreateForgotPasswordRequestRequest.builder()
+                        .username("me@email.com")
+                        .build();
+        Response response = apiUtils.makePostAPICall(request, headers, user.getId().toString(), "USER");
+        assertThat(response.statusCode()).isEqualTo(403);
+    }
 }

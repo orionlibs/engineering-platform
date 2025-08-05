@@ -103,8 +103,8 @@ public class UserServiceTest
         userTemp.setLastName("Emilson");
         userTemp.setPhoneNumber("07896620211");
         UserModel newUser = dao.save(userTemp);
-        assertThatThrownBy(() -> userService.loadUserByUserID(UUID.fromString("702d6695-0092-4ea1-b322-4c7da832a3b5"))).isInstanceOf(UserIDNotFoundException.class)
-                        .hasMessage("User not found");
+        Optional<UserModel> userWrap = userService.loadUserByUserID(UUID.randomUUID().toString());
+        assertThat(userWrap.isEmpty()).isTrue();
     }
 
 
@@ -140,7 +140,7 @@ public class UserServiceTest
         userTemp.setLastName("Emilson");
         userTemp.setPhoneNumber("07896620211");
         UserModel newUser = dao.save(userTemp);
-        assertThatThrownBy(() -> userService.loadUserByUserID("702d6695-0092-4ea1-b322-4c7da832a3b5")).isInstanceOf(UserIDNotFoundException.class)
-                        .hasMessage("User not found");
+        Optional<UserModel> userWrap = userService.loadUserByUserID(UUID.randomUUID().toString());
+        assertThat(userWrap.isEmpty()).isTrue();
     }
 }
