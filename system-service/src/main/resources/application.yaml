@@ -24,7 +24,7 @@ management:
         #GET /actuator/prometheus
 
 springdoc:
-  packagesToScan: io.github.orionlibs.user.api,io.github.orionlibs.user.authentication.api,io.github.orionlibs.user.registration.api
+  packagesToScan: io.github.orionlibs.system.api
   writer-with-order-by-keys: true
   api-docs:
     path: /api/docs
@@ -33,37 +33,19 @@ springdoc:
 
 spring:
   application:
-    name: User Service
+    name: System Service
   main:
     banner-mode: off
   jackson:
     property-naming-strategy: SNAKE_CASE
 
-user:
-  default-settings:
-    settings:
-      - name: theme
-        value: dark
-
-password:
-  pattern: "^(?=.{8,})(?=.*[A-Z])(?=.*\\d).*$"
-
-error:
-  api:
-    validation:
-      message: "Validation failed for one or more fields"
-    not_found:
-      message: "Resource not found: "
-    access_denied:
-      message: "Access denied"
-    generic_error:
-      message: "An unexpected error occurred"
-  database:
-    duplicate_record:
-      message: "Duplicate database record found: "
-
 version: 0.0.1
 environment: ${ENVIRONMENT_NAME:production}
+
+app:
+  default-config:
+    default.printing.timezone: GB
+    default.page.size: 50
 
 # Production profile (default)
 ---
@@ -84,9 +66,9 @@ crypto:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: ${USERS_DATABASE_URL}
-    username: ${USERS_DATABASE_USERNAME}
-    password: ${USERS_DATABASE_PASSWORD}
+    url: ${SYSTEM_DATABASE_URL}
+    username: ${SYSTEM_DATABASE_USERNAME}
+    password: ${SYSTEM_DATABASE_PASSWORD}
     hikari:
       minimumIdle: 2
       maximumPoolSize: 10
@@ -95,9 +77,9 @@ crypto:
       connectionTimeout: 30000
   logging-datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: ${USERS_DATABASE_URL}
-    username: ${USERS_DATABASE_USERNAME}
-    password: ${USERS_DATABASE_PASSWORD}
+    url: ${SYSTEM_DATABASE_URL}
+    username: ${SYSTEM_DATABASE_USERNAME}
+    password: ${SYSTEM_DATABASE_PASSWORD}
     hikari:
       minimumIdle: 2
       maximumPoolSize: 10
@@ -132,12 +114,12 @@ spring:
 
   datasource:
     driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;MODE=MySQL;\INIT=CREATE SCHEMA IF NOT EXISTS uns;
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;MODE=MySQL;INIT=CREATE SCHEMA IF NOT EXISTS uns
     username: sa
     password:
   logging-datasource:
     driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;MODE=MySQL;\INIT=CREATE SCHEMA IF NOT EXISTS uns;
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;MODE=MySQL;INIT=CREATE SCHEMA IF NOT EXISTS uns
     username: sa
     password:
   #logging:
@@ -151,11 +133,11 @@ spring:
       dialect: org.hibernate.dialect.H2Dialect
   #  show-sql: true
     properties:
-      hibernate:
-        format_sql: true
+      hibernate.default_schema: uns
+      hibernate.format_sql: true
 
   springdoc:
-    packagesToScan: io.github.orionlibs.user.api,io.github.orionlibs.user.authentication.api,io.github.orionlibs.user.registration.api
+    packagesToScan: io.github.orionlibs.system.api
     writer-with-order-by-keys: true
     api-docs:
       enabled: true
