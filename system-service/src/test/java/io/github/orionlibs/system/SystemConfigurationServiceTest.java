@@ -14,7 +14,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootTest
 @ActiveProfiles("test")
-public class ConfigurationServiceTest
+public class SystemConfigurationServiceTest
 {
     @Autowired SystemConfigurationService configurationService;
 
