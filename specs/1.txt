@@ -7,7 +7,6 @@
 
 
 2--create project "user-update-service" with API:
-"PATCH /users/passwords",
 "POST /users/passwords/forgot-requests"
 "PATCH /users/enablements" to enable/disable accounts
 "DELETE /users"
