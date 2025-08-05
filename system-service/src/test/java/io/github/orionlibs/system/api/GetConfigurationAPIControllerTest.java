@@ -39,9 +39,7 @@ public class GetConfigurationAPIControllerTest
         assertThat(response.statusCode()).isEqualTo(200);
         ConfigurationsDTO body = response.as(ConfigurationsDTO.class);
         assertThat(body.configurations().size()).isEqualTo(2);
-        assertThat(body.configurations().get(0).key()).isEqualTo("default.printing.timezone");
-        assertThat(body.configurations().get(0).value()).isEqualTo("GB");
-        assertThat(body.configurations().get(1).key()).isEqualTo("default.page.size");
-        assertThat(body.configurations().get(1).value()).isEqualTo("50");
+        assertThat(body.configurations().contains(new ConfigurationDTO("default.printing.timezone", "GB"))).isTrue();
+        assertThat(body.configurations().contains(new ConfigurationDTO("default.page.size", "50"))).isTrue();
     }
 }

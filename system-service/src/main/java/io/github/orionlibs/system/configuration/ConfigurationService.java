@@ -2,6 +2,7 @@ package io.github.orionlibs.system.configuration;
 
 import io.github.orionlibs.system.configuration.model.ConfigurationDAO;
 import io.github.orionlibs.system.configuration.model.ConfigurationModel;
+import io.github.orionlibs.system.converter.ConfigurationDTOToModelConverter;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,8 @@ public class ConfigurationService
 {
     @Autowired
     private ConfigurationDAO dao;
+    @Autowired
+    private ConfigurationDTOToModelConverter configurationDTOToModelConverter;
 
 
     @Transactional(readOnly = true)
