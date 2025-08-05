@@ -19,7 +19,6 @@ import org.springframework.test.context.ActiveProfiles;
 public class GetConfigurationAPIControllerTest
 {
     @LocalServerPort int port;
-    //@Autowired TestUtils utils;
     @Autowired APITestUtils apiUtils;
     HttpHeaders headers;
 

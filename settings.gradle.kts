@@ -13,9 +13,9 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "engineering-platform"
-include(":core", ":system-service", ":user-service")
+include(":core", ":user-service", ":system-service")
 //include(":uns-cli")
 
 project(":core").projectDir = file("core")
-project(":system-service").projectDir = file("system-service")
 project(":user-service").projectDir = file("user-service")
+project(":system-service").projectDir = file("system-service")
