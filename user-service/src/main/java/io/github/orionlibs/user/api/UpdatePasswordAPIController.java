@@ -41,7 +41,8 @@ public class UpdatePasswordAPIController
                                     )
                     ),
                     responses = {@ApiResponse(responseCode = "201", description = "User password updated"),
-                                    @ApiResponse(responseCode = "400", description = "Invalid input")}
+                                    @ApiResponse(responseCode = "400", description = "Invalid input"),
+                                    @ApiResponse(responseCode = "404", description = "User not found")}
     )
     @PatchMapping(value = "/users/passwords", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("isAuthenticated()")
