@@ -8,6 +8,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Optional;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -39,12 +40,16 @@ public class JWTFilter extends OncePerRequestFilter
             String userID = jwtService.extractUserID(token);
             if(userID != null && SecurityContextHolder.getContext().getAuthentication() == null)
             {
-                UserModel user = userService.loadUserByUserID(userID);
-                if(jwtService.validateToken(token, user))
+                Optional<UserModel> userWrap = userService.loadUserByUserID(userID);
+                if(userWrap.isPresent())
                 {
-                    UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
-                    auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(req));
-                    SecurityContextHolder.getContext().setAuthentication(auth);
+                    UserModel user = userWrap.get();
+                    if(jwtService.validateToken(token, user))
+                    {
+                        UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+                        auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(req));
+                        SecurityContextHolder.getContext().setAuthentication(auth);
+                    }
                 }
             }
         }

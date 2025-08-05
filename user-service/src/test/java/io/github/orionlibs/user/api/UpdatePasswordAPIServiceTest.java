@@ -11,6 +11,7 @@ import io.github.orionlibs.user.registration.UserRegistrationService;
 import io.github.orionlibs.user.registration.api.UserRegistrationRequest;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +59,18 @@ public class UpdatePasswordAPIServiceTest
                         .build();
         Response response = apiUtils.makePatchAPICall(request, headers, user.getId().toString(), "USER");
         assertThat(response.statusCode()).isEqualTo(200);
+    }
+
+
+    @Test
+    void updatePassword_userNotFound()
+    {
+        RestAssured.baseURI = basePath;
+        UpdatePasswordRequest request = UpdatePasswordRequest.builder()
+                        .password("bunkzh3Z!1")
+                        .build();
+        Response response = apiUtils.makePatchAPICall(request, headers, UUID.randomUUID().toString(), "USER");
+        assertThat(response.statusCode()).isEqualTo(404);
     }
 
 

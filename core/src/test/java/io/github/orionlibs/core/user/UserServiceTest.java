@@ -6,6 +6,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import io.github.orionlibs.core.cryptology.HMACSHAEncryptionKeyProvider;
 import io.github.orionlibs.core.user.model.UserDAO;
 import io.github.orionlibs.core.user.model.UserModel;
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
@@ -83,11 +84,11 @@ public class UserServiceTest
         UserModel newUser = dao.save(userTemp);
         assertThat(newUser.getCreatedAt()).isNotNull();
         assertThat(newUser.getUpdatedAt()).isNotNull();
-        UserModel user = userService.loadUserByUserID(newUser.getId());
-        assertThat(user).isNotNull();
-        assertThat(user.getUsername()).isEqualTo("me@email.com");
-        assertThat(user.getPassword().isEmpty()).isFalse();
-        assertThat(user.getAuthorities()).isEqualTo(Set.of(new SimpleGrantedAuthority("USER")));
+        Optional<UserModel> user = userService.loadUserByUserID(newUser.getId());
+        assertThat(user.isPresent()).isTrue();
+        assertThat(user.get().getUsername()).isEqualTo("me@email.com");
+        assertThat(user.get().getPassword().isEmpty()).isFalse();
+        assertThat(user.get().getAuthorities()).isEqualTo(Set.of(new SimpleGrantedAuthority("USER")));
     }
 
 
@@ -120,11 +121,11 @@ public class UserServiceTest
         UserModel newUser = dao.save(userTemp);
         assertThat(newUser.getCreatedAt()).isNotNull();
         assertThat(newUser.getUpdatedAt()).isNotNull();
-        UserModel user = userService.loadUserByUserID(newUser.getId().toString());
-        assertThat(user).isNotNull();
-        assertThat(user.getUsername()).isEqualTo("me@email.com");
-        assertThat(user.getPassword().isEmpty()).isFalse();
-        assertThat(user.getAuthorities()).isEqualTo(Set.of(new SimpleGrantedAuthority("USER")));
+        Optional<UserModel> user = userService.loadUserByUserID(newUser.getId().toString());
+        assertThat(user.isPresent()).isTrue();
+        assertThat(user.get().getUsername()).isEqualTo("me@email.com");
+        assertThat(user.get().getPassword().isEmpty()).isFalse();
+        assertThat(user.get().getAuthorities()).isEqualTo(Set.of(new SimpleGrantedAuthority("USER")));
     }
 
 

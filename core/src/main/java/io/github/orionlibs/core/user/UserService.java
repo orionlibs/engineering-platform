@@ -2,6 +2,7 @@ package io.github.orionlibs.core.user;
 
 import io.github.orionlibs.core.user.model.UserDAO;
 import io.github.orionlibs.core.user.model.UserModel;
+import java.util.Optional;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
@@ -45,17 +46,16 @@ public class UserService implements UserDetailsService
 
 
     @Transactional(readOnly = true)
-    public UserModel loadUserByUserID(String userID) throws UserIDNotFoundException
+    public Optional<UserModel> loadUserByUserID(String userID)
     {
         return loadUserByUserID(UUID.fromString(userID));
     }
 
 
     @Transactional(readOnly = true)
-    public UserModel loadUserByUserID(UUID userID) throws UserIDNotFoundException
+    public Optional<UserModel> loadUserByUserID(UUID userID)
     {
-        return dao.findByUserID(userID)
-                        .orElseThrow(() -> new UserIDNotFoundException("User not found"));
+        return dao.findByUserID(userID);
     }
 
 

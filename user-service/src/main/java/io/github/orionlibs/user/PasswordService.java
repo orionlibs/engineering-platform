@@ -4,6 +4,7 @@ import io.github.orionlibs.core.Logger;
 import io.github.orionlibs.core.user.UserService;
 import io.github.orionlibs.core.user.model.UserModel;
 import io.github.orionlibs.user.api.UpdatePasswordRequest;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +19,12 @@ public class PasswordService
     @Transactional
     public boolean update(String userID, UpdatePasswordRequest request)
     {
-        UserModel user = userService.loadUserByUserID(userID);
+        Optional<UserModel> userWrap = userService.loadUserByUserID(userID);
+        if(userWrap.isEmpty())
+        {
+            return false;
+        }
+        UserModel user = userWrap.get();
         user.setPassword(request.getPassword());
         userService.saveUser(user);
         Logger.info("Updated user password");

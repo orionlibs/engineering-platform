@@ -1,14 +1,13 @@
 package io.github.orionlibs.user;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import io.github.orionlibs.core.user.UserIDNotFoundException;
 import io.github.orionlibs.core.user.UserService;
 import io.github.orionlibs.core.user.model.UserModel;
 import io.github.orionlibs.user.api.UpdatePasswordRequest;
 import io.github.orionlibs.user.registration.UserRegistrationService;
 import io.github.orionlibs.user.registration.api.UserRegistrationRequest;
+import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +56,7 @@ public class PasswordServiceTest
         UpdatePasswordRequest request = UpdatePasswordRequest.builder()
                         .password("bunkzh3Z!1")
                         .build();
-        assertThatThrownBy(() -> passwordService.update("702d6695-0092-4ea1-b322-4c7da832a3b5", request)).isInstanceOf(UserIDNotFoundException.class)
-                        .hasMessageContaining("User not found");
+        boolean result = passwordService.update(UUID.randomUUID().toString(), request);
+        assertThat(result).isFalse();
     }
 }

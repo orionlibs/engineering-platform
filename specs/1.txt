@@ -6,9 +6,6 @@
 --update README.md
 
 
-Create a system project that we can use to CRUD system config
-
-
 2--create project "user-update-service" with API:
 "PATCH /users/passwords",
 "POST /users/passwords/forgot-requests"
