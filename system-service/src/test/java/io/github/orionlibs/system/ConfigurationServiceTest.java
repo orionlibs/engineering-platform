@@ -2,7 +2,7 @@ package io.github.orionlibs.system;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import io.github.orionlibs.system.configuration.ConfigurationService;
+import io.github.orionlibs.system.configuration.SystemConfigurationService;
 import io.github.orionlibs.system.configuration.model.ConfigurationModel;
 import java.util.List;
 import java.util.Optional;
@@ -16,7 +16,7 @@ import org.springframework.test.context.ActiveProfiles;
 @ActiveProfiles("test")
 public class ConfigurationServiceTest
 {
-    @Autowired ConfigurationService configurationService;
+    @Autowired SystemConfigurationService configurationService;
 
 
     @Test

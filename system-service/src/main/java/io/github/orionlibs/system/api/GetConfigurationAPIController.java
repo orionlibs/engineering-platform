@@ -1,7 +1,7 @@
 package io.github.orionlibs.system.api;
 
 import io.github.orionlibs.system.ControllerUtils;
-import io.github.orionlibs.system.configuration.ConfigurationService;
+import io.github.orionlibs.system.configuration.SystemConfigurationService;
 import io.github.orionlibs.system.configuration.model.ConfigurationModel;
 import io.github.orionlibs.system.converter.ConfigurationModelToDTOConverter;
 import io.swagger.v3.oas.annotations.Operation;
@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class GetConfigurationAPIController
 {
     @Autowired
-    private ConfigurationService configurationService;
+    private SystemConfigurationService configurationService;
     @Autowired
     private ConfigurationModelToDTOConverter configurationModelToDTOConverter;
 

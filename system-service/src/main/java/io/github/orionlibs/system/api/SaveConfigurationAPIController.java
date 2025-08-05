@@ -1,7 +1,7 @@
 package io.github.orionlibs.system.api;
 
 import io.github.orionlibs.system.ControllerUtils;
-import io.github.orionlibs.system.configuration.ConfigurationService;
+import io.github.orionlibs.system.configuration.SystemConfigurationService;
 import io.github.orionlibs.system.configuration.model.ConfigurationModel;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class SaveConfigurationAPIController
 {
     @Autowired
-    private ConfigurationService configurationService;
+    private SystemConfigurationService configurationService;
 
 
     @Operation(
