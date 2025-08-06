@@ -23,8 +23,7 @@ public class UserService implements UserDetailsService
     public OrionUserDetails loadUserByUsername(String username) throws UsernameNotFoundException
     {
         UserModel user = loadUserAsModelByUsername(username);
-        OrionUserDetails userDetails = new OrionUserDetails(user.getUsername(), user.getPassword(), user.isEnabled(), true, true, true, user.getAuthorities());
-        userDetails.setUserID(user.getId());
+        OrionUserDetails userDetails = new OrionUserDetails(user.getId(), user.getUsername(), user.getPassword(), user.isEnabled(), true, true, true, user.getAuthorities());
         return userDetails;
     }
 
