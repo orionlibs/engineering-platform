@@ -5,6 +5,8 @@ import io.github.orionlibs.core.user.model.OrionUserDetails;
 import io.github.orionlibs.user.api.CreateForgotPasswordRequestRequest;
 import io.github.orionlibs.user.model.ForgotPasswordRequestModel;
 import io.github.orionlibs.user.model.ForgotPasswordRequestsDAO;
+import java.time.LocalDateTime;
+import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -24,8 +26,11 @@ public class ForgotPasswordService
         try
         {
             OrionUserDetails user = userService.loadUserByUsername(request.getUsername());
+            String forgotPasswordCode = UUID.randomUUID().toString();
             ForgotPasswordRequestModel model = new ForgotPasswordRequestModel();
             model.setUserID(user.getUserID());
+            model.setForgotPasswordCode(forgotPasswordCode);
+            model.setExpiresAt(LocalDateTime.now().plusMinutes(20L));
             dao.saveAndFlush(model);
             return true;
         }
