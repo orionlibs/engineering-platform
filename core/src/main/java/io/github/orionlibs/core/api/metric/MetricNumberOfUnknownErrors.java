@@ -1,4 +1,4 @@
-package io.github.orionlibs.core.api;
+package io.github.orionlibs.core.api.metric;
 
 import io.github.orionlibs.core.observability.Metric;
 import io.micrometer.core.instrument.MeterRegistry;

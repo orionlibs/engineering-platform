@@ -1,4 +1,4 @@
-package io.github.orionlibs.core.api;
+package io.github.orionlibs.core.api.key;
 
 import io.github.orionlibs.core.api.header.HTTPHeader;
 import jakarta.servlet.FilterChain;

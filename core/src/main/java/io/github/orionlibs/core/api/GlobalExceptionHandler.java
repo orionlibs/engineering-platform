@@ -1,6 +1,11 @@
 package io.github.orionlibs.core.api;
 
 import io.github.orionlibs.core.Logger;
+import io.github.orionlibs.core.api.metric.MetricNumberOfAPIInputValidationErrors;
+import io.github.orionlibs.core.api.metric.MetricNumberOfAccessDeniedErrors;
+import io.github.orionlibs.core.api.metric.MetricNumberOfDuplicateRecordErrors;
+import io.github.orionlibs.core.api.metric.MetricNumberOfResourceNotFoundErrors;
+import io.github.orionlibs.core.api.metric.MetricNumberOfUnknownErrors;
 import io.github.orionlibs.core.data.DuplicateRecordException;
 import io.github.orionlibs.core.data.ResourceNotFoundException;
 import io.github.orionlibs.core.event.Publishable;

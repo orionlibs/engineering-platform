@@ -1,4 +1,4 @@
-package io.github.orionlibs.core.api;
+package io.github.orionlibs.core.api.key;
 
 import java.util.Collection;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
