@@ -1,7 +1,7 @@
 package io.github.orionlibs.user.password.forgot.api;
 
 import io.github.orionlibs.user.ControllerUtils;
-import io.github.orionlibs.user.password.ForgotPasswordService;
+import io.github.orionlibs.user.password.forgot.ForgotPasswordService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Schema;

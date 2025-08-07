@@ -1,4 +1,4 @@
-package io.github.orionlibs.user.password.api;
+package io.github.orionlibs.user.password.forgot.api;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -7,7 +7,6 @@ import io.github.orionlibs.core.tests.APITestUtils;
 import io.github.orionlibs.core.user.model.UserDAO;
 import io.github.orionlibs.core.user.model.UserModel;
 import io.github.orionlibs.user.ControllerUtils;
-import io.github.orionlibs.user.password.forgot.api.CreateForgotPasswordRequestRequest;
 import io.github.orionlibs.user.registration.UserRegistrationService;
 import io.github.orionlibs.user.registration.api.UserRegistrationRequest;
 import io.restassured.RestAssured;
