@@ -1,4 +1,4 @@
-package io.github.orionlibs.user;
+package io.github.orionlibs.user.password;
 
 import io.github.orionlibs.core.email.EmailService;
 import io.github.orionlibs.core.user.UserService;

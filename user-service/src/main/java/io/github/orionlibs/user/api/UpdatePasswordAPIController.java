@@ -1,7 +1,7 @@
 package io.github.orionlibs.user.api;
 
 import io.github.orionlibs.user.ControllerUtils;
-import io.github.orionlibs.user.PasswordService;
+import io.github.orionlibs.user.password.PasswordService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
