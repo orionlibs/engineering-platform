@@ -13,8 +13,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,15 +22,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(ControllerUtils.baseAPIPath)
 @Validated
 @Tag(name = "Users", description = "User manager")
-public class ProcessForgotPasswordRequestAPIController
+public class ValidateForgotPasswordRequestAPIController
 {
     @Autowired
     private ForgotPasswordService forgotPasswordService;
 
 
     @Operation(
-                    summary = "Process forgot password request",
-                    description = "Process forgot password request",
+                    summary = "Validate forgot password request",
+                    description = "Validate forgot password request",
                     parameters = @io.swagger.v3.oas.annotations.Parameter(
                                     name = "forgotPasswordCode",
                                     description = "The code that is used to identify the password change request for a particular user",
@@ -38,14 +38,14 @@ public class ProcessForgotPasswordRequestAPIController
                                     in = ParameterIn.PATH,
                                     schema = @Schema(type = "string")
                     ),
-                    responses = {@ApiResponse(responseCode = "200", description = "Password change succeeded"),
+                    responses = {@ApiResponse(responseCode = "200", description = "Forgot password request found"),
                                     @ApiResponse(responseCode = "404", description = "Invalid input")}
     )
-    @PostMapping(value = "/users/passwords/forgot-requests/{forgotPasswordCode}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/users/passwords/forgot-requests/{forgotPasswordCode}", produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("!isAuthenticated()")
-    public ResponseEntity<?> processForgotPasswordRequest(@PathVariable String forgotPasswordCode)
+    public ResponseEntity<?> validateForgotPasswordRequest(@PathVariable String forgotPasswordCode)
     {
-        if(forgotPasswordService.processCode(forgotPasswordCode))
+        if(forgotPasswordService.isCodeValid(forgotPasswordCode))
         {
             return ResponseEntity.ok(Map.of());
         }

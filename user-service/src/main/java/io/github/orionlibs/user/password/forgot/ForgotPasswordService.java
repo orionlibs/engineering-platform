@@ -1,13 +1,14 @@
 package io.github.orionlibs.user.password.forgot;
 
+import io.github.orionlibs.core.Logger;
 import io.github.orionlibs.core.email.EmailService;
 import io.github.orionlibs.core.user.UserService;
 import io.github.orionlibs.core.user.model.OrionUserDetails;
+import io.github.orionlibs.user.password.forgot.api.CreateForgotPasswordRequestRequest;
 import io.github.orionlibs.user.password.forgot.model.ForgotPasswordRequestModel;
 import io.github.orionlibs.user.password.forgot.model.ForgotPasswordRequestsDAO;
-import io.github.orionlibs.user.password.forgot.api.CreateForgotPasswordRequestRequest;
 import java.time.LocalDateTime;
-import java.util.UUID;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,10 @@ public class ForgotPasswordService
     private ForgotPasswordRequestsDAO dao;
     @Autowired
     private EmailService emailer;
+    @Autowired
+    private ForgotPasswordCodeGenerator forgotPasswordCodeGenerator;
+    @Autowired
+    private ForgotPasswordCodeValidator forgotPasswordCodeValidator;
 
 
     //@Transactional(readOnly = true)
@@ -29,13 +34,14 @@ public class ForgotPasswordService
         try
         {
             OrionUserDetails user = userService.loadUserByUsername(request.getUsername());
-            String forgotPasswordCode = UUID.randomUUID().toString();
+            String forgotPasswordCode = forgotPasswordCodeGenerator.generateString();
             ForgotPasswordRequestModel model = new ForgotPasswordRequestModel();
             model.setUserID(user.getUserID());
             model.setForgotPasswordCode(forgotPasswordCode);
             model.setExpiresAt(LocalDateTime.now().plusMinutes(20L));
             model = dao.saveAndFlush(model);
             emailer.sendEmail();
+            Logger.info("Processed forgot password request");
             return true;
         }
         catch(UsernameNotFoundException e)
@@ -53,7 +59,8 @@ public class ForgotPasswordService
 
     public boolean isCodeValid(String forgotPasswordCode)
     {
-        dao.findByForgotPasswordCode(forgotPasswordCode);
-        return true;
+        Optional<ForgotPasswordRequestModel> model = dao.findByForgotPasswordCode(forgotPasswordCode);
+        return model.map(m -> forgotPasswordCodeValidator.isValid(m))
+                        .orElse(false);
     }
 }
