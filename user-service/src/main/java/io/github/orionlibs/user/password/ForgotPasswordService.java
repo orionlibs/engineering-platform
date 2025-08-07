@@ -3,7 +3,7 @@ package io.github.orionlibs.user.password;
 import io.github.orionlibs.core.email.EmailService;
 import io.github.orionlibs.core.user.UserService;
 import io.github.orionlibs.core.user.model.OrionUserDetails;
-import io.github.orionlibs.user.api.CreateForgotPasswordRequestRequest;
+import io.github.orionlibs.user.password.api.CreateForgotPasswordRequestRequest;
 import io.github.orionlibs.user.model.ForgotPasswordRequestModel;
 import io.github.orionlibs.user.model.ForgotPasswordRequestsDAO;
 import java.time.LocalDateTime;

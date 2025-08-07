@@ -1,13 +1,13 @@
-package io.github.orionlibs.user;
+package io.github.orionlibs.user.password;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import io.github.orionlibs.core.user.UserService;
 import io.github.orionlibs.core.user.model.UserModel;
-import io.github.orionlibs.user.api.CreateForgotPasswordRequestRequest;
-import io.github.orionlibs.user.password.ForgotPasswordService;
+import io.github.orionlibs.user.password.api.UpdatePasswordRequest;
 import io.github.orionlibs.user.registration.UserRegistrationService;
 import io.github.orionlibs.user.registration.api.UserRegistrationRequest;
+import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +16,11 @@ import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootTest
 @ActiveProfiles("test")
-public class ForgotPasswordServiceTest
+public class PasswordServiceTest
 {
     @Autowired UserService userService;
     @Autowired UserRegistrationService userRegistrationService;
-    @Autowired ForgotPasswordService forgotPasswordService;
+    @Autowired PasswordService passwordService;
     UserModel user;
 
 
@@ -40,23 +40,23 @@ public class ForgotPasswordServiceTest
 
 
     @Test
-    void process_userNotFound()
+    void updatePassword()
     {
-        CreateForgotPasswordRequestRequest request = CreateForgotPasswordRequestRequest.builder()
-                        .username("me111111@email.com")
+        UpdatePasswordRequest request = UpdatePasswordRequest.builder()
+                        .password("bunkzh3Z!1")
                         .build();
-        boolean result = forgotPasswordService.process(request);
-        assertThat(result).isFalse();
+        boolean result = passwordService.update(user.getId().toString(), request);
+        assertThat(result).isTrue();
     }
 
 
     @Test
-    void process()
+    void updatePassword_wrongUser()
     {
-        CreateForgotPasswordRequestRequest request = CreateForgotPasswordRequestRequest.builder()
-                        .username("me@email.com")
+        UpdatePasswordRequest request = UpdatePasswordRequest.builder()
+                        .password("bunkzh3Z!1")
                         .build();
-        boolean result = forgotPasswordService.process(request);
-        assertThat(result).isTrue();
+        boolean result = passwordService.update(UUID.randomUUID().toString(), request);
+        assertThat(result).isFalse();
     }
 }

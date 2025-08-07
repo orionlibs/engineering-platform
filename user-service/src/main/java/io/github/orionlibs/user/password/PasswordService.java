@@ -3,7 +3,7 @@ package io.github.orionlibs.user.password;
 import io.github.orionlibs.core.Logger;
 import io.github.orionlibs.core.user.UserService;
 import io.github.orionlibs.core.user.model.UserModel;
-import io.github.orionlibs.user.api.UpdatePasswordRequest;
+import io.github.orionlibs.user.password.api.UpdatePasswordRequest;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

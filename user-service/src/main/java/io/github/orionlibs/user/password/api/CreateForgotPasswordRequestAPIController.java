@@ -1,4 +1,4 @@
-package io.github.orionlibs.user.api;
+package io.github.orionlibs.user.password.api;
 
 import io.github.orionlibs.user.ControllerUtils;
 import io.github.orionlibs.user.password.ForgotPasswordService;
