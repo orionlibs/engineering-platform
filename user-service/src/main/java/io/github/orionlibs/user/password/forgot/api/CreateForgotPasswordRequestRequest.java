@@ -1,5 +1,6 @@
 package io.github.orionlibs.user.password.forgot.api;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,4 +17,6 @@ public class CreateForgotPasswordRequestRequest
 {
     @Email(message = "Invalid email address format")
     private String username;
+    @JsonIgnore
+    private String forgotPasswordCodeGenerated;
 }

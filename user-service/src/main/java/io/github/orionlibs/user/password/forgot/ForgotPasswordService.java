@@ -35,6 +35,7 @@ public class ForgotPasswordService
         {
             OrionUserDetails user = userService.loadUserByUsername(request.getUsername());
             String forgotPasswordCode = forgotPasswordCodeGenerator.generateString();
+            request.setForgotPasswordCodeGenerated(forgotPasswordCode);
             ForgotPasswordRequestModel model = new ForgotPasswordRequestModel();
             model.setUserID(user.getUserID());
             model.setForgotPasswordCode(forgotPasswordCode);
@@ -51,9 +52,9 @@ public class ForgotPasswordService
     }
 
 
-    public boolean processCode(String forgotPasswordCode)
+    public void deleteRequest(String forgotPasswordCode)
     {
-        return true;
+        dao.deleteByForgotPasswordCode(forgotPasswordCode);
     }
 
 
@@ -62,5 +63,11 @@ public class ForgotPasswordService
         Optional<ForgotPasswordRequestModel> model = dao.findByForgotPasswordCode(forgotPasswordCode);
         return model.map(m -> forgotPasswordCodeValidator.isValid(m))
                         .orElse(false);
+    }
+
+
+    public String getUserIDByForgotPasswordCode(String forgotPasswordCode)
+    {
+        return dao.findUsesrIDByForgotPasswordCode(forgotPasswordCode);
     }
 }

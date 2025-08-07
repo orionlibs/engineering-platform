@@ -58,4 +58,30 @@ public class ForgotPasswordServiceTest
         boolean result = forgotPasswordService.process(request);
         assertThat(result).isTrue();
     }
+
+
+    @Test
+    void isCodeValid()
+    {
+        CreateForgotPasswordRequestRequest request = CreateForgotPasswordRequestRequest.builder()
+                        .username("me@email.com")
+                        .build();
+        boolean result = forgotPasswordService.process(request);
+        result = forgotPasswordService.isCodeValid(request.getForgotPasswordCodeGenerated());
+        assertThat(result).isTrue();
+        result = forgotPasswordService.isCodeValid("nonexistentcode");
+        assertThat(result).isFalse();
+    }
+
+
+    @Test
+    void getUserIDByForgotPasswordCode()
+    {
+        CreateForgotPasswordRequestRequest request = CreateForgotPasswordRequestRequest.builder()
+                        .username("me@email.com")
+                        .build();
+        boolean result = forgotPasswordService.process(request);
+        String userID = forgotPasswordService.getUserIDByForgotPasswordCode(request.getForgotPasswordCodeGenerated());
+        assertThat(user.getId().toString()).isEqualTo(userID);
+    }
 }

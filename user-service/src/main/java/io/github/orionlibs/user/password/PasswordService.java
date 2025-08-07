@@ -4,6 +4,7 @@ import io.github.orionlibs.core.Logger;
 import io.github.orionlibs.core.user.UserService;
 import io.github.orionlibs.core.user.model.UserModel;
 import io.github.orionlibs.user.password.api.UpdatePasswordRequest;
+import io.github.orionlibs.user.password.forgot.ForgotPasswordService;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,8 @@ public class PasswordService
 {
     @Autowired
     private UserService userService;
+    @Autowired
+    private ForgotPasswordService forgotPasswordService;
 
 
     @Transactional
@@ -29,5 +32,13 @@ public class PasswordService
         userService.saveUser(user);
         Logger.info("Updated user password");
         return true;
+    }
+
+
+    @Transactional
+    public boolean update(UpdatePasswordRequest request, String forgotPasswordCode)
+    {
+        String userID = forgotPasswordService.getUserIDByForgotPasswordCode(forgotPasswordCode);
+        return update(userID, request);
     }
 }
