@@ -1,4 +1,4 @@
-package io.github.orionlibs.user.password.api;
+package io.github.orionlibs.user.password.forgot.api;
 
 import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;

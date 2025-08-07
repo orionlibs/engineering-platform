@@ -1,4 +1,4 @@
-package io.github.orionlibs.user.model;
+package io.github.orionlibs.user.password.forgot.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

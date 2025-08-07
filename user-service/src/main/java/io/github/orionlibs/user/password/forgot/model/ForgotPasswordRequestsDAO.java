@@ -1,4 +1,4 @@
-package io.github.orionlibs.user.model;
+package io.github.orionlibs.user.password.forgot.model;
 
 import java.util.Optional;
 import java.util.UUID;

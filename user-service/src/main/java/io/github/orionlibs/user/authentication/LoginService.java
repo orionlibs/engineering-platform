@@ -25,7 +25,7 @@ public class LoginService implements Publishable
     private UserService userService;
 
 
-    public String loginUser(LoginRequest requestBean) throws ResourceNotFoundException
+    public String loginUserAndGetToken(LoginRequest requestBean) throws ResourceNotFoundException
     {
         Authentication auth = new UsernamePasswordAuthenticationToken(requestBean.getUsername(), requestBean.getPassword());
         try

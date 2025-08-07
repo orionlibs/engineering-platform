@@ -45,6 +45,6 @@ public class LoginAPIController
     @PreAuthorize("!isAuthenticated()")
     public ResponseEntity<?> login(@Valid @RequestBody LoginRequest requestBean)
     {
-        return ResponseEntity.ok(Map.of("token", loginService.loginUser(requestBean)));
+        return ResponseEntity.ok(Map.of("token", loginService.loginUserAndGetToken(requestBean)));
     }
 }
