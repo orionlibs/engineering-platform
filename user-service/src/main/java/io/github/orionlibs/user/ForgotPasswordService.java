@@ -1,5 +1,6 @@
 package io.github.orionlibs.user;
 
+import io.github.orionlibs.core.email.EmailService;
 import io.github.orionlibs.core.user.UserService;
 import io.github.orionlibs.core.user.model.OrionUserDetails;
 import io.github.orionlibs.user.api.CreateForgotPasswordRequestRequest;
@@ -18,6 +19,8 @@ public class ForgotPasswordService
     private UserService userService;
     @Autowired
     private ForgotPasswordRequestsDAO dao;
+    @Autowired
+    private EmailService emailer;
 
 
     //@Transactional(readOnly = true)
@@ -31,12 +34,25 @@ public class ForgotPasswordService
             model.setUserID(user.getUserID());
             model.setForgotPasswordCode(forgotPasswordCode);
             model.setExpiresAt(LocalDateTime.now().plusMinutes(20L));
-            dao.saveAndFlush(model);
+            model = dao.saveAndFlush(model);
+            emailer.sendEmail();
             return true;
         }
         catch(UsernameNotFoundException e)
         {
             return false;
         }
+    }
+
+
+    public boolean processCode(String forgotPasswordCode)
+    {
+        return true;
+    }
+
+
+    public boolean isCodeValid(String forgotPasswordCode)
+    {
+        return true;
     }
 }
