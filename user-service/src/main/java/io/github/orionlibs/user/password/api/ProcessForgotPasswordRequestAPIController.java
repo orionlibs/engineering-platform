@@ -1,7 +1,7 @@
 package io.github.orionlibs.user.password.api;
 
 import io.github.orionlibs.user.ControllerUtils;
-import io.github.orionlibs.user.ForgotPasswordService;
+import io.github.orionlibs.user.password.ForgotPasswordService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -33,7 +33,7 @@ public class ProcessForgotPasswordRequestAPIController
                     description = "Process forgot password request",
                     parameters = @io.swagger.v3.oas.annotations.Parameter(
                                     name = "forgotPasswordCode",
-                                    description = "The code that is used to identify the password change request",
+                                    description = "The code that is used to identify the password change request for a particular user",
                                     required = true,
                                     in = ParameterIn.PATH,
                                     schema = @Schema(type = "string")

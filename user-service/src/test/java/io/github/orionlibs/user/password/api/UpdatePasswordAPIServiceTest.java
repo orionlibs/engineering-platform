@@ -1,4 +1,4 @@
-package io.github.orionlibs.user.api;
+package io.github.orionlibs.user.password.api;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -7,11 +7,11 @@ import io.github.orionlibs.core.tests.APITestUtils;
 import io.github.orionlibs.core.user.model.UserDAO;
 import io.github.orionlibs.core.user.model.UserModel;
 import io.github.orionlibs.user.ControllerUtils;
-import io.github.orionlibs.user.password.api.CreateForgotPasswordRequestRequest;
 import io.github.orionlibs.user.registration.UserRegistrationService;
 import io.github.orionlibs.user.registration.api.UserRegistrationRequest;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
-public class CreateForgotPasswordRequestAPIServiceTest
+public class UpdatePasswordAPIServiceTest
 {
     @LocalServerPort int port;
     @Autowired UserDAO dao;
@@ -36,7 +36,7 @@ public class CreateForgotPasswordRequestAPIServiceTest
     @BeforeEach
     void setup()
     {
-        basePath = "http://localhost:" + port + ControllerUtils.baseAPIPath + "/users/passwords/forgot-requests";
+        basePath = "http://localhost:" + port + ControllerUtils.baseAPIPath + "/users/passwords";
         dao.deleteAll();
         headers = new HttpHeaders();
         user = userRegistrationService.registerUser(UserRegistrationRequest.builder()
@@ -51,52 +51,40 @@ public class CreateForgotPasswordRequestAPIServiceTest
 
 
     @Test
-    void createForgotPasswordRequest()
+    void updatePassword()
     {
         RestAssured.baseURI = basePath;
-        CreateForgotPasswordRequestRequest request = CreateForgotPasswordRequestRequest.builder()
-                        .username("me@email.com")
+        UpdatePasswordRequest request = UpdatePasswordRequest.builder()
+                        .password("bunkzh3Z!1")
                         .build();
-        Response response = apiUtils.makePostAPICall(request, headers);
+        Response response = apiUtils.makePatchAPICall(request, headers, user.getId().toString(), "USER");
         assertThat(response.statusCode()).isEqualTo(200);
     }
 
 
     @Test
-    void createForgotPasswordRequest_userNotFound()
+    void updatePassword_userNotFound()
     {
         RestAssured.baseURI = basePath;
-        CreateForgotPasswordRequestRequest request = CreateForgotPasswordRequestRequest.builder()
-                        .username("me111111@email.com")
+        UpdatePasswordRequest request = UpdatePasswordRequest.builder()
+                        .password("bunkzh3Z!1")
                         .build();
-        Response response = apiUtils.makePostAPICall(request, headers);
-        assertThat(response.statusCode()).isEqualTo(200);
+        Response response = apiUtils.makePatchAPICall(request, headers, UUID.randomUUID().toString(), "USER");
+        assertThat(response.statusCode()).isEqualTo(404);
     }
 
 
     @Test
-    void createForgotPasswordRequest_invalidUsername()
+    void updatePassword_invalidPassword()
     {
         RestAssured.baseURI = basePath;
-        CreateForgotPasswordRequestRequest request = CreateForgotPasswordRequestRequest.builder()
-                        .username("me")
+        UpdatePasswordRequest request = UpdatePasswordRequest.builder()
+                        .password("4528")
                         .build();
-        Response response = apiUtils.makePostAPICall(request, headers);
+        Response response = apiUtils.makePatchAPICall(request, headers, user.getId().toString(), "USER");
         assertThat(response.statusCode()).isEqualTo(400);
         APIError body = response.as(APIError.class);
         assertThat(body.message()).isEqualTo("Validation failed for one or more fields");
-        assertThat(body.fieldErrors().get(0).message()).isEqualTo("Invalid email address format");
-    }
-
-
-    @Test
-    void createForgotPasswordRequest_authenticatedUser()
-    {
-        RestAssured.baseURI = basePath;
-        CreateForgotPasswordRequestRequest request = CreateForgotPasswordRequestRequest.builder()
-                        .username("me@email.com")
-                        .build();
-        Response response = apiUtils.makePostAPICall(request, headers, user.getId().toString(), "USER");
-        assertThat(response.statusCode()).isEqualTo(403);
+        assertThat(body.fieldErrors().get(0).message()).isEqualTo("Password does not meet security requirements");
     }
 }

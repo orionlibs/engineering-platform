@@ -1,5 +1,6 @@
 package io.github.orionlibs.user.model;
 
+import java.util.Optional;
 import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -10,4 +11,7 @@ public interface ForgotPasswordRequestsDAO extends JpaRepository<ForgotPasswordR
 {
     @Query(value = "SELECT 1", nativeQuery = true)
     Integer testConnection();
+
+
+    Optional<ForgotPasswordRequestModel> findByForgotPasswordCode(String forgotPasswordCode);
 }

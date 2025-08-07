@@ -53,6 +53,7 @@ public class ForgotPasswordService
 
     public boolean isCodeValid(String forgotPasswordCode)
     {
+        dao.findByForgotPasswordCode(forgotPasswordCode);
         return true;
     }
 }
