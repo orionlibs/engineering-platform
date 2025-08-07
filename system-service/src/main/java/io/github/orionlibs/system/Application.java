@@ -1,7 +1,7 @@
 package io.github.orionlibs.system;
 
-import io.github.orionlibs.core.api.ApiMetricsInterceptor;
 import io.github.orionlibs.core.api.GlobalExceptionHandler;
+import io.github.orionlibs.core.api.metric.ApiMetricsInterceptor;
 import io.github.orionlibs.core.event.EventPublisher;
 import io.github.orionlibs.core.event.EventPublisher.EventPublisherFake;
 import io.github.orionlibs.core.json.JSONService;

@@ -1,7 +1,7 @@
 package io.github.orionlibs.system;
 
-import io.github.orionlibs.core.api.ApiKeyAuthFilter;
-import io.github.orionlibs.core.api.ApiKeyAuthenticationProvider;
+import io.github.orionlibs.core.api.key.ApiKeyAuthFilter;
+import io.github.orionlibs.core.api.key.ApiKeyAuthenticationProvider;
 import io.jsonwebtoken.SignatureAlgorithm;
 import java.util.Arrays;
 import java.util.Base64;

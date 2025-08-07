@@ -1,8 +1,8 @@
 package io.github.orionlibs.user;
 
-import io.github.orionlibs.core.api.ApiKeyAuthFilter;
-import io.github.orionlibs.core.api.ApiKeyAuthenticationProvider;
-import io.github.orionlibs.core.jwt.JWTService;
+import io.github.orionlibs.core.api.JWTService;
+import io.github.orionlibs.core.api.key.ApiKeyAuthFilter;
+import io.github.orionlibs.core.api.key.ApiKeyAuthenticationProvider;
 import io.github.orionlibs.core.user.UserService;
 import io.github.orionlibs.user.authentication.PostAuthenticationChecks;
 import io.github.orionlibs.user.authentication.PreAuthenticationChecks;
