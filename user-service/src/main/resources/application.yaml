@@ -62,6 +62,11 @@ error:
     duplicate_record:
       message: "Duplicate database record found: "
 
+app:
+  cleanup:
+    expired_forgot_password_requests:
+      rate: 86400000
+
 version: 0.0.1
 environment: ${ENVIRONMENT_NAME:production}
 

@@ -1,5 +1,6 @@
 package io.github.orionlibs.user.password.forgot.model;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -22,4 +23,7 @@ public interface ForgotPasswordRequestsDAO extends JpaRepository<ForgotPasswordR
 
     @Query("SELECT c.userID FROM ForgotPasswordRequestModel c WHERE c.forgotPasswordCode = :forgot_password_code")
     String findUsesrIDByForgotPasswordCode(@Param("forgot_password_code") String forgotPasswordCode);
+
+
+    long deleteByExpiresAtBefore(LocalDateTime cutoff);
 }

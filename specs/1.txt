@@ -7,7 +7,6 @@
 
 
 2--create project "user-update-service" with API:
-"POST /users/passwords/forgot-requests"
 when the system starts it will delete expired requests from the database
 "PATCH /admin/users/passwords" for an administrator to change someone else's password
 "PATCH /users/enablements" to enable/disable accounts

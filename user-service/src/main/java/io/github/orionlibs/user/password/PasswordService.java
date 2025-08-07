@@ -39,6 +39,11 @@ public class PasswordService
     public boolean update(UpdatePasswordRequest request, String forgotPasswordCode)
     {
         String userID = forgotPasswordService.getUserIDByForgotPasswordCode(forgotPasswordCode);
-        return update(userID, request);
+        boolean updated = update(userID, request);
+        if(updated)
+        {
+            forgotPasswordService.deleteRequest(forgotPasswordCode);
+        }
+        return updated;
     }
 }
