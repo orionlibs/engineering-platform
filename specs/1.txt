@@ -6,9 +6,6 @@
 --update README.md
 
 
-2--create project "user-update-service" with API:
-"DELETE /users"
-3--create project "user-details-service" with API:
 "GET /users/{id}"
 4--create project "user-settings-service" with API:
 "GET /users/settings",

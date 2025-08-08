@@ -1,5 +1,6 @@
 package io.github.orionlibs.core.user;
 
+import io.github.orionlibs.core.user.converter.UserModelToDTOConverter;
 import io.github.orionlibs.core.user.model.OrionUserDetails;
 import io.github.orionlibs.core.user.model.UserDAO;
 import io.github.orionlibs.core.user.model.UserModel;
@@ -16,6 +17,8 @@ public class UserService implements UserDetailsService
 {
     @Autowired
     private UserDAO dao;
+    @Autowired
+    private UserModelToDTOConverter userModelToDTOConverter;
 
 
     @Override
@@ -110,5 +113,17 @@ public class UserService implements UserDetailsService
     public void delete(String userID)
     {
         delete(UUID.fromString(userID));
+    }
+
+
+    @Transactional(readOnly = true)
+    public AccountDetailsDTO getDetailsByUserID(String userID)
+    {
+        Optional<UserModel> userWrap = dao.findByUserID(UUID.fromString(userID));
+        if(userWrap.isPresent())
+        {
+            return userModelToDTOConverter.convert(userWrap.get());
+        }
+        return new AccountDetailsDTO("");
     }
 }

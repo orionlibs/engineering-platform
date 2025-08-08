@@ -38,7 +38,7 @@ public class AdminDisableAccountAPIController
                                                     schema = @Schema(implementation = AdminEnableAccountRequest.class)
                                     )
                     ),
-                    responses = {@ApiResponse(responseCode = "201", description = "User account disabled"),
+                    responses = {@ApiResponse(responseCode = "200", description = "User account disabled"),
                                     @ApiResponse(responseCode = "400", description = "Invalid input"),
                                     @ApiResponse(responseCode = "404", description = "User not found")}
     )

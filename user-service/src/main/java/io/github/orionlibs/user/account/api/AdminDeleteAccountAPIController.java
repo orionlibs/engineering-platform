@@ -38,7 +38,7 @@ public class AdminDeleteAccountAPIController
                                     in = ParameterIn.PATH,
                                     schema = @Schema(type = "string")
                     ),
-                    responses = {@ApiResponse(responseCode = "201", description = "User account deleted"),
+                    responses = {@ApiResponse(responseCode = "200", description = "User account deleted"),
                                     @ApiResponse(responseCode = "400", description = "Invalid input")}
     )
     @DeleteMapping(value = "/admin/users/{userID}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
