@@ -6,7 +6,6 @@
 --update README.md
 
 
-PATCH /users/settings/{settingID}
 "PUT /users/settings"
 "POST /users/logout"
 
