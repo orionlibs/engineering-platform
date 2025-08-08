@@ -55,6 +55,13 @@ public class UserDAOImpl implements UserDAO
 
 
     @Override
+    public void delete(UUID userID)
+    {
+        userDAO.deleteById(userID);
+    }
+
+
+    @Override
     public void deleteAll()
     {
         userDAO.deleteAll();

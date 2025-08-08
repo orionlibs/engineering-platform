@@ -14,6 +14,9 @@ public interface UserDAO
     Optional<UserModel> findByUsernameHash(String usernameHash);
 
 
+    void delete(UUID userID);
+
+
     void deleteAll();
 
 
