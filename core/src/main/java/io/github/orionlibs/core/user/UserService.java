@@ -104,4 +104,11 @@ public class UserService implements UserDetailsService
     {
         dao.delete(userID);
     }
+
+
+    @Transactional
+    public void delete(String userID)
+    {
+        delete(UUID.fromString(userID));
+    }
 }
