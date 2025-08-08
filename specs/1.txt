@@ -6,14 +6,10 @@
 --update README.md
 
 
-4--create project "user-settings-service" with API:
-"GET /users/settings",
-GET /users/settings/{settingID}
+GET /admin/users/settings/{settingID}
+GET setting by name
 PATCH /users/settings/{settingID}
 "PUT /users/settings"
-5--create project "user-login-service" with API:
-"POST /users/login" uses spring JWT
-6--create project "user-logout-service" with API:
 "POST /users/logout"
 
 
