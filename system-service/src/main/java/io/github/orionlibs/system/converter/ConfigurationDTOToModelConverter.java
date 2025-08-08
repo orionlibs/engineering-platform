@@ -15,7 +15,6 @@ public class ConfigurationDTOToModelConverter implements Converter<SaveConfigura
         {
             return null;
         }
-        ConfigurationModel model = new ConfigurationModel(objectToConvert.getKey(), objectToConvert.getValue());
-        return model;
+        return new ConfigurationModel(objectToConvert.getKey(), objectToConvert.getValue());
     }
 }
