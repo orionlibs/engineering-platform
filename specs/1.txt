@@ -6,9 +6,6 @@
 --update README.md
 
 
-Create a command line utility project allowing users to run certain tasks by calling (internally) the APIs. Find how to generate a client SDK in java from all APIs. The utility will use this SDK
-
-
 Create project "databases-service" with API:
 1--get number of registered databases
 2--get number of connected databases
@@ -279,6 +276,9 @@ Create feedback service for people to submit feedback
 
 
 Create support service for users to create support requests and support users to create and manage support tickets
+
+
+Create a command line utility project allowing users to run certain tasks by calling (internally) the APIs. Find how to generate a client SDK in java from all APIs. The utility will use this SDK
 
 
 https://openautomationsoftware.com/knowledge-base/options-reference/

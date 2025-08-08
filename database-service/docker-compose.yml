@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: ../
+      dockerfile: database-service/Dockerfile
+      args:
+        serviceName: database-service
+    image: database-service:latest
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SYSTEM_DATABASE_URL: "${SYSTEM_DATABASE_URL}"
+      SYSTEM_DATABASE_USERNAME: "${SYSTEM_DATABASE_USERNAME}"
+      SYSTEM_DATABASE_PASSWORD: "${SYSTEM_DATABASE_PASSWORD}"
