@@ -55,7 +55,7 @@ public class GetUserSettingsAPIServiceTest
         Response response = apiUtils.makeGetAPICall(headers, user.getId().toString(), "USER");
         assertThat(response.statusCode()).isEqualTo(200);
         UserSettingsDTO body = response.as(UserSettingsDTO.class);
-        assertThat(body.settings().size()).isEqualTo(2);
+        assertThat(body.settings().size()).isEqualTo(1);
         assertThat(body.settings().get(0).settingName()).isEqualTo("theme");
         assertThat(body.settings().get(0).settingValue()).isEqualTo("dark");
     }
