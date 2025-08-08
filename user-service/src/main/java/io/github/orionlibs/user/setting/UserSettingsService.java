@@ -28,6 +28,20 @@ public class UserSettingsService
 
 
     @Transactional(readOnly = true)
+    public Optional<UserSettingsModel> getByID(String settingID)
+    {
+        return getByID(UUID.fromString(settingID));
+    }
+
+
+    @Transactional(readOnly = true)
+    public Optional<UserSettingsModel> getByIDAndUserID(String settingID, String userID)
+    {
+        return dao.findByIdAndUser_Id(UUID.fromString(settingID), UUID.fromString(userID));
+    }
+
+
+    @Transactional(readOnly = true)
     public List<UserSettingsModel> getByUserID(UUID userID)
     {
         return dao.findAllByUserId(userID);
