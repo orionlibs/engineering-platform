@@ -6,10 +6,6 @@
 --update README.md
 
 
-"PUT /users/settings"
-"POST /users/logout"
-
-
 Create a command line utility project allowing users to run certain tasks by calling (internally) the APIs. Find how to generate a client SDK in java from all APIs. The utility will use this SDK
 
 

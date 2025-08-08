@@ -12,7 +12,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Optional;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 public class JWTFilter extends OncePerRequestFilter
@@ -23,7 +22,7 @@ public class JWTFilter extends OncePerRequestFilter
     private final AuthenticationService authenticationService;
 
 
-    public JWTFilter(JWTService jwtService, HeaderService headerService, UserDetailsService userDetailsService, UserService userService, AuthenticationService authenticationService)
+    public JWTFilter(JWTService jwtService, HeaderService headerService, UserService userService, AuthenticationService authenticationService)
     {
         this.jwtService = jwtService;
         this.headerService = headerService;
@@ -43,7 +42,7 @@ public class JWTFilter extends OncePerRequestFilter
             if(userWrap.isPresent())
             {
                 UserModel user = userWrap.get();
-                if(jwtService.validateToken(token, user))
+                if(jwtService.isTokenValid(token, user))
                 {
                     authenticationService.saveUserInSession(req, user);
                 }

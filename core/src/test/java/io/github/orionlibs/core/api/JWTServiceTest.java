@@ -69,12 +69,12 @@ public class JWTServiceTest
         assertThat(token).isNotNull();
         String extracted = jwtService.extractUserID(token);
         assertThat(extracted.length()).isGreaterThan(20);
-        assertThat(jwtService.validateToken(token, user)).isTrue();
+        assertThat(jwtService.isTokenValid(token, user)).isTrue();
     }
 
 
     @Test
-    void validateToken_wrongUser()
+    void isToken_Valid_wrongUser()
     {
         UserDetails user1 = new User(
                         "me@email.com",
@@ -96,12 +96,12 @@ public class JWTServiceTest
         newUser2 = userService.saveUser(newUser2);
         String token = jwtService.generateToken(user1);
         assertThat(token).isNotNull();
-        assertThat(jwtService.validateToken(token, user2)).isFalse();
+        assertThat(jwtService.isTokenValid(token, user2)).isFalse();
     }
 
 
     @Test
-    void validateToken_expiredToken()
+    void isToken_expiredTokenValid()
     {
         Date now = new Date();
         Date past = new Date(now.getTime() - 10_000);
@@ -112,6 +112,6 @@ public class JWTServiceTest
         );
         String expiredToken = jwtService.generateToken(user, now, past);
         assertThat(expiredToken).isNotNull();
-        assertThat(jwtService.validateToken(expiredToken, user)).isFalse();
+        assertThat(jwtService.isTokenValid(expiredToken, user)).isFalse();
     }
 }

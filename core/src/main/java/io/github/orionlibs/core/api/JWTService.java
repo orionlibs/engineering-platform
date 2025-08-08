@@ -87,7 +87,27 @@ public class JWTService
     }
 
 
-    public boolean validateToken(String token, UserDetails userDetails)
+    public boolean isTokenValid(String token)
+    {
+        String userID = extractUserID(token);
+        boolean isTokenExpired = false;
+        try
+        {
+            isTokenExpired = isTokenExpired(token);
+        }
+        catch(ExpiredJwtException e)
+        {
+            isTokenExpired = true;
+        }
+        catch(Exception e)
+        {
+            isTokenExpired = false;
+        }
+        return !isTokenExpired;
+    }
+
+
+    public boolean isTokenValid(String token, UserDetails userDetails)
     {
         String userID = extractUserID(token);
         UserModel user = userService.loadUserAsModelByUsername(userDetails.getUsername());

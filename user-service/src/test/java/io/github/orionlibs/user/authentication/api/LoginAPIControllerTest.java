@@ -10,6 +10,7 @@ import io.github.orionlibs.user.registration.UserRegistrationService;
 import io.github.orionlibs.user.registration.api.UserRegistrationRequest;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.BeforeEach;
@@ -56,6 +57,8 @@ class LoginAPIControllerTest
                         .build();
         Response response = apiUtils.makePostAPICall(request, null);
         assertThat(response.statusCode()).isEqualTo(200);
+        Map body = response.as(Map.class);
+        assertThat(((String)body.get("token")).length()).isGreaterThan(10);
     }
 
 
