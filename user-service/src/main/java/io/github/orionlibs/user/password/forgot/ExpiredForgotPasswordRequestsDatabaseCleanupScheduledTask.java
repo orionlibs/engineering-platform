@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 @Component
-public class ForgotPasswordRequestsCleanup
+public class ExpiredForgotPasswordRequestsDatabaseCleanupScheduledTask
 {
     @Autowired
     private ForgotPasswordRequestsDAO dao;

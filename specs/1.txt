@@ -7,9 +7,6 @@
 
 
 2--create project "user-update-service" with API:
-when the system starts it will delete expired requests from the database
-"PATCH /admin/users/passwords" for an administrator to change someone else's password
-"PATCH /users/enablements" to enable/disable accounts
 "DELETE /users"
 3--create project "user-details-service" with API:
 "GET /users/{id}"

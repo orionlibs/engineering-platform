@@ -50,6 +50,42 @@ public class UserService implements UserDetailsService
 
 
     @Transactional
+    public boolean enable(String userID)
+    {
+        Optional<UserModel> userWrap = loadUserByUserID(userID);
+        if(userWrap.isPresent())
+        {
+            UserModel user = userWrap.get();
+            user.setEnabled(true);
+            saveUser(user);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+
+    @Transactional
+    public boolean disable(String userID)
+    {
+        Optional<UserModel> userWrap = loadUserByUserID(userID);
+        if(userWrap.isPresent())
+        {
+            UserModel user = userWrap.get();
+            user.setEnabled(false);
+            saveUser(user);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+
+    @Transactional
     public UserModel saveUser(UserModel user)
     {
         return dao.save(user);

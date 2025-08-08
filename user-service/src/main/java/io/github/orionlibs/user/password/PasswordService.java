@@ -3,6 +3,7 @@ package io.github.orionlibs.user.password;
 import io.github.orionlibs.core.Logger;
 import io.github.orionlibs.core.user.UserService;
 import io.github.orionlibs.core.user.model.UserModel;
+import io.github.orionlibs.user.password.api.AdminUpdatePasswordRequest;
 import io.github.orionlibs.user.password.api.UpdatePasswordRequest;
 import io.github.orionlibs.user.password.forgot.ForgotPasswordService;
 import java.util.Optional;
@@ -23,6 +24,22 @@ public class PasswordService
     public boolean update(String userID, UpdatePasswordRequest request)
     {
         Optional<UserModel> userWrap = userService.loadUserByUserID(userID);
+        if(userWrap.isEmpty())
+        {
+            return false;
+        }
+        UserModel user = userWrap.get();
+        user.setPassword(request.getPassword());
+        userService.saveUser(user);
+        Logger.info("Updated user password");
+        return true;
+    }
+
+
+    @Transactional
+    public boolean update(AdminUpdatePasswordRequest request)
+    {
+        Optional<UserModel> userWrap = userService.loadUserByUserID(request.getUserID());
         if(userWrap.isEmpty())
         {
             return false;

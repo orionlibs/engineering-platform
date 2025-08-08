@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import io.github.orionlibs.core.user.UserService;
 import io.github.orionlibs.core.user.model.UserModel;
+import io.github.orionlibs.user.password.api.AdminUpdatePasswordRequest;
 import io.github.orionlibs.user.password.api.UpdatePasswordRequest;
 import io.github.orionlibs.user.registration.UserRegistrationService;
 import io.github.orionlibs.user.registration.api.UserRegistrationRequest;
@@ -58,5 +59,25 @@ public class PasswordServiceTest
                         .build();
         boolean result = passwordService.update(UUID.randomUUID().toString(), request);
         assertThat(result).isFalse();
+    }
+
+
+    @Test
+    void updatePasswordAsAdmin()
+    {
+        UserModel admin = userRegistrationService.registerUser(UserRegistrationRequest.builder()
+                        .username("admin@email.com")
+                        .password("bunkzh3Z!")
+                        .authority("ADMINISTRATOR")
+                        .firstName("Dimi")
+                        .lastName("Emilson")
+                        .phoneNumber("07896620211")
+                        .build());
+        AdminUpdatePasswordRequest request = AdminUpdatePasswordRequest.builder()
+                        .userID(user.getId().toString())
+                        .password("bunkzh3Z!1")
+                        .build();
+        boolean result = passwordService.update(request);
+        assertThat(result).isTrue();
     }
 }
