@@ -81,6 +81,51 @@ public class UserSettingsService
 
 
     @Transactional
+    public boolean updateByID(String settingID, String settingValue)
+    {
+        Optional<UserSettingsModel> modelWrap = getByID(settingID);
+        if(modelWrap.isPresent())
+        {
+            UserSettingsModel model = modelWrap.get();
+            model.setSettingValue(settingValue);
+            UserSettingsModel updated = save(model);
+        }
+        Logger.info("Updated user setting");
+        return true;
+    }
+
+
+    @Transactional
+    public boolean updateByIDAndUserID(String settingID, String settingValue, String userID)
+    {
+        Optional<UserSettingsModel> modelWrap = getByIDAndUserID(settingID, userID);
+        if(modelWrap.isPresent())
+        {
+            UserSettingsModel model = modelWrap.get();
+            model.setSettingValue(settingValue);
+            UserSettingsModel updated = save(model);
+        }
+        Logger.info("Updated user setting");
+        return true;
+    }
+
+
+    @Transactional
+    public boolean updateByName(String settingName, String settingValue, String userID)
+    {
+        Optional<UserSettingsModel> modelWrap = getBySettingNameAndUserID(settingName, userID);
+        if(modelWrap.isPresent())
+        {
+            UserSettingsModel model = modelWrap.get();
+            model.setSettingValue(settingValue);
+            UserSettingsModel updated = save(model);
+        }
+        Logger.info("Updated user setting");
+        return true;
+    }
+
+
+    @Transactional
     public void saveDefaultSettingsForUser(UserModel user)
     {
         for(DefaultUserSettings.Setting def : defaultUserSettings.getSettings())
