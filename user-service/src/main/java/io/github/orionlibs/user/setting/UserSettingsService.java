@@ -34,6 +34,13 @@ public class UserSettingsService
     }
 
 
+    @Transactional(readOnly = true)
+    public List<UserSettingsModel> getByUserID(String userID)
+    {
+        return getByUserID(UUID.fromString(userID));
+    }
+
+
     @Transactional
     public UserSettingsModel save(UserSettingsModel model)
     {

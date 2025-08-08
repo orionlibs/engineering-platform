@@ -6,7 +6,6 @@
 --update README.md
 
 
-"GET /admin/users/{id}"
 4--create project "user-settings-service" with API:
 "GET /users/settings",
 GET /users/settings/{settingID}
