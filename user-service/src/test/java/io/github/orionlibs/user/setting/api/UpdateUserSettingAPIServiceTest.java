@@ -5,11 +5,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 import io.github.orionlibs.core.tests.APITestUtils;
 import io.github.orionlibs.core.user.model.UserDAO;
 import io.github.orionlibs.core.user.model.UserModel;
+import io.github.orionlibs.core.user.setting.model.UserSettingsModel;
 import io.github.orionlibs.user.ControllerUtils;
 import io.github.orionlibs.user.registration.UserRegistrationService;
 import io.github.orionlibs.user.registration.api.UserRegistrationRequest;
+import io.github.orionlibs.user.setting.UserSettingsService;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +28,7 @@ public class UpdateUserSettingAPIServiceTest
     @LocalServerPort int port;
     @Autowired UserDAO dao;
     @Autowired UserRegistrationService userRegistrationService;
+    @Autowired UserSettingsService userSettingsService;
     @Autowired APITestUtils apiUtils;
     String basePath;
     HttpHeaders headers;
@@ -51,21 +55,16 @@ public class UpdateUserSettingAPIServiceTest
     @Test
     void updateUserSetting()
     {
-        RestAssured.baseURI = basePath;
-        Response response = apiUtils.makeGetAPICall(headers, user.getId().toString(), "USER");
-        assertThat(response.statusCode()).isEqualTo(200);
-        UserSettingsDTO body = response.as(UserSettingsDTO.class);
-        String settingID = body.settings().get(0).id();
+        List<UserSettingsModel> settings = userSettingsService.getByUserID(user.getId().toString());
+        String settingID = settings.get(0).getId().toString();
         RestAssured.baseURI = basePath + "/" + settingID;
         UpdateUserSettingRequest request = UpdateUserSettingRequest.builder()
                         .settingValue("light")
                         .build();
-        response = apiUtils.makePatchAPICall(request, headers, user.getId().toString(), "USER");
+        Response response = apiUtils.makePatchAPICall(request, headers, user.getId().toString(), "USER");
         assertThat(response.statusCode()).isEqualTo(200);
         RestAssured.baseURI = basePath;
-        response = apiUtils.makeGetAPICall(headers, user.getId().toString(), "USER");
-        assertThat(response.statusCode()).isEqualTo(200);
-        body = response.as(UserSettingsDTO.class);
-        assertThat(body.settings().get(0).settingValue()).isEqualTo("light");
+        settings = userSettingsService.getByUserID(user.getId().toString());
+        assertThat(settings.get(0).getSettingValue()).isEqualTo("light");
     }
 }

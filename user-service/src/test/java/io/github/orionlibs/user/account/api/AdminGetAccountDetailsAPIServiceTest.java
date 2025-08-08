@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import io.github.orionlibs.core.tests.APITestUtils;
 import io.github.orionlibs.core.user.AccountDetailsDTO;
+import io.github.orionlibs.core.user.UserAuthority;
 import io.github.orionlibs.core.user.model.UserDAO;
 import io.github.orionlibs.core.user.model.UserModel;
 import io.github.orionlibs.user.ControllerUtils;
@@ -51,7 +52,7 @@ public class AdminGetAccountDetailsAPIServiceTest
         admin = userRegistrationService.registerUser(UserRegistrationRequest.builder()
                         .username("admin@email.com")
                         .password("bunkzh3Z!")
-                        .authority("ADMINISTRATOR")
+                        .authority(UserAuthority.ADMINISTRATOR.name())
                         .firstName("Dimi")
                         .lastName("Emilson")
                         .phoneNumber("07896620211")

@@ -3,6 +3,7 @@ package io.github.orionlibs.user.account.api;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import io.github.orionlibs.core.tests.APITestUtils;
+import io.github.orionlibs.core.user.UserAuthority;
 import io.github.orionlibs.core.user.model.UserDAO;
 import io.github.orionlibs.core.user.model.UserModel;
 import io.github.orionlibs.user.ControllerUtils;
@@ -49,7 +50,7 @@ public class AdminDeleteAccountAPIServiceTest
         admin = userRegistrationService.registerUser(UserRegistrationRequest.builder()
                         .username("admin@email.com")
                         .password("bunkzh3Z!")
-                        .authority("ADMINISTRATOR")
+                        .authority(UserAuthority.ADMINISTRATOR.name())
                         .firstName("Dimi")
                         .lastName("Emilson")
                         .phoneNumber("07896620211")
@@ -61,7 +62,7 @@ public class AdminDeleteAccountAPIServiceTest
     void adminDeleteAccount()
     {
         RestAssured.baseURI = basePath + "/" + user.getId().toString();
-        Response response = apiUtils.makeDeleteAPICall(headers, admin.getId().toString(), "ADMINISTRATOR");
+        Response response = apiUtils.makeDeleteAPICall(headers, admin.getId().toString(), UserAuthority.ADMINISTRATOR.name());
         assertThat(response.statusCode()).isEqualTo(200);
     }
 }

@@ -5,11 +5,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 import io.github.orionlibs.core.tests.APITestUtils;
 import io.github.orionlibs.core.user.model.UserDAO;
 import io.github.orionlibs.core.user.model.UserModel;
+import io.github.orionlibs.core.user.setting.model.UserSettingsModel;
 import io.github.orionlibs.user.ControllerUtils;
 import io.github.orionlibs.user.registration.UserRegistrationService;
 import io.github.orionlibs.user.registration.api.UserRegistrationRequest;
+import io.github.orionlibs.user.setting.UserSettingsService;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +28,7 @@ public class GetUserSettingAPIServiceTest
     @LocalServerPort int port;
     @Autowired UserDAO dao;
     @Autowired UserRegistrationService userRegistrationService;
+    @Autowired UserSettingsService userSettingsService;
     @Autowired APITestUtils apiUtils;
     String basePath;
     HttpHeaders headers;
@@ -51,15 +55,12 @@ public class GetUserSettingAPIServiceTest
     @Test
     void getUserSetting()
     {
-        RestAssured.baseURI = basePath;
-        Response response = apiUtils.makeGetAPICall(headers, user.getId().toString(), "USER");
-        assertThat(response.statusCode()).isEqualTo(200);
-        UserSettingsDTO body = response.as(UserSettingsDTO.class);
-        String settingID = body.settings().get(0).id();
+        List<UserSettingsModel> settings = userSettingsService.getByUserID(user.getId().toString());
+        String settingID = settings.get(0).getId().toString();
         RestAssured.baseURI = basePath + "/" + settingID;
-        response = apiUtils.makeGetAPICall(headers, user.getId().toString(), "USER");
-        UserSettingDTO body2 = response.as(UserSettingDTO.class);
-        assertThat(body2.settingName()).isEqualTo("theme");
-        assertThat(body2.settingValue()).isEqualTo("dark");
+        Response response = apiUtils.makeGetAPICall(headers, user.getId().toString(), "USER");
+        UserSettingDTO body = response.as(UserSettingDTO.class);
+        assertThat(body.settingName()).isEqualTo("theme");
+        assertThat(body.settingValue()).isEqualTo("dark");
     }
 }

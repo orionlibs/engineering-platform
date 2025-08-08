@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import io.github.orionlibs.core.api.APIError;
 import io.github.orionlibs.core.tests.APITestUtils;
+import io.github.orionlibs.core.user.UserAuthority;
 import io.github.orionlibs.core.user.model.UserDAO;
 import io.github.orionlibs.core.user.model.UserModel;
 import io.github.orionlibs.user.ControllerUtils;
@@ -51,7 +52,7 @@ public class AdminUpdatePasswordAPIServiceTest
         admin = userRegistrationService.registerUser(UserRegistrationRequest.builder()
                         .username("admin@email.com")
                         .password("bunkzh3Z!")
-                        .authority("ADMINISTRATOR")
+                        .authority(UserAuthority.ADMINISTRATOR.name())
                         .firstName("Dimi")
                         .lastName("Emilson")
                         .phoneNumber("07896620211")
@@ -67,7 +68,7 @@ public class AdminUpdatePasswordAPIServiceTest
                         .userID(user.getId().toString())
                         .password("bunkzh3Z!1")
                         .build();
-        Response response = apiUtils.makePatchAPICall(request, headers, admin.getId().toString(), "ADMINISTRATOR");
+        Response response = apiUtils.makePatchAPICall(request, headers, admin.getId().toString(), UserAuthority.ADMINISTRATOR.name());
         assertThat(response.statusCode()).isEqualTo(200);
     }
 
@@ -80,7 +81,7 @@ public class AdminUpdatePasswordAPIServiceTest
                         .userID(UUID.randomUUID().toString())
                         .password("bunkzh3Z!1")
                         .build();
-        Response response = apiUtils.makePatchAPICall(request, headers, admin.getId().toString(), "ADMINISTRATOR");
+        Response response = apiUtils.makePatchAPICall(request, headers, admin.getId().toString(), UserAuthority.ADMINISTRATOR.name());
         assertThat(response.statusCode()).isEqualTo(404);
     }
 
@@ -93,7 +94,7 @@ public class AdminUpdatePasswordAPIServiceTest
                         .userID(user.getId().toString())
                         .password("4528")
                         .build();
-        Response response = apiUtils.makePatchAPICall(request, headers, admin.getId().toString(), "ADMINISTRATOR");
+        Response response = apiUtils.makePatchAPICall(request, headers, admin.getId().toString(), UserAuthority.ADMINISTRATOR.name());
         assertThat(response.statusCode()).isEqualTo(400);
         APIError body = response.as(APIError.class);
         assertThat(body.message()).isEqualTo("Validation failed for one or more fields");
@@ -109,7 +110,7 @@ public class AdminUpdatePasswordAPIServiceTest
                         .userID("invalidUUID")
                         .password("bunkzh3Z!")
                         .build();
-        Response response = apiUtils.makePatchAPICall(request, headers, admin.getId().toString(), "ADMINISTRATOR");
+        Response response = apiUtils.makePatchAPICall(request, headers, admin.getId().toString(), UserAuthority.ADMINISTRATOR.name());
         assertThat(response.statusCode()).isEqualTo(400);
         APIError body = response.as(APIError.class);
         assertThat(body.message()).isEqualTo("Validation failed for one or more fields");

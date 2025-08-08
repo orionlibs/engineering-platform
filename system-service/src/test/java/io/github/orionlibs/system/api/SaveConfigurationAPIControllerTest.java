@@ -3,6 +3,7 @@ package io.github.orionlibs.system.api;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import io.github.orionlibs.core.tests.APITestUtils;
+import io.github.orionlibs.core.user.UserAuthority;
 import io.github.orionlibs.system.ControllerUtils;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -39,7 +40,7 @@ class SaveConfigurationAPIControllerTest
                         .key("")
                         .value("US")
                         .build();
-        Response response = apiUtils.makePostAPICall(config, headers, "Jimmy", "ADMINISTRATOR");
+        Response response = apiUtils.makePostAPICall(config, headers, "Jimmy", UserAuthority.ADMINISTRATOR.name());
         assertThat(response.statusCode()).isEqualTo(400);
     }
 
@@ -63,7 +64,7 @@ class SaveConfigurationAPIControllerTest
                         .key("default.printing.timezone")
                         .value("US")
                         .build();
-        Response response = apiUtils.makePostAPICall(config, headers, "Jimmy", "ADMINISTRATOR");
+        Response response = apiUtils.makePostAPICall(config, headers, "Jimmy", UserAuthority.ADMINISTRATOR.name());
         assertThat(response.statusCode()).isEqualTo(200);
         response = apiUtils.makeGetAPICall(null, "Jimmy", "USER");
         assertThat(response.statusCode()).isEqualTo(200);

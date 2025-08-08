@@ -3,13 +3,17 @@ package io.github.orionlibs.user.setting.api;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import io.github.orionlibs.core.tests.APITestUtils;
+import io.github.orionlibs.core.user.UserAuthority;
 import io.github.orionlibs.core.user.model.UserDAO;
 import io.github.orionlibs.core.user.model.UserModel;
+import io.github.orionlibs.core.user.setting.model.UserSettingsModel;
 import io.github.orionlibs.user.ControllerUtils;
 import io.github.orionlibs.user.registration.UserRegistrationService;
 import io.github.orionlibs.user.registration.api.UserRegistrationRequest;
+import io.github.orionlibs.user.setting.UserSettingsService;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +29,7 @@ public class AdminUpdateUserSettingAPIServiceTest
     @LocalServerPort int port;
     @Autowired UserDAO dao;
     @Autowired UserRegistrationService userRegistrationService;
+    @Autowired UserSettingsService userSettingsService;
     @Autowired APITestUtils apiUtils;
     String basePath;
     HttpHeaders headers;
@@ -49,7 +54,7 @@ public class AdminUpdateUserSettingAPIServiceTest
         admin = userRegistrationService.registerUser(UserRegistrationRequest.builder()
                         .username("admin@email.com")
                         .password("bunkzh3Z!")
-                        .authority("ADMINISTRATOR")
+                        .authority(UserAuthority.ADMINISTRATOR.name())
                         .firstName("Dimi")
                         .lastName("Emilson")
                         .phoneNumber("07896620211")
@@ -60,21 +65,15 @@ public class AdminUpdateUserSettingAPIServiceTest
     @Test
     void adminUpdateUserSetting()
     {
-        RestAssured.baseURI = "http://localhost:" + port + ControllerUtils.baseAPIPath + "/users/settings";
-        Response response = apiUtils.makeGetAPICall(headers, user.getId().toString(), "USER");
-        assertThat(response.statusCode()).isEqualTo(200);
-        UserSettingsDTO body = response.as(UserSettingsDTO.class);
-        String settingID = body.settings().get(0).id();
+        List<UserSettingsModel> settings = userSettingsService.getByUserID(user.getId().toString());
+        String settingID = settings.get(0).getId().toString();
         RestAssured.baseURI = String.format(basePath, user.getId().toString(), settingID);
         AdminUpdateUserSettingRequest request = AdminUpdateUserSettingRequest.builder()
                         .settingValue("light")
                         .build();
-        response = apiUtils.makePatchAPICall(request, headers, admin.getId().toString(), "ADMINISTRATOR");
+        Response response = apiUtils.makePatchAPICall(request, headers, admin.getId().toString(), UserAuthority.ADMINISTRATOR.name());
         assertThat(response.statusCode()).isEqualTo(200);
-        RestAssured.baseURI = "http://localhost:" + port + ControllerUtils.baseAPIPath + "/users/settings";
-        response = apiUtils.makeGetAPICall(headers, user.getId().toString(), "USER");
-        assertThat(response.statusCode()).isEqualTo(200);
-        body = response.as(UserSettingsDTO.class);
-        assertThat(body.settings().get(0).settingValue()).isEqualTo("light");
+        settings = userSettingsService.getByUserID(user.getId().toString());
+        assertThat(settings.get(0).getSettingValue()).isEqualTo("light");
     }
 }
