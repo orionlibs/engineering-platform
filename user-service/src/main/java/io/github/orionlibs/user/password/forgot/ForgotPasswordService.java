@@ -28,7 +28,6 @@ public class ForgotPasswordService
     private ForgotPasswordCodeValidator forgotPasswordCodeValidator;
 
 
-    //@Transactional(readOnly = true)
     public boolean process(CreateForgotPasswordRequestRequest request)
     {
         try
