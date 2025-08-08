@@ -42,6 +42,13 @@ public class UserSettingsService
 
 
     @Transactional(readOnly = true)
+    public Optional<UserSettingsModel> getBySettingNameAndUserID(String settingName, String userID)
+    {
+        return dao.findBySettingNameAndUser_Id(settingName, UUID.fromString(userID));
+    }
+
+
+    @Transactional(readOnly = true)
     public List<UserSettingsModel> getByUserID(UUID userID)
     {
         return dao.findAllByUserId(userID);

@@ -13,4 +13,7 @@ public interface UserSettingsDAORepository extends JpaRepository<UserSettingsMod
 
 
     Optional<UserSettingsModel> findByIdAndUser_Id(UUID id, UUID userId);
+
+
+    Optional<UserSettingsModel> findBySettingNameAndUser_Id(String settingName, UUID userId);
 }
