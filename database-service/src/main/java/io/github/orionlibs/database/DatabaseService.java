@@ -17,6 +17,12 @@ public class DatabaseService
     }
 
 
+    public long getNumberOfRegisteredDataProviders()
+    {
+        return dao.count();
+    }
+
+
     public void deleteAll()
     {
         dao.deleteAll();
