@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import io.github.orionlibs.core.cryptology.HMACSHAEncryptionKeyProvider;
 import io.github.orionlibs.core.user.UserService;
+import io.github.orionlibs.core.user.authentication.JWTService;
 import io.github.orionlibs.core.user.model.UserModel;
 import io.jsonwebtoken.SignatureAlgorithm;
 import java.nio.charset.StandardCharsets;
