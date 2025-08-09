@@ -2,6 +2,7 @@ package io.github.orionlibs.core.api.key;
 
 import io.github.orionlibs.core.user.model.UserDetailsWithUserID;
 import java.util.Collection;
+import java.util.Objects;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -26,7 +27,7 @@ public class ApiKeyAuthenticationToken extends AbstractAuthenticationToken
         super(auths);
         this.apiKey = apiKey;
         this.apiSecret = apiSecret;
-        this.userID = principal.getUserID().toString();
+        this.userID = principal.getUserID();
         setAuthenticated(true);
         setDetails(principal);
     }
@@ -47,7 +48,7 @@ public class ApiKeyAuthenticationToken extends AbstractAuthenticationToken
     @Override
     public Object getCredentials()
     {
-        return apiSecret;
+        return getApiSecret();
     }
 
 
@@ -61,5 +62,21 @@ public class ApiKeyAuthenticationToken extends AbstractAuthenticationToken
     public String getUserID()
     {
         return userID;
+    }
+
+
+    public boolean equals(Object other)
+    {
+        if(other instanceof ApiKeyAuthenticationToken)
+        {
+            ApiKeyAuthenticationToken temp = (ApiKeyAuthenticationToken)other;
+            return Objects.equals(apiKey, ((ApiKeyAuthenticationToken)other).getApiKey())
+                            && Objects.equals(apiSecret, ((ApiKeyAuthenticationToken)other).getApiSecret())
+                            && Objects.equals(userID, ((ApiKeyAuthenticationToken)other).getUserID());
+        }
+        else
+        {
+            return false;
+        }
     }
 }

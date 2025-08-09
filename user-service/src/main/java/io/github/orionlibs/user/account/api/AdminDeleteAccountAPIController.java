@@ -42,7 +42,7 @@ public class AdminDeleteAccountAPIController extends WebService
     )
     @DeleteMapping(value = "/admin/users/{userID}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAuthority('ADMINISTRATOR')")
-    public ResponseEntity<?> adminDeleteAccount(@PathVariable String userID)
+    public ResponseEntity<Map> adminDeleteAccount(@PathVariable String userID)
     {
         userService.delete(userID);
         return ResponseEntity.ok(Map.of());

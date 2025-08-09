@@ -47,7 +47,7 @@ public class DataSourceConfiguration
                             @Override
                             public void beforeQuery(ExecutionInfo execInfo, List<QueryInfo> queryInfoList)
                             {
-                                Instant now = Instant.now();
+                                //Instant now = Instant.now();
                                 for(QueryInfo qi : queryInfoList)
                                 {
                                     String sql = qi.getQuery();
@@ -59,8 +59,8 @@ public class DataSourceConfiguration
                             @Override
                             public void afterQuery(ExecutionInfo execInfo, List<QueryInfo> queryInfoList)
                             {
-                                long durationMs = execInfo.getElapsedTime(); // in ms
-                                Instant now = Instant.now();
+                                //long durationMs = execInfo.getElapsedTime(); // in ms
+                                //Instant now = Instant.now();
                                 for(QueryInfo qi : queryInfoList)
                                 {
                                     String sql = qi.getQuery();

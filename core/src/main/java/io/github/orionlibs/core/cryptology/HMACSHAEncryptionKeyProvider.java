@@ -12,7 +12,7 @@ public class HMACSHAEncryptionKeyProvider
 {
     @Value("${crypto.hmac-for-jwt.key}")
     private String jwtSigningKey;
-    private String HMAC_ALGO = "HmacSHA512";
+    private String hmacAlgorithm = "HmacSHA512";
 
 
     /**
@@ -22,8 +22,8 @@ public class HMACSHAEncryptionKeyProvider
     {
         try
         {
-            Mac mac = Mac.getInstance(HMAC_ALGO);
-            mac.init(new SecretKeySpec(key, HMAC_ALGO));
+            Mac mac = Mac.getInstance(hmacAlgorithm);
+            mac.init(new SecretKeySpec(key, hmacAlgorithm));
             byte[] rawHmac = mac.doFinal(data.getBytes(StandardCharsets.UTF_8));
             return Base64.getEncoder().encodeToString(rawHmac);
         }

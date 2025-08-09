@@ -11,13 +11,13 @@ public class SHAEncodingKeyProvider implements InitializingBean
     public static byte[] shaKey;
     @Value("${crypto.sha.key}")
     private String shaEncodingKey;
-    private byte[] KEY_BYTES_FOR_SHA_256;
+    private byte[] keyBytesForSHA256;
 
 
     @Override
     public void afterPropertiesSet() throws Exception
     {
-        KEY_BYTES_FOR_SHA_256 = shaEncodingKey.getBytes(StandardCharsets.UTF_8);
+        keyBytesForSHA256 = shaEncodingKey.getBytes(StandardCharsets.UTF_8);
         shaKey = loadKey();
     }
 
@@ -25,6 +25,6 @@ public class SHAEncodingKeyProvider implements InitializingBean
     public byte[] loadKey()
     {
         // TODO: fetch the wrapped key from Vault/KMS, unwrap it, and return a byte[]
-        return KEY_BYTES_FOR_SHA_256;
+        return keyBytesForSHA256;
     }
 }

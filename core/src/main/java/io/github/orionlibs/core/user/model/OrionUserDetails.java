@@ -31,4 +31,15 @@ public class OrionUserDetails extends User
         super(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
         this.userID = userID;
     }
+
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        if(obj instanceof OrionUserDetails user)
+        {
+            return this.userID.equals(user.getUserID()) && super.equals(obj);
+        }
+        return false;
+    }
 }

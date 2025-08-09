@@ -25,7 +25,7 @@ public class SystemConfigurationServiceTest
         List<ConfigurationModel> result = configurationService.getAll();
         Set<ConfigurationModel> expected = Set.of(new ConfigurationModel("default.printing.timezone", "GB"),
                         new ConfigurationModel("default.page.size", "50"));
-        assertThat(expected.containsAll(result)).isTrue();
+        assertThat(result).containsAll(expected);
     }
 
 

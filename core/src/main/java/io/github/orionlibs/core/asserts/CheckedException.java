@@ -2,7 +2,7 @@ package io.github.orionlibs.core.asserts;
 
 public class CheckedException extends Exception
 {
-    private static final String DefaultErrorMessage = "There was an error.";
+    private static final String DEFAULT_ERROR_MESSAGE = "There was an error.";
 
 
     public CheckedException(String errorMessage)
@@ -25,6 +25,6 @@ public class CheckedException extends Exception
 
     public CheckedException(Throwable cause)
     {
-        super(DefaultErrorMessage, cause);
+        super(DEFAULT_ERROR_MESSAGE, cause);
     }
 }

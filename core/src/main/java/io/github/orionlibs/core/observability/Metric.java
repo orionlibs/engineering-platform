@@ -14,14 +14,14 @@ public abstract class Metric
     private final ConcurrentMap<String, Counter> counterCache = new ConcurrentHashMap<>();
 
 
-    public Metric(String name, String description)
+    protected Metric(String name, String description)
     {
         this.name = name;
         this.description = description;
     }
 
 
-    public Metric(String name, String description, MeterRegistry meterRegistry)
+    protected Metric(String name, String description, MeterRegistry meterRegistry)
     {
         this.meterRegistry = meterRegistry;
         this.name = name;
@@ -44,13 +44,13 @@ public abstract class Metric
     public void update(String tagKey, String tagValue)
     {
         String cacheKey = name + "|" + tagKey + "|" + tagValue;
-        Counter counter = counterCache.computeIfAbsent(cacheKey, key ->
+        Counter counterNew = counterCache.computeIfAbsent(cacheKey, key ->
                         Counter.builder(name)
                                         .description(description)
                                         .tag(tagKey, tagValue)
                                         .register(meterRegistry)
         );
-        counter.increment();
+        counterNew.increment();
     }
 
 

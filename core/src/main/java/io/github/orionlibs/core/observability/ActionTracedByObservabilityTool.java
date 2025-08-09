@@ -35,6 +35,7 @@ public class ActionTracedByObservabilityTool
         }
         catch(InterruptedException ignored)
         {
+            //empty
         }
     }
 }

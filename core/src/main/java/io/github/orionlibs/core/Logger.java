@@ -15,4 +15,9 @@ public class Logger
     {
         log.error(message, parameters);
     }
+
+
+    private Logger()
+    {
+    }
 }
