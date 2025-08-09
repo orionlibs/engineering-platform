@@ -1,5 +1,6 @@
 package io.github.orionlibs.database.api;
 
+import io.github.orionlibs.core.api.WebService;
 import io.github.orionlibs.database.ControllerUtils;
 import io.github.orionlibs.database.DatabaseService;
 import io.github.orionlibs.database.converter.DataProviderDTOToModelConverter;
@@ -25,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(ControllerUtils.baseAPIPath)
 @Validated
 @Tag(name = "Data provider", description = "Data provider manager")
-public class SaveDataProviderAPIController
+public class SaveDataProviderAPIController extends WebService
 {
     @Autowired
     private DatabaseService databaseService;

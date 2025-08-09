@@ -2,6 +2,7 @@ package io.github.orionlibs.user.registration.api;
 
 import static org.springframework.http.ResponseEntity.created;
 
+import io.github.orionlibs.core.api.WebService;
 import io.github.orionlibs.user.ControllerUtils;
 import io.github.orionlibs.user.registration.UserRegistrationService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -23,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(ControllerUtils.baseAPIPath)
 @Validated
 @Tag(name = "Users", description = "User manager")
-public class SaveUserAPIController
+public class SaveUserAPIController extends WebService
 {
     @Autowired
     private UserRegistrationService userRegistrationService;

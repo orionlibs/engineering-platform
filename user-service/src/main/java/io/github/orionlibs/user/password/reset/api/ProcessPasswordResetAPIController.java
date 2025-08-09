@@ -1,5 +1,6 @@
 package io.github.orionlibs.user.password.reset.api;
 
+import io.github.orionlibs.core.api.WebService;
 import io.github.orionlibs.user.ControllerUtils;
 import io.github.orionlibs.user.password.PasswordService;
 import io.github.orionlibs.user.password.api.UpdatePasswordRequest;
@@ -26,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(ControllerUtils.baseAPIPath)
 @Validated
 @Tag(name = "Users", description = "User manager")
-public class ProcessPasswordResetAPIController
+public class ProcessPasswordResetAPIController extends WebService
 {
     @Autowired
     private PasswordService passwordService;
