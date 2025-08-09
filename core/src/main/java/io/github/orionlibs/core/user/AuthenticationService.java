@@ -1,5 +1,6 @@
 package io.github.orionlibs.core.user;
 
+import io.github.orionlibs.core.user.authentication.JWTToken;
 import io.github.orionlibs.core.user.model.UserModel;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -10,10 +11,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class AuthenticationService
 {
-    public void saveUserInSession(HttpServletRequest request, UserModel user)
+    public void saveUserInSession(HttpServletRequest request, UserModel user, JWTToken tokenData)
     {
         UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
         auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
         SecurityContextHolder.getContext().setAuthentication(auth);
+        SessionService.setAttribute(request, SessionAttribute.currentUserJWTToken, tokenData.getToken());
+        SessionService.setAttribute(request, SessionAttribute.currentUserJWTTokenData, tokenData);
+        SessionService.setAttribute(request, SessionAttribute.currentUserID, tokenData.getUserID());
+        SessionService.setAttribute(request, SessionAttribute.currentUsername, user.getUsername());
+        SessionService.setAttribute(request, SessionAttribute.currentUserAuthority, user.getAuthority());
     }
 }

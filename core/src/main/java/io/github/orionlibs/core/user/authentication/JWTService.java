@@ -1,6 +1,7 @@
 package io.github.orionlibs.core.user.authentication;
 
 import io.github.orionlibs.core.cryptology.HMACSHAEncryptionKeyProvider;
+import io.github.orionlibs.core.user.UserAuthority;
 import io.github.orionlibs.core.user.UserService;
 import io.github.orionlibs.core.user.model.UserModel;
 import io.jsonwebtoken.Claims;
@@ -182,10 +183,72 @@ public class JWTService
                         .parseClaimsJws(token)
                         .getPayload();
     }
-        /*ExpiredJwtException
-        UnsupportedJwtException
-        MalformedJwtException
-        SignatureException
-        SecurityException
-        IllegalArgumentException*/
+
+
+    /*ExpiredJwtException
+    UnsupportedJwtException
+    MalformedJwtException
+    SignatureException
+    SecurityException
+    IllegalArgumentException*/
+    public JWTToken getJWTTokenData(String token)
+    {
+        JWTToken jwtToken = new JWTToken();
+        jwtToken.setToken(token);
+        jwtToken.setUserID(UserAuthority.ANONYMOUS.name());
+        try
+        {
+            Claims claims = parseClaims(token);
+            getDataFromToken(jwtToken, claims);
+        }
+        catch(SecurityException ex)
+        {
+            jwtToken.setHasErrors(true);
+        }
+        catch(MalformedJwtException ex)
+        {
+            jwtToken.setHasErrors(true);
+        }
+        catch(ExpiredJwtException ex)
+        {
+            jwtToken.setHasErrors(true);
+            jwtToken.setExpiredToken(true);
+            getDataFromToken(jwtToken, ex.getClaims());
+        }
+        catch(UnsupportedJwtException ex)
+        {
+            jwtToken.setHasErrors(true);
+        }
+        catch(IllegalArgumentException ex)
+        {
+            jwtToken.setHasErrors(true);
+        }
+        return jwtToken;
+    }
+
+
+    private void getDataFromToken(JWTToken jwtToken, Claims claims)
+    {
+        String subject = claims.getSubject();
+        String userID = subject;
+        jwtToken.setUserID(userID);
+        //String refreshToken = claims.get("orion.refresh.token", String.class);
+        //jwtToken.setDoesRefreshTokenExistInDatabase(AuthenticationTokenService.doesRefreshTokenExistByTokenAndUserID(refreshToken, userID));
+        String refreshTokenExpirationInEpochMillisecondsString = claims.get("orion.refresh.token.expiration.timestamp.in.epoch.milliseconds", String.class);
+        long refreshTokenExpirationInEpochMilliseconds = -1L;
+        if(refreshTokenExpirationInEpochMillisecondsString != null)
+        {
+            refreshTokenExpirationInEpochMilliseconds = Long.parseLong(refreshTokenExpirationInEpochMillisecondsString);
+        }
+        //jwtToken.setRefreshToken(refreshToken);
+        /*jwtToken.setRefreshTokenExpirationDateTime(CalendarService.convertEpochMillisecondsToDateTime(refreshTokenExpirationInEpochMilliseconds));
+        jwtToken.setExpiredRefreshToken(CalendarService.hasExpired(jwtToken.getRefreshTokenExpirationDateTime()));
+        com.orion.core.calendar.date.Date expirationDate = com.orion.core.calendar.date.Date.of(claims.getExpiration().getYear() + 1900,
+                        claims.getExpiration().getMonth() + 1,
+                        claims.getExpiration().getDate());
+        Time expirationTime = Time.of(claims.getExpiration().getHours(),
+                        claims.getExpiration().getMinutes(),
+                        claims.getExpiration().getSeconds());
+        JWTToken.setTokenExpirationDateTime(DateTime.of(expirationDate, expirationTime));*/
+    }
 }

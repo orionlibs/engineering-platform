@@ -1,9 +1,10 @@
 package io.github.orionlibs.user.authentication;
 
-import io.github.orionlibs.core.api.JWTService;
 import io.github.orionlibs.core.api.header.HeaderService;
 import io.github.orionlibs.core.user.AuthenticationService;
 import io.github.orionlibs.core.user.UserService;
+import io.github.orionlibs.core.user.authentication.JWTService;
+import io.github.orionlibs.core.user.authentication.JWTToken;
 import io.github.orionlibs.core.user.model.UserModel;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -35,16 +36,17 @@ public class JWTFilter extends OncePerRequestFilter
     protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws ServletException, IOException
     {
         String token = headerService.extractAuthorisationBearerToken(req);
-        String userID = jwtService.extractUserID(token);
-        if(userID != null && SecurityContextHolder.getContext().getAuthentication() == null)
+        //String userID = jwtService.extractUserID(token);
+        JWTToken tokenData = jwtService.getJWTTokenData(token);
+        if(tokenData.getUserID() != null && SecurityContextHolder.getContext().getAuthentication() == null)
         {
-            Optional<UserModel> userWrap = userService.loadUserByUserID(userID);
+            Optional<UserModel> userWrap = userService.loadUserByUserID(tokenData.getUserID());
             if(userWrap.isPresent())
             {
                 UserModel user = userWrap.get();
                 if(jwtService.isTokenValid(token, user))
                 {
-                    authenticationService.saveUserInSession(req, user);
+                    authenticationService.saveUserInSession(req, user, tokenData);
                 }
             }
         }
