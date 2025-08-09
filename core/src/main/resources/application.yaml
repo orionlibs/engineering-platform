@@ -16,6 +16,12 @@ error:
     duplicate_record:
       message: "Duplicate database record found: "
 
+user:
+  default-settings:
+    settings:
+      - name: theme
+        value: dark
+
 # Production profile (default)
 ---
 spring:

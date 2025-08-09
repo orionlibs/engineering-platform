@@ -1,11 +1,11 @@
 package io.github.orionlibs.core.api.key;
 
+import io.github.orionlibs.core.user.model.UserDetailsWithUserID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -19,13 +19,14 @@ public class ApiKeyAuthenticationProvider implements AuthenticationProvider
     public Authentication authenticate(Authentication authentication) throws AuthenticationException
     {
         ApiKeyAuthenticationToken token = (ApiKeyAuthenticationToken)authentication;
-        UserDetails user = validationService.validate(token.getApiKey(), token.getApiSecret());
+        UserDetailsWithUserID user = validationService.validate(token.getApiKey(), token.getApiSecret());
         if(user == null)
         {
             throw new BadCredentialsException("Invalid API key/secret");
         }
         return new ApiKeyAuthenticationToken(
-                        user, user.getAuthorities(),
+                        user,
+                        user.getAuthorities(),
                         token.getApiKey(),
                         token.getApiSecret()
         );

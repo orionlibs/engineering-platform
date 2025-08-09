@@ -6,9 +6,9 @@ import io.github.orionlibs.core.tests.APITestUtils;
 import io.github.orionlibs.core.user.AccountDetailsDTO;
 import io.github.orionlibs.core.user.model.UserDAO;
 import io.github.orionlibs.core.user.model.UserModel;
+import io.github.orionlibs.core.user.registration.UserRegistrationService;
+import io.github.orionlibs.core.user.registration.api.UserRegistrationRequest;
 import io.github.orionlibs.user.ControllerUtils;
-import io.github.orionlibs.user.registration.UserRegistrationService;
-import io.github.orionlibs.user.registration.api.UserRegistrationRequest;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import java.util.UUID;
@@ -66,8 +66,6 @@ public class GetAccountDetailsAPIServiceTest
     {
         RestAssured.baseURI = basePath;
         Response response = apiUtils.makeGetAPICall(headers, UUID.randomUUID().toString(), "USER");
-        assertThat(response.statusCode()).isEqualTo(200);
-        AccountDetailsDTO body = response.as(AccountDetailsDTO.class);
-        assertThat(body.username()).isEqualTo("");
+        assertThat(response.statusCode()).isEqualTo(401);
     }
 }

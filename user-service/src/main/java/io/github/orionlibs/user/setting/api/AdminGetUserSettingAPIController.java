@@ -3,7 +3,7 @@ package io.github.orionlibs.user.setting.api;
 import io.github.orionlibs.core.api.WebService;
 import io.github.orionlibs.core.user.setting.model.UserSettingsModel;
 import io.github.orionlibs.user.ControllerUtils;
-import io.github.orionlibs.user.setting.UserSettingsService;
+import io.github.orionlibs.core.user.setting.UserSettingsService;
 import io.github.orionlibs.user.setting.converter.UserSettingModelToDTOConverter;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -49,7 +49,7 @@ public class AdminGetUserSettingAPIController extends WebService
                     )},
                     responses = {@ApiResponse(responseCode = "200", description = "User account setting returned")}
     )
-    @GetMapping(value = "/users/{userID}/settings/{settingsID}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/admin/users/{userID}/settings/{settingsID}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAuthority('ADMINISTRATOR')")
     public ResponseEntity<UserSettingDTO> adminGetUserSetting(@PathVariable String userID, @PathVariable String settingsID)
     {

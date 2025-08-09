@@ -32,7 +32,7 @@ public class LoginService implements Publishable
         {
             OrionUserDetails user = userService.loadUserByUsername(requestBean.getUsername());
             authenticationManager.authenticate(auth);
-            String token = jwtService.generateToken((String)auth.getPrincipal(), user.getAuthorities());
+            String token = jwtService.generateToken(user.getUserID().toString(), user.getAuthorities());
             publish(EventUserLoggedIn.EVENT_NAME, EventUserLoggedIn.builder()
                             .username(requestBean.getUsername())
                             .build());

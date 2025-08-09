@@ -6,9 +6,9 @@ import io.github.orionlibs.core.api.APIError;
 import io.github.orionlibs.core.tests.APITestUtils;
 import io.github.orionlibs.core.user.model.UserDAO;
 import io.github.orionlibs.core.user.model.UserModel;
+import io.github.orionlibs.core.user.registration.UserRegistrationService;
+import io.github.orionlibs.core.user.registration.api.UserRegistrationRequest;
 import io.github.orionlibs.user.ControllerUtils;
-import io.github.orionlibs.user.registration.UserRegistrationService;
-import io.github.orionlibs.user.registration.api.UserRegistrationRequest;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import java.util.UUID;
@@ -70,7 +70,7 @@ public class UpdatePasswordAPIServiceTest
                         .password("bunkzh3Z!1")
                         .build();
         Response response = apiUtils.makePatchAPICall(request, headers, UUID.randomUUID().toString(), "USER");
-        assertThat(response.statusCode()).isEqualTo(404);
+        assertThat(response.statusCode()).isEqualTo(401);
     }
 
 

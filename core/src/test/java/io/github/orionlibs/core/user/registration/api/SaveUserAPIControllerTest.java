@@ -1,4 +1,4 @@
-package io.github.orionlibs.user.registration.api;
+package io.github.orionlibs.core.user.registration.api;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -6,7 +6,6 @@ import io.github.orionlibs.core.api.APIError;
 import io.github.orionlibs.core.tests.APITestUtils;
 import io.github.orionlibs.core.user.UserAuthority;
 import io.github.orionlibs.core.user.model.UserDAO;
-import io.github.orionlibs.user.ControllerUtils;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import java.util.Set;
@@ -16,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.http.HttpHeaders;
 import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -26,6 +26,7 @@ class SaveUserAPIControllerTest
     @Autowired APITestUtils apiUtils;
     String basePath;
     @Autowired UserDAO dao;
+    HttpHeaders headers;
 
 
     @BeforeEach
@@ -49,7 +50,7 @@ class SaveUserAPIControllerTest
                         .lastName("Emilson")
                         .phoneNumber("07896620211")
                         .build();
-        Response response = apiUtils.makePostAPICall(request, null);
+        Response response = apiUtils.makePostAPICall(request, headers);
         assertThat(response.statusCode()).isEqualTo(201);
     }
 

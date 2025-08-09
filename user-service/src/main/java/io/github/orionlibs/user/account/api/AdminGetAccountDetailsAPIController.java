@@ -39,7 +39,7 @@ public class AdminGetAccountDetailsAPIController extends WebService
                     ),
                     responses = {@ApiResponse(responseCode = "200", description = "User account details returned")}
     )
-    @GetMapping(value = "/users/{userID}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/admin/users/{userID}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAuthority('ADMINISTRATOR')")
     public ResponseEntity<AccountDetailsDTO> adminGetAccountDetails(@PathVariable String userID)
     {

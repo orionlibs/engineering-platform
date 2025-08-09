@@ -9,17 +9,30 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "api_keys", schema = "uns", indexes = {
-                @Index(name = "idx_uns_api_keys", columnList = "apiKey,user_id")
+                @Index(name = "idx_uns_api_keys", columnList = "api_key,user_id")
 })
 public class ApiKeyModel
 {
     @Id
-    @Column(name = "api_key", nullable = false, updatable = false)
+    @Column(name = "api_key", length = 700, nullable = false, updatable = false)
     private String apiKey;
     @Column(name = "api_secret", nullable = false)
     private String apiSecret;
     @Column(name = "user_id", nullable = false)
     private UUID userID;
+
+
+    public ApiKeyModel()
+    {
+    }
+
+
+    public ApiKeyModel(String apiKey, String apiSecret, String userID)
+    {
+        this.apiKey = apiKey;
+        this.apiSecret = apiSecret;
+        this.userID = UUID.fromString(userID);
+    }
 
 
     public String getApiKey()

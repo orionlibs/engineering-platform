@@ -1,10 +1,9 @@
-package io.github.orionlibs.user.registration.api;
+package io.github.orionlibs.core.user.registration.api;
 
 import static org.springframework.http.ResponseEntity.created;
 
 import io.github.orionlibs.core.api.WebService;
-import io.github.orionlibs.user.ControllerUtils;
-import io.github.orionlibs.user.registration.UserRegistrationService;
+import io.github.orionlibs.core.user.registration.UserRegistrationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -14,6 +13,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -44,6 +44,7 @@ public class SaveUserAPIController extends WebService
                                     @ApiResponse(responseCode = "409", description = "Duplicate username found")}
     )
     @PostMapping(value = "/users", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("!isAuthenticated()")
     public ResponseEntity<?> saveUser(@Valid @RequestBody UserRegistrationRequest userToSave)
     {
         userRegistrationService.registerUser(userToSave);

@@ -1,5 +1,6 @@
 package io.github.orionlibs.user.authentication;
 
+import io.github.orionlibs.core.api.key.ApiKeyService;
 import io.github.orionlibs.core.event.Publishable;
 import io.github.orionlibs.core.user.authentication.JWTService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Service;
 public class LogoutService implements Publishable
 {
     @Autowired
-    private JWTService jwtService;
+    private ApiKeyService apiKeyService;
 
 
     public String logoutUser(HttpServletRequest request, HttpServletResponse response, String token)
@@ -28,6 +29,7 @@ public class LogoutService implements Publishable
             request.getSession(false).invalidate();
         }
         //response.addHeader(HttpHeaders.SET_COOKIE, CookieService.createCookie(CookieName.JWTAccessToken.get(), null, 0).toString());
+        apiKeyService.delete(token);
         return "";
     }
 }

@@ -1,14 +1,15 @@
 package io.github.orionlibs.core.api.key;
 
+import io.github.orionlibs.core.user.model.UserDetailsWithUserID;
 import java.util.Collection;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 public class ApiKeyAuthenticationToken extends AbstractAuthenticationToken
 {
     private final String apiKey;
     private final String apiSecret;
+    private String userID;
 
 
     public ApiKeyAuthenticationToken(String apiKey, String apiSecret)
@@ -17,6 +18,17 @@ public class ApiKeyAuthenticationToken extends AbstractAuthenticationToken
         this.apiKey = apiKey;
         this.apiSecret = apiSecret;
         setAuthenticated(false);
+    }
+
+
+    public ApiKeyAuthenticationToken(UserDetailsWithUserID principal, Collection<? extends GrantedAuthority> auths, String apiKey, String apiSecret)
+    {
+        super(auths);
+        this.apiKey = apiKey;
+        this.apiSecret = apiSecret;
+        this.userID = principal.getUserID().toString();
+        setAuthenticated(true);
+        setDetails(principal);
     }
 
 
@@ -32,16 +44,6 @@ public class ApiKeyAuthenticationToken extends AbstractAuthenticationToken
     }
 
 
-    public ApiKeyAuthenticationToken(UserDetails principal, Collection<? extends GrantedAuthority> auths, String apiKey, String apiSecret)
-    {
-        super(auths);
-        this.apiKey = apiKey;
-        this.apiSecret = apiSecret;
-        setAuthenticated(true);
-        setDetails(principal);
-    }
-
-
     @Override
     public Object getCredentials()
     {
@@ -53,5 +55,11 @@ public class ApiKeyAuthenticationToken extends AbstractAuthenticationToken
     public Object getPrincipal()
     {
         return getDetails();
+    }
+
+
+    public String getUserID()
+    {
+        return userID;
     }
 }

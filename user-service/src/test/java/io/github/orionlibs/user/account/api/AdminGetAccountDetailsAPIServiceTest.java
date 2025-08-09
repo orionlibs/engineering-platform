@@ -8,8 +8,8 @@ import io.github.orionlibs.core.user.UserAuthority;
 import io.github.orionlibs.core.user.model.UserDAO;
 import io.github.orionlibs.core.user.model.UserModel;
 import io.github.orionlibs.user.ControllerUtils;
-import io.github.orionlibs.user.registration.UserRegistrationService;
-import io.github.orionlibs.user.registration.api.UserRegistrationRequest;
+import io.github.orionlibs.core.user.registration.UserRegistrationService;
+import io.github.orionlibs.core.user.registration.api.UserRegistrationRequest;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import java.util.UUID;
@@ -38,7 +38,7 @@ public class AdminGetAccountDetailsAPIServiceTest
     @BeforeEach
     void setup()
     {
-        basePath = "http://localhost:" + port + ControllerUtils.baseAPIPath + "/users";
+        basePath = "http://localhost:" + port + ControllerUtils.baseAPIPath + "/admin/users";
         dao.deleteAll();
         headers = new HttpHeaders();
         user = userRegistrationService.registerUser(UserRegistrationRequest.builder()
@@ -63,8 +63,8 @@ public class AdminGetAccountDetailsAPIServiceTest
     @Test
     void adminGetAccountDetails()
     {
-        RestAssured.baseURI = basePath;
-        Response response = apiUtils.makeGetAPICall(headers, user.getId().toString(), "USER");
+        RestAssured.baseURI = basePath + "/" + user.getId().toString();
+        Response response = apiUtils.makeGetAPICall(headers, user.getId().toString(), UserAuthority.ADMINISTRATOR.name());
         assertThat(response.statusCode()).isEqualTo(200);
         AccountDetailsDTO body = response.as(AccountDetailsDTO.class);
         assertThat(body.username()).isEqualTo("me@email.com");
@@ -74,10 +74,8 @@ public class AdminGetAccountDetailsAPIServiceTest
     @Test
     void adminGetAccountDetails_userNotFound()
     {
-        RestAssured.baseURI = basePath;
-        Response response = apiUtils.makeGetAPICall(headers, UUID.randomUUID().toString(), "USER");
-        assertThat(response.statusCode()).isEqualTo(200);
-        AccountDetailsDTO body = response.as(AccountDetailsDTO.class);
-        assertThat(body.username()).isEqualTo("");
+        RestAssured.baseURI = basePath + "/" + user.getId().toString();
+        Response response = apiUtils.makeGetAPICall(headers, UUID.randomUUID().toString(), UserAuthority.ADMINISTRATOR.name());
+        assertThat(response.statusCode()).isEqualTo(401);
     }
 }

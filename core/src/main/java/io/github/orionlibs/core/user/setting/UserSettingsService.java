@@ -1,4 +1,4 @@
-package io.github.orionlibs.user.setting;
+package io.github.orionlibs.core.user.setting;
 
 import io.github.orionlibs.core.Logger;
 import io.github.orionlibs.core.user.model.UserModel;

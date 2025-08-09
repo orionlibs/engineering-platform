@@ -3,6 +3,8 @@ package io.github.orionlibs.core.api.key;
 import io.github.orionlibs.core.api.key.model.ApiKeyDAO;
 import io.github.orionlibs.core.api.key.model.ApiKeyModel;
 import io.github.orionlibs.core.user.model.UserDAO;
+import io.github.orionlibs.core.user.model.UserDetailsWithUserID;
+import io.github.orionlibs.core.user.model.UserModel;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -22,7 +24,7 @@ public class ApiKeyValidationService
     private UserDetailsService userService;
 
 
-    public UserDetails validate(String apiKey, String apiSecret) throws AuthenticationException
+    public UserDetailsWithUserID validate(String apiKey, String apiSecret) throws AuthenticationException
     {
         Optional<ApiKeyModel> opt = apiKeyDAO.findById(apiKey);
         if(opt.isEmpty())
@@ -34,8 +36,18 @@ public class ApiKeyValidationService
         {
             return null;
         }
-        return userDAO.findByUserID(model.getUserID())
+        Optional<UserModel> userFound = userDAO.findByUserID(model.getUserID());
+        if(userFound.isPresent())
+        {
+            UserDetails user = userService.loadUserByUsername(userFound.get().getUsername());
+            return new UserDetailsWithUserID(model.getUserID().toString(), user);
+        }
+        else
+        {
+            throw new BadCredentialsException("User not found");
+        }
+        /*return userDAO.findByUserID(model.getUserID())
                         .map(user -> userService.loadUserByUsername(user.getUsername()))
-                        .orElseThrow(() -> new BadCredentialsException("User not found"));
+                        .orElseThrow(() -> new BadCredentialsException("User not found"));*/
     }
 }

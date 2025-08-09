@@ -3,7 +3,7 @@ package io.github.orionlibs.user.setting.api;
 import io.github.orionlibs.core.api.WebService;
 import io.github.orionlibs.core.user.setting.model.UserSettingsModel;
 import io.github.orionlibs.user.ControllerUtils;
-import io.github.orionlibs.user.setting.UserSettingsService;
+import io.github.orionlibs.core.user.setting.UserSettingsService;
 import io.github.orionlibs.user.setting.converter.UserSettingModelToDTOConverter;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
