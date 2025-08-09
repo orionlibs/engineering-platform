@@ -4,12 +4,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import io.github.orionlibs.core.api.APIError;
 import io.github.orionlibs.core.tests.APITestUtils;
+import io.github.orionlibs.core.tests.TestUtils;
 import io.github.orionlibs.core.user.UserAuthority;
 import io.github.orionlibs.core.user.model.UserDAO;
 import io.github.orionlibs.core.user.model.UserModel;
 import io.github.orionlibs.user.ControllerUtils;
-import io.github.orionlibs.core.user.registration.UserRegistrationService;
-import io.github.orionlibs.core.user.registration.api.UserRegistrationRequest;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import java.util.UUID;
@@ -27,8 +26,8 @@ public class AdminEnableAccountAPIServiceTest
 {
     @LocalServerPort int port;
     @Autowired UserDAO dao;
-    @Autowired UserRegistrationService userRegistrationService;
     @Autowired APITestUtils apiUtils;
+    @Autowired TestUtils testUtils;
     String basePath;
     HttpHeaders headers;
     UserModel user;
@@ -41,22 +40,8 @@ public class AdminEnableAccountAPIServiceTest
         basePath = "http://localhost:" + port + ControllerUtils.baseAPIPath + "/admin/users/enablements";
         dao.deleteAll();
         headers = new HttpHeaders();
-        user = userRegistrationService.registerUser(UserRegistrationRequest.builder()
-                        .username("me@email.com")
-                        .password("bunkzh3Z!")
-                        .authority("USER")
-                        .firstName("Dimi")
-                        .lastName("Emilson")
-                        .phoneNumber("07896620211")
-                        .build());
-        admin = userRegistrationService.registerUser(UserRegistrationRequest.builder()
-                        .username("admin@email.com")
-                        .password("bunkzh3Z!")
-                        .authority(UserAuthority.ADMINISTRATOR.name())
-                        .firstName("Dimi")
-                        .lastName("Emilson")
-                        .phoneNumber("07896620211")
-                        .build());
+        user = testUtils.registerUser("me@email.com", "USER");
+        admin = testUtils.registerUser("admin@email.com", UserAuthority.ADMINISTRATOR.name());
     }
 
 

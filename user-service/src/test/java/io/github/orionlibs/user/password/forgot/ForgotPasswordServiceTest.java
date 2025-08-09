@@ -2,11 +2,10 @@ package io.github.orionlibs.user.password.forgot;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import io.github.orionlibs.core.tests.TestUtils;
 import io.github.orionlibs.core.user.UserService;
 import io.github.orionlibs.core.user.model.UserModel;
 import io.github.orionlibs.user.password.forgot.api.CreateForgotPasswordRequestRequest;
-import io.github.orionlibs.core.user.registration.UserRegistrationService;
-import io.github.orionlibs.core.user.registration.api.UserRegistrationRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +17,8 @@ import org.springframework.test.context.ActiveProfiles;
 public class ForgotPasswordServiceTest
 {
     @Autowired UserService userService;
-    @Autowired UserRegistrationService userRegistrationService;
     @Autowired ForgotPasswordService forgotPasswordService;
+    @Autowired TestUtils testUtils;
     UserModel user;
 
 
@@ -27,14 +26,7 @@ public class ForgotPasswordServiceTest
     void setup()
     {
         userService.deleteAll();
-        user = userRegistrationService.registerUser(UserRegistrationRequest.builder()
-                        .username("me@email.com")
-                        .password("bunkzh3Z!")
-                        .authority("USER")
-                        .firstName("Dimi")
-                        .lastName("Emilson")
-                        .phoneNumber("07896620211")
-                        .build());
+        user = testUtils.registerUser("me@email.com", "USER");
     }
 
 

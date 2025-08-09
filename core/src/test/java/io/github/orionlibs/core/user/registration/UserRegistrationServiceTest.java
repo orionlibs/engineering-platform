@@ -68,7 +68,7 @@ public class UserRegistrationServiceTest
     {
         UserRegistrationRequest request = UserRegistrationRequest.builder()
                         .username("me@email.com")
-                        .password("4528")
+                        .password("bunkzh3Z!")
                         .authority("USER")
                         .firstName("Dimi")
                         .lastName("Emilson")

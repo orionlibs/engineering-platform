@@ -3,11 +3,10 @@ package io.github.orionlibs.system.api;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import io.github.orionlibs.core.tests.APITestUtils;
+import io.github.orionlibs.core.tests.TestUtils;
 import io.github.orionlibs.core.user.UserAuthority;
 import io.github.orionlibs.core.user.model.UserDAO;
 import io.github.orionlibs.core.user.model.UserModel;
-import io.github.orionlibs.core.user.registration.UserRegistrationService;
-import io.github.orionlibs.core.user.registration.api.UserRegistrationRequest;
 import io.github.orionlibs.system.ControllerUtils;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -25,8 +24,8 @@ class SaveConfigurationAPIControllerTest
 {
     @LocalServerPort int port;
     @Autowired APITestUtils apiUtils;
+    @Autowired TestUtils testUtils;
     @Autowired UserDAO dao;
-    @Autowired UserRegistrationService userRegistrationService;
     HttpHeaders headers;
     UserModel user;
 
@@ -38,14 +37,7 @@ class SaveConfigurationAPIControllerTest
         headers = new HttpHeaders();
         RestAssured.baseURI = "http://localhost:" + port + ControllerUtils.baseAPIPath + "/systems/configurations";
         dao.deleteAll();
-        user = userRegistrationService.registerUser(UserRegistrationRequest.builder()
-                        .username("me@email.com")
-                        .password("bunkzh3Z!")
-                        .authority("USER")
-                        .firstName("Dimi")
-                        .lastName("Emilson")
-                        .phoneNumber("07896620211")
-                        .build());
+        user = testUtils.registerUser("me@email.com", "USER");
     }
 
 

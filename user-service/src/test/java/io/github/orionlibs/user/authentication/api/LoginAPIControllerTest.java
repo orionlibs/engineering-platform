@@ -4,10 +4,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import io.github.orionlibs.core.api.APIError;
 import io.github.orionlibs.core.tests.APITestUtils;
+import io.github.orionlibs.core.tests.TestUtils;
 import io.github.orionlibs.core.user.model.UserDAO;
 import io.github.orionlibs.user.ControllerUtils;
-import io.github.orionlibs.core.user.registration.UserRegistrationService;
-import io.github.orionlibs.core.user.registration.api.UserRegistrationRequest;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import java.util.Map;
@@ -27,8 +26,8 @@ class LoginAPIControllerTest
     @LocalServerPort int port;
     @Autowired UserDAO dao;
     @Autowired APITestUtils apiUtils;
+    @Autowired TestUtils testUtils;
     String basePath;
-    @Autowired UserRegistrationService userRegistrationService;
 
 
     @BeforeEach
@@ -36,14 +35,7 @@ class LoginAPIControllerTest
     {
         basePath = "http://localhost:" + port + ControllerUtils.baseAPIPath + "/users/login";
         dao.deleteAll();
-        userRegistrationService.registerUser(UserRegistrationRequest.builder()
-                        .username("me@email.com")
-                        .password("bunkzh3Z!")
-                        .authority("USER")
-                        .firstName("Dimi")
-                        .lastName("Emilson")
-                        .phoneNumber("07896620211")
-                        .build());
+        testUtils.registerUser("me@email.com", "USER");
     }
 
 

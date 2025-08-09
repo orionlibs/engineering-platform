@@ -3,11 +3,10 @@ package io.github.orionlibs.user.setting.api;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import io.github.orionlibs.core.tests.APITestUtils;
+import io.github.orionlibs.core.tests.TestUtils;
 import io.github.orionlibs.core.user.model.UserDAO;
 import io.github.orionlibs.core.user.model.UserModel;
 import io.github.orionlibs.user.ControllerUtils;
-import io.github.orionlibs.core.user.registration.UserRegistrationService;
-import io.github.orionlibs.core.user.registration.api.UserRegistrationRequest;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeEach;
@@ -24,8 +23,8 @@ public class GetUserSettingByNameAPIServiceTest
 {
     @LocalServerPort int port;
     @Autowired UserDAO dao;
-    @Autowired UserRegistrationService userRegistrationService;
     @Autowired APITestUtils apiUtils;
+    @Autowired TestUtils testUtils;
     String basePath;
     HttpHeaders headers;
     UserModel user;
@@ -37,14 +36,7 @@ public class GetUserSettingByNameAPIServiceTest
         basePath = "http://localhost:" + port + ControllerUtils.baseAPIPath + "/users/settings/names/%s";
         dao.deleteAll();
         headers = new HttpHeaders();
-        user = userRegistrationService.registerUser(UserRegistrationRequest.builder()
-                        .username("me@email.com")
-                        .password("bunkzh3Z!")
-                        .authority("USER")
-                        .firstName("Dimi")
-                        .lastName("Emilson")
-                        .phoneNumber("07896620211")
-                        .build());
+        user = testUtils.registerUser("me@email.com", "USER");
     }
 
 

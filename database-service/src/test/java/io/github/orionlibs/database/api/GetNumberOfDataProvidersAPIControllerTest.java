@@ -3,10 +3,9 @@ package io.github.orionlibs.database.api;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import io.github.orionlibs.core.tests.APITestUtils;
+import io.github.orionlibs.core.tests.TestUtils;
 import io.github.orionlibs.core.user.model.UserDAO;
 import io.github.orionlibs.core.user.model.UserModel;
-import io.github.orionlibs.core.user.registration.UserRegistrationService;
-import io.github.orionlibs.core.user.registration.api.UserRegistrationRequest;
 import io.github.orionlibs.database.ControllerUtils;
 import io.github.orionlibs.database.DatabaseService;
 import io.github.orionlibs.database.model.DataProviderModel;
@@ -27,8 +26,8 @@ class GetNumberOfDataProvidersAPIControllerTest
 {
     @LocalServerPort int port;
     @Autowired APITestUtils apiUtils;
+    @Autowired TestUtils testUtils;
     @Autowired UserDAO dao;
-    @Autowired UserRegistrationService userRegistrationService;
     @Autowired DatabaseService databaseService;
     String basePath;
     HttpHeaders headers;
@@ -40,14 +39,7 @@ class GetNumberOfDataProvidersAPIControllerTest
     {
         basePath = "http://localhost:" + port + ControllerUtils.baseAPIPath + "/databases/count";
         dao.deleteAll();
-        user = userRegistrationService.registerUser(UserRegistrationRequest.builder()
-                        .username("me@email.com")
-                        .password("bunkzh3Z!")
-                        .authority("USER")
-                        .firstName("Dimi")
-                        .lastName("Emilson")
-                        .phoneNumber("07896620211")
-                        .build());
+        user = testUtils.registerUser("me@email.com", "USER");
         databaseService.deleteAll();
         DataProviderModel model = new DataProviderModel("jdbc:mysql://localhost1:3306", "me1@email.com", "bunkzh3Z!");
         model = databaseService.saveDataProvider(model);

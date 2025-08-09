@@ -4,10 +4,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import io.github.orionlibs.core.api.APIError;
 import io.github.orionlibs.core.tests.APITestUtils;
+import io.github.orionlibs.core.tests.TestUtils;
 import io.github.orionlibs.core.user.model.UserDAO;
 import io.github.orionlibs.core.user.model.UserModel;
-import io.github.orionlibs.core.user.registration.UserRegistrationService;
-import io.github.orionlibs.core.user.registration.api.UserRegistrationRequest;
 import io.github.orionlibs.user.ControllerUtils;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -26,8 +25,8 @@ public class UpdatePasswordAPIServiceTest
 {
     @LocalServerPort int port;
     @Autowired UserDAO dao;
-    @Autowired UserRegistrationService userRegistrationService;
     @Autowired APITestUtils apiUtils;
+    @Autowired TestUtils testUtils;
     String basePath;
     HttpHeaders headers;
     UserModel user;
@@ -39,14 +38,7 @@ public class UpdatePasswordAPIServiceTest
         basePath = "http://localhost:" + port + ControllerUtils.baseAPIPath + "/users/passwords";
         dao.deleteAll();
         headers = new HttpHeaders();
-        user = userRegistrationService.registerUser(UserRegistrationRequest.builder()
-                        .username("me@email.com")
-                        .password("bunkzh3Z!")
-                        .authority("USER")
-                        .firstName("Dimi")
-                        .lastName("Emilson")
-                        .phoneNumber("07896620211")
-                        .build());
+        user = testUtils.registerUser("me@email.com", "USER");
     }
 
 

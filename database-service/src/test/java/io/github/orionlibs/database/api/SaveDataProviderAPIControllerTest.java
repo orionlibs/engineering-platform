@@ -4,10 +4,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import io.github.orionlibs.core.api.APIError;
 import io.github.orionlibs.core.tests.APITestUtils;
+import io.github.orionlibs.core.tests.TestUtils;
 import io.github.orionlibs.core.user.model.UserDAO;
 import io.github.orionlibs.core.user.model.UserModel;
-import io.github.orionlibs.core.user.registration.UserRegistrationService;
-import io.github.orionlibs.core.user.registration.api.UserRegistrationRequest;
 import io.github.orionlibs.database.ControllerUtils;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -25,8 +24,8 @@ class SaveDataProviderAPIControllerTest
 {
     @LocalServerPort int port;
     @Autowired APITestUtils apiUtils;
+    @Autowired TestUtils testUtils;
     @Autowired UserDAO dao;
-    @Autowired UserRegistrationService userRegistrationService;
     String basePath;
     HttpHeaders headers;
     UserModel user;
@@ -37,14 +36,7 @@ class SaveDataProviderAPIControllerTest
     {
         basePath = "http://localhost:" + port + ControllerUtils.baseAPIPath + "/databases";
         dao.deleteAll();
-        user = userRegistrationService.registerUser(UserRegistrationRequest.builder()
-                        .username("me@email.com")
-                        .password("bunkzh3Z!")
-                        .authority("USER")
-                        .firstName("Dimi")
-                        .lastName("Emilson")
-                        .phoneNumber("07896620211")
-                        .build());
+        user = testUtils.registerUser("me@email.com", "USER");
     }
 
 

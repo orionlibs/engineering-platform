@@ -3,14 +3,13 @@ package io.github.orionlibs.user.setting.api;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import io.github.orionlibs.core.tests.APITestUtils;
+import io.github.orionlibs.core.tests.TestUtils;
 import io.github.orionlibs.core.user.UserAuthority;
 import io.github.orionlibs.core.user.model.UserDAO;
 import io.github.orionlibs.core.user.model.UserModel;
+import io.github.orionlibs.core.user.setting.UserSettingsService;
 import io.github.orionlibs.core.user.setting.model.UserSettingsModel;
 import io.github.orionlibs.user.ControllerUtils;
-import io.github.orionlibs.core.user.registration.UserRegistrationService;
-import io.github.orionlibs.core.user.registration.api.UserRegistrationRequest;
-import io.github.orionlibs.core.user.setting.UserSettingsService;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import java.util.List;
@@ -28,9 +27,9 @@ public class AdminGetUserSettingAPIServiceTest
 {
     @LocalServerPort int port;
     @Autowired UserDAO dao;
-    @Autowired UserRegistrationService userRegistrationService;
     @Autowired UserSettingsService userSettingsService;
     @Autowired APITestUtils apiUtils;
+    @Autowired TestUtils testUtils;
     String basePath;
     HttpHeaders headers;
     UserModel user;
@@ -43,22 +42,8 @@ public class AdminGetUserSettingAPIServiceTest
         basePath = "http://localhost:" + port + ControllerUtils.baseAPIPath + "/admin/users/%s/settings/%s";
         dao.deleteAll();
         headers = new HttpHeaders();
-        user = userRegistrationService.registerUser(UserRegistrationRequest.builder()
-                        .username("me@email.com")
-                        .password("bunkzh3Z!")
-                        .authority("USER")
-                        .firstName("Dimi")
-                        .lastName("Emilson")
-                        .phoneNumber("07896620211")
-                        .build());
-        admin = userRegistrationService.registerUser(UserRegistrationRequest.builder()
-                        .username("admin@email.com")
-                        .password("bunkzh3Z!")
-                        .authority(UserAuthority.ADMINISTRATOR.name())
-                        .firstName("Dimi")
-                        .lastName("Emilson")
-                        .phoneNumber("07896620211")
-                        .build());
+        user = testUtils.registerUser("me@email.com", "USER");
+        admin = testUtils.registerUser("admin@email.com", UserAuthority.ADMINISTRATOR.name());
     }
 
 
