@@ -3,12 +3,10 @@ package io.github.orionlibs.system.api;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import io.github.orionlibs.core.tests.APITestUtils;
-import io.github.orionlibs.core.tests.TestUtils;
-import io.github.orionlibs.core.user.model.UserDAO;
-import io.github.orionlibs.core.user.model.UserModel;
 import io.github.orionlibs.system.ControllerUtils;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +21,7 @@ public class GetConfigurationAPIControllerTest
 {
     @LocalServerPort int port;
     @Autowired APITestUtils apiUtils;
-    @Autowired TestUtils testUtils;
-    @Autowired UserDAO dao;
     HttpHeaders headers;
-    UserModel user;
 
 
     @BeforeEach
@@ -34,15 +29,13 @@ public class GetConfigurationAPIControllerTest
     {
         headers = new HttpHeaders();
         RestAssured.baseURI = "http://localhost:" + port + ControllerUtils.baseAPIPath + "/systems/configurations";
-        dao.deleteAll();
-        user = testUtils.registerUser("me@email.com", "USER");
     }
 
 
     @Test
     void getAllSystemConfigurations()
     {
-        Response response = apiUtils.makeGetAPICall(null, user.getId().toString(), "USER");
+        Response response = apiUtils.makeGetAPICall(null, UUID.randomUUID().toString(), "USER");
         assertThat(response.statusCode()).isEqualTo(200);
         ConfigurationsDTO body = response.as(ConfigurationsDTO.class);
         assertThat(body.configurations().size()).isEqualTo(2);

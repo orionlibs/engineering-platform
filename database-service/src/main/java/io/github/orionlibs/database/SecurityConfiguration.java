@@ -1,7 +1,7 @@
 package io.github.orionlibs.database;
 
 import io.github.orionlibs.core.api.key.ApiKeyAuthFilter;
-import io.github.orionlibs.core.api.key.ApiKeyAuthenticationProvider;
+import io.github.orionlibs.database.api.authentication.DatabaseServiceAPIKeyAuthenticationProvider;
 import io.jsonwebtoken.SignatureAlgorithm;
 import java.util.Arrays;
 import java.util.Base64;
@@ -59,7 +59,7 @@ public class SecurityConfiguration
 
 
     @Bean
-    public AuthenticationManager apiKeyAuthenticationManager(ApiKeyAuthenticationProvider apiKeyProvider)
+    public AuthenticationManager apiKeyAuthenticationManager(DatabaseServiceAPIKeyAuthenticationProvider apiKeyProvider)
     {
         return new ProviderManager(apiKeyProvider);
     }
@@ -96,7 +96,7 @@ public class SecurityConfiguration
 
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtDecoder jwtDecoder, JwtAuthenticationConverter authConverter, ApiKeyAuthenticationProvider apiKeyProvider, ApiKeyAuthFilter apiKeyAuthFilter) throws Exception
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtDecoder jwtDecoder, JwtAuthenticationConverter authConverter, DatabaseServiceAPIKeyAuthenticationProvider apiKeyProvider, ApiKeyAuthFilter apiKeyAuthFilter) throws Exception
     {
         http.cors(corsCustomizer())
                         .csrf(csrfCustomizer())

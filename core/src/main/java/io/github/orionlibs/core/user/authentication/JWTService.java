@@ -12,14 +12,16 @@ import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.UnsupportedJwtException;
 import io.jsonwebtoken.security.SignatureException;
-import jakarta.xml.bind.DatatypeConverter;
+import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -37,8 +39,7 @@ public class JWTService
 
     public Key convertSigningKeyToSecretKeyObject(String signingKey)
     {
-        byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(signingKey);
-        return new SecretKeySpec(apiKeySecretBytes, SignatureAlgorithm.HS512.getJcaName());
+        return new SecretKeySpec(signingKey.getBytes(StandardCharsets.UTF_8), SignatureAlgorithm.HS512.getJcaName());
     }
 
 
@@ -236,11 +237,17 @@ public class JWTService
     }
 
 
+    @SuppressWarnings("unchecked")
     private void getDataFromToken(JWTToken jwtToken, Claims claims)
     {
         String subject = claims.getSubject();
         String userID = subject;
         jwtToken.setUserID(userID);
+        List<String> authorities = (List<String>)claims.get("authorities");
+        List<? extends GrantedAuthority> grantedAuthorities = authorities.stream()
+                        .map(SimpleGrantedAuthority::new)
+                        .toList();
+        jwtToken.setAuthorities(grantedAuthorities);
         //String refreshToken = claims.get("orion.refresh.token", String.class);
         //jwtToken.setDoesRefreshTokenExistInDatabase(AuthenticationTokenService.doesRefreshTokenExistByTokenAndUserID(refreshToken, userID));
         String refreshTokenExpirationInEpochMillisecondsString = claims.get("orion.refresh.token.expiration.timestamp.in.epoch.milliseconds", String.class);

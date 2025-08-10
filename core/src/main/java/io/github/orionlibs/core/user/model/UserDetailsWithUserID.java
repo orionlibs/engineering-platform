@@ -1,7 +1,6 @@
 package io.github.orionlibs.core.user.model;
 
 import java.util.Collection;
-import java.util.UUID;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -17,11 +16,21 @@ public class UserDetailsWithUserID
     private boolean credentialsNonExpired;
 
 
+    public UserDetailsWithUserID(String userID, Collection<? extends GrantedAuthority> authorities)
+    {
+        this.userID = userID;
+        this.authorities = authorities;
+        this.enabled = true;
+        this.accountNonLocked = true;
+        this.accountNonExpired = true;
+        this.credentialsNonExpired = true;
+    }
+
+
     public UserDetailsWithUserID(String userID, UserDetails user)
     {
         this.userID = userID;
         this.username = user.getUsername();
-        this.password = getPassword();
         this.authorities = user.getAuthorities();
         this.enabled = user.isEnabled();
         this.accountNonLocked = user.isAccountNonLocked();

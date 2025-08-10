@@ -1,10 +1,10 @@
 package io.github.orionlibs.user.authentication;
 
 import io.github.orionlibs.core.api.header.HeaderService;
-import io.github.orionlibs.core.user.AuthenticationService;
 import io.github.orionlibs.core.user.UserService;
 import io.github.orionlibs.core.user.authentication.JWTService;
 import io.github.orionlibs.core.user.authentication.JWTToken;
+import io.github.orionlibs.core.user.authentication.UserSessionDataService;
 import io.github.orionlibs.core.user.model.UserModel;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -20,15 +20,15 @@ public class JWTFilter extends OncePerRequestFilter
     private final JWTService jwtService;
     private final HeaderService headerService;
     private final UserService userService;
-    private final AuthenticationService authenticationService;
+    private final UserSessionDataService userSessionDataService;
 
 
-    public JWTFilter(JWTService jwtService, HeaderService headerService, UserService userService, AuthenticationService authenticationService)
+    public JWTFilter(JWTService jwtService, HeaderService headerService, UserService userService, UserSessionDataService userSessionDataService)
     {
         this.jwtService = jwtService;
         this.headerService = headerService;
         this.userService = userService;
-        this.authenticationService = authenticationService;
+        this.userSessionDataService = userSessionDataService;
     }
 
 
@@ -46,7 +46,7 @@ public class JWTFilter extends OncePerRequestFilter
                 UserModel user = userWrap.get();
                 if(jwtService.isTokenValid(token, user))
                 {
-                    authenticationService.saveUserInSession(req, user, tokenData);
+                    userSessionDataService.saveUserInSession(req, user, tokenData);
                 }
             }
         }

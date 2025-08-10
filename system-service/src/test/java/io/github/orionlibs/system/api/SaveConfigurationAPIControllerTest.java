@@ -3,13 +3,11 @@ package io.github.orionlibs.system.api;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import io.github.orionlibs.core.tests.APITestUtils;
-import io.github.orionlibs.core.tests.TestUtils;
 import io.github.orionlibs.core.user.UserAuthority;
-import io.github.orionlibs.core.user.model.UserDAO;
-import io.github.orionlibs.core.user.model.UserModel;
 import io.github.orionlibs.system.ControllerUtils;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +22,8 @@ class SaveConfigurationAPIControllerTest
 {
     @LocalServerPort int port;
     @Autowired APITestUtils apiUtils;
-    @Autowired TestUtils testUtils;
-    @Autowired UserDAO dao;
     HttpHeaders headers;
-    UserModel user;
+    String userID;
 
 
     @BeforeEach
@@ -36,8 +32,7 @@ class SaveConfigurationAPIControllerTest
     {
         headers = new HttpHeaders();
         RestAssured.baseURI = "http://localhost:" + port + ControllerUtils.baseAPIPath + "/systems/configurations";
-        dao.deleteAll();
-        user = testUtils.registerUser("me@email.com", "USER");
+        userID = UUID.randomUUID().toString();
     }
 
 
@@ -48,7 +43,7 @@ class SaveConfigurationAPIControllerTest
                         .key("")
                         .value("US")
                         .build();
-        Response response = apiUtils.makePostAPICall(config, headers, user.getId().toString(), UserAuthority.ADMINISTRATOR.name());
+        Response response = apiUtils.makePostAPICall(config, headers, userID, UserAuthority.ADMINISTRATOR.name());
         assertThat(response.statusCode()).isEqualTo(400);
     }
 
@@ -72,9 +67,9 @@ class SaveConfigurationAPIControllerTest
                         .key("default.printing.timezone")
                         .value("US")
                         .build();
-        Response response = apiUtils.makePostAPICall(config, headers, user.getId().toString(), UserAuthority.ADMINISTRATOR.name());
+        Response response = apiUtils.makePostAPICall(config, headers, userID, UserAuthority.ADMINISTRATOR.name());
         assertThat(response.statusCode()).isEqualTo(200);
-        response = apiUtils.makeGetAPICall(null, user.getId().toString(), "USER");
+        response = apiUtils.makeGetAPICall(null, userID, "USER");
         assertThat(response.statusCode()).isEqualTo(200);
         ConfigurationsDTO body = response.as(ConfigurationsDTO.class);
         assertThat(body.configurations().size()).isEqualTo(2);
