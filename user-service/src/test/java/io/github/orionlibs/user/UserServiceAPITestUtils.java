@@ -2,7 +2,7 @@ package io.github.orionlibs.user;
 
 import io.github.orionlibs.core.json.JSONService;
 import io.github.orionlibs.core.tests.APITestUtils;
-import io.github.orionlibs.user.api.key.ApiKeyService;
+import io.github.orionlibs.user.api.key.APIKeyService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import java.security.Key;
@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 public class UserServiceAPITestUtils extends APITestUtils
 {
     @Autowired JSONService jsonService;
-    @Autowired ApiKeyService apiKeyService;
+    @Autowired APIKeyService apiKeyService;
     @Value("${jwt.secret}")
     String base64Secret;
 
@@ -30,7 +30,8 @@ public class UserServiceAPITestUtils extends APITestUtils
     }
 
 
-    private String jwtWithAuthorities(String subject, String... authorities)
+    @Override
+    protected String jwtWithAuthorities(String subject, String... authorities)
     {
         String apiKey = Jwts.builder()
                         .setSubject(subject)

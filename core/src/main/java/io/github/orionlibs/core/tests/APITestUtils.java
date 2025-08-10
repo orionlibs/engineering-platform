@@ -35,7 +35,7 @@ public class APITestUtils
     }
 
 
-    private String jwtWithAuthorities(String subject, String... authorities)
+    protected String jwtWithAuthorities(String subject, String... authorities)
     {
         String apiKey = Jwts.builder()
                         .setSubject(subject)

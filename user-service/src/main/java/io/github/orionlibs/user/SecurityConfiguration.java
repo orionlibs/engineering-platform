@@ -3,7 +3,7 @@ package io.github.orionlibs.user;
 import io.github.orionlibs.core.api.key.ApiKeyAuthFilter;
 import io.github.orionlibs.core.user.UserService;
 import io.github.orionlibs.core.user.authentication.JWTService;
-import io.github.orionlibs.user.api.key.ApiKeyAuthenticationProvider;
+import io.github.orionlibs.user.api.key.UserServiceAPIKeyAuthenticationProvider;
 import io.github.orionlibs.user.authentication.PostAuthenticationChecks;
 import io.github.orionlibs.user.authentication.PreAuthenticationChecks;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -87,7 +87,7 @@ public class SecurityConfiguration
 
 
     @Bean
-    public AuthenticationManager apiKeyAuthenticationManager(ApiKeyAuthenticationProvider apiKeyProvider)
+    public AuthenticationManager apiKeyAuthenticationManager(UserServiceAPIKeyAuthenticationProvider apiKeyProvider)
     {
         return new ProviderManager(apiKeyProvider);
     }
@@ -186,7 +186,7 @@ public class SecurityConfiguration
 
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtDecoder jwtDecoder, JwtAuthenticationConverter authConverter, ApiKeyAuthenticationProvider apiKeyProvider, ApiKeyAuthFilter apiKeyAuthFilter) throws Exception
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtDecoder jwtDecoder, JwtAuthenticationConverter authConverter, UserServiceAPIKeyAuthenticationProvider apiKeyProvider, ApiKeyAuthFilter apiKeyAuthFilter) throws Exception
     {
         http.cors(corsCustomizer())
                         .csrf(csrfCustomizer())

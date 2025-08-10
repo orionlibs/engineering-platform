@@ -1,7 +1,7 @@
 package io.github.orionlibs.user.authentication;
 
 import io.github.orionlibs.core.event.Publishable;
-import io.github.orionlibs.user.api.key.ApiKeyService;
+import io.github.orionlibs.user.api.key.APIKeyService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 public class LogoutService implements Publishable
 {
     @Autowired
-    private ApiKeyService apiKeyService;
+    private APIKeyService apiKeyService;
 
 
     public String logoutUser(HttpServletRequest request, HttpServletResponse response, String token)

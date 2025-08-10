@@ -10,10 +10,10 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ApiKeyAuthenticationProvider implements AuthenticationProvider
+public class UserServiceAPIKeyAuthenticationProvider implements AuthenticationProvider
 {
     @Autowired
-    private ApiKeyValidationService validationService;
+    private UserServiceAPIKeyValidationService validationService;
 
 
     @Override

@@ -5,7 +5,7 @@ import io.github.orionlibs.core.event.Publishable;
 import io.github.orionlibs.core.user.UserService;
 import io.github.orionlibs.core.user.authentication.JWTService;
 import io.github.orionlibs.core.user.model.OrionUserDetails;
-import io.github.orionlibs.user.api.key.ApiKeyService;
+import io.github.orionlibs.user.api.key.APIKeyService;
 import io.github.orionlibs.user.authentication.api.LoginRequest;
 import io.github.orionlibs.user.event.EventUserLoggedIn;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class LoginService implements Publishable
     @Autowired
     private UserService userService;
     @Autowired
-    private ApiKeyService apiKeyService;
+    private APIKeyService apiKeyService;
 
 
     public String loginUserAndGetToken(LoginRequest requestBean) throws ResourceNotFoundException
