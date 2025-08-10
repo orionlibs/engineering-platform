@@ -1,14 +1,22 @@
 package io.github.orionlibs.database;
 
+import io.github.orionlibs.database.connectivity.DatabaseConnectivityMonitor;
+import io.github.orionlibs.database.connectivity.DatabaseConnectivityRegistry;
 import io.github.orionlibs.database.model.DataProviderModel;
 import io.github.orionlibs.database.model.DataProvidersDAO;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
 @Service
 public class DatabaseService
 {
     @Autowired private DataProvidersDAO dao;
+    @Autowired private ApplicationContext context;
+    @Autowired private DatabaseConnectivityRegistry databaseConnectivityRegistry;
 
 
     public DataProviderModel saveDataProvider(DataProviderModel model)
@@ -26,5 +34,62 @@ public class DatabaseService
     public void deleteAll()
     {
         dao.deleteAll();
+    }
+
+
+    public Connection getDatabaseConnection(String databaseURL, String databaseUsername, String databasePassword) throws ClassNotFoundException, SQLException
+    {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection connection = DriverManager.getConnection(databaseURL, databaseUsername, databasePassword);
+        DatabaseWrapper wrapper = new DatabaseWrapper(connection, databaseConnectivityRegistry);
+
+        //JDBCTemplateWrapper wrapper = new JDBCTemplateWrapper("core", coreDataSource, new JdbcTemplate(coreDataSource), databaseConnectivityRegistry);
+        //DB.registerDatabaseConnection("core", bean);
+        //Runtime.getRuntime().addShutdownHook(new Thread(SpringDataConfiguration::shutdownCoreDatabase));
+        //StoreAndForwardEngine storeAndForwardEngine = new StoreAndForwardEngine(bean, 1000);
+        //StoreAndForwardEngineRegistry.registerStoreAndForwardEngine("core", storeAndForwardEngine);
+        /*if(wrapper.isConnected())
+        {
+            //log + alert + show error in DB status page
+            databaseConnectivityRegistry.setStatusAndNotify("core", DatabaseConnectivityStatus.builder()
+                            .databaseName("core")
+                            .connectionURL(wrapper.getConnectionURL())
+                            .isConnected(Boolean.TRUE)
+                            .datetimeConnectionEstablished(Instant.now())
+                            .datetimeConnectionLost(null)
+                            .errorMessage("")
+                            .build());
+        }
+        else
+        {
+            databaseConnectivityRegistry.setStatusAndNotify("core", DatabaseConnectivityStatus.builder()
+                            .databaseName("core")
+                            .connectionURL(wrapper.getConnectionURL())
+                            .isConnected(Boolean.FALSE)
+                            .datetimeConnectionEstablished(null)
+                            .datetimeConnectionLost(Instant.now())
+                            .errorMessage("Cannot connect to the database server")
+                            .build());
+        }*/
+        DatabaseConnectivityMonitor databaseConnectivityMonitor = new DatabaseConnectivityMonitor(databaseConnectivityRegistry, wrapper);
+        context.getAutowireCapableBeanFactory().initializeBean(databaseConnectivityMonitor, "CoreDatabaseConnectionMonitor");
+        context.getAutowireCapableBeanFactory().autowireBean(databaseConnectivityMonitor);
+        return connection;
+    }
+
+
+    public void closeConnection(Connection connection)
+    {
+        try
+        {
+            if(connection != null)
+            {
+                connection.close();
+            }
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 }

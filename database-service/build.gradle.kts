@@ -89,6 +89,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-validation")
+    implementation("org.springframework:spring-messaging")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     implementation("com.github.gavlyukovskiy:datasource-proxy-spring-boot-starter:1.12.0")
     implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")

@@ -19,7 +19,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -30,7 +29,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Import(GlobalExceptionHandler.class)
 @EnableJpaRepositories(basePackages = {"io.github.orionlibs"})
 @EntityScan({"io.github.orionlibs"})
-@EnableScheduling
 public class Application extends SpringBootServletInitializer implements WebMvcConfigurer
 {
     @Value("${version}")

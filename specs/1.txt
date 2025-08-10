@@ -7,7 +7,6 @@
 
 
 Create project "databases-service" with API:
-1--get number of registered databases
 2--get number of connected databases
 3--get number of databases the system failed to connect to
 4--get configured databases
