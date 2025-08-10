@@ -9,7 +9,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Service;
 
 @Service
-public class AuthenticationService
+public class UserSessionDataService
 {
     public void saveUserInSession(HttpServletRequest request, UserModel user, JWTToken tokenData)
     {

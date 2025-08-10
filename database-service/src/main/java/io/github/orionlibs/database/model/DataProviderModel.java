@@ -14,7 +14,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 @Table(name = "data_providers", schema = "uns", indexes = {
-                @Index(name = "idx_uns_data_providers", columnList = "configuration_key")
+                @Index(name = "idx_uns_data_providers", columnList = "id")
 })
 public class DataProviderModel
 {
