@@ -1,4 +1,4 @@
-package io.github.orionlibs.core.api.key.model;
+package io.github.orionlibs.user.api.key.model;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

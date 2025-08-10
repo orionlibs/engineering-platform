@@ -1,7 +1,7 @@
 package io.github.orionlibs.user.authentication;
 
-import io.github.orionlibs.core.api.key.ApiKeyService;
 import io.github.orionlibs.core.event.Publishable;
+import io.github.orionlibs.user.api.key.ApiKeyService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;

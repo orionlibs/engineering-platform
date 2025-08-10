@@ -1,7 +1,7 @@
 package io.github.orionlibs.core;
 
 import io.github.orionlibs.core.api.key.ApiKeyAuthFilter;
-import io.github.orionlibs.core.api.key.ApiKeyAuthenticationProvider;
+import io.github.orionlibs.core.api.key.CoreAPIKeyAuthenticationProvider;
 import io.jsonwebtoken.SignatureAlgorithm;
 import java.util.Arrays;
 import java.util.Base64;
@@ -59,14 +59,14 @@ public class SecurityConfiguration
 
 
     @Bean
-    public AuthenticationManager apiKeyAuthenticationManager(ApiKeyAuthenticationProvider apiKeyProvider)
+    public AuthenticationManager apiKeyAuthenticationManager(CoreAPIKeyAuthenticationProvider apiKeyProvider)
     {
         return new ProviderManager(apiKeyProvider);
     }
 
 
     @Bean
-    public ApiKeyAuthFilter apiKeyAuthFilter(ApiKeyAuthenticationProvider apiKeyProvider)
+    public ApiKeyAuthFilter apiKeyAuthFilter(CoreAPIKeyAuthenticationProvider apiKeyProvider)
     {
         return new ApiKeyAuthFilter(apiKeyAuthenticationManager(apiKeyProvider));
     }
@@ -96,7 +96,7 @@ public class SecurityConfiguration
 
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtDecoder jwtDecoder, JwtAuthenticationConverter authConverter, ApiKeyAuthenticationProvider apiKeyProvider, ApiKeyAuthFilter apiKeyAuthFilter) throws Exception
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtDecoder jwtDecoder, JwtAuthenticationConverter authConverter, CoreAPIKeyAuthenticationProvider apiKeyProvider, ApiKeyAuthFilter apiKeyAuthFilter) throws Exception
     {
         http.cors(corsCustomizer())
                         .csrf(csrfCustomizer())

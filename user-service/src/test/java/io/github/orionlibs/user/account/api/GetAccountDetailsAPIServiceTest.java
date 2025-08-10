@@ -2,12 +2,12 @@ package io.github.orionlibs.user.account.api;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import io.github.orionlibs.core.tests.APITestUtils;
 import io.github.orionlibs.core.tests.TestUtils;
 import io.github.orionlibs.core.user.AccountDetailsDTO;
 import io.github.orionlibs.core.user.model.UserDAO;
 import io.github.orionlibs.core.user.model.UserModel;
 import io.github.orionlibs.user.ControllerUtils;
+import io.github.orionlibs.user.UserServiceAPITestUtils;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import java.util.UUID;
@@ -25,7 +25,7 @@ public class GetAccountDetailsAPIServiceTest
 {
     @LocalServerPort int port;
     @Autowired UserDAO dao;
-    @Autowired APITestUtils apiUtils;
+    @Autowired UserServiceAPITestUtils apiUtils;
     @Autowired TestUtils testUtils;
     String basePath;
     HttpHeaders headers;

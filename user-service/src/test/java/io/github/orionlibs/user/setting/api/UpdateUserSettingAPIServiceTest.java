@@ -2,13 +2,13 @@ package io.github.orionlibs.user.setting.api;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import io.github.orionlibs.core.tests.APITestUtils;
 import io.github.orionlibs.core.tests.TestUtils;
 import io.github.orionlibs.core.user.model.UserDAO;
 import io.github.orionlibs.core.user.model.UserModel;
 import io.github.orionlibs.core.user.setting.UserSettingsService;
 import io.github.orionlibs.core.user.setting.model.UserSettingsModel;
 import io.github.orionlibs.user.ControllerUtils;
+import io.github.orionlibs.user.UserServiceAPITestUtils;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import java.util.List;
@@ -27,7 +27,7 @@ public class UpdateUserSettingAPIServiceTest
     @LocalServerPort int port;
     @Autowired UserDAO dao;
     @Autowired UserSettingsService userSettingsService;
-    @Autowired APITestUtils apiUtils;
+    @Autowired UserServiceAPITestUtils apiUtils;
     @Autowired TestUtils testUtils;
     String basePath;
     HttpHeaders headers;

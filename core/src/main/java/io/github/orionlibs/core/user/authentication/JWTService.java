@@ -1,6 +1,5 @@
 package io.github.orionlibs.core.user.authentication;
 
-import io.github.orionlibs.core.api.key.ApiKeyService;
 import io.github.orionlibs.core.cryptology.HMACSHAEncryptionKeyProvider;
 import io.github.orionlibs.core.user.UserAuthority;
 import io.github.orionlibs.core.user.UserService;
@@ -32,8 +31,6 @@ public class JWTService
     @Autowired
     private UserService userService;
     @Autowired
-    private ApiKeyService apiKeyService;
-    @Autowired
     private HMACSHAEncryptionKeyProvider hmacSHAEncryptionKeyProvider;
 
 
@@ -56,7 +53,7 @@ public class JWTService
                         .expiration(new Date(System.currentTimeMillis() + EXPIRATION_IN_MILLISECONDS))
                         .signWith(convertSigningKeyToSecretKeyObject(hmacSHAEncryptionKeyProvider.getJwtSigningKey()), SignatureAlgorithm.HS512)
                         .compact();
-        apiKeyService.save(user.getId().toString(), token, "");
+        //apiKeyService.save(user.getId().toString(), token, "");
         return token;
     }
 
@@ -75,7 +72,7 @@ public class JWTService
                         .expiration(expirationDate)
                         .signWith(convertSigningKeyToSecretKeyObject(hmacSHAEncryptionKeyProvider.getJwtSigningKey()), SignatureAlgorithm.HS512)
                         .compact();
-        apiKeyService.save(userID, token, "");
+        //apiKeyService.save(userID, token, "");
         return token;
     }
 
@@ -93,7 +90,7 @@ public class JWTService
                         .expiration(expiresAt)
                         .signWith(convertSigningKeyToSecretKeyObject(hmacSHAEncryptionKeyProvider.getJwtSigningKey()), SignatureAlgorithm.HS512)
                         .compact();
-        apiKeyService.save(user.getId().toString(), token, "");
+        //apiKeyService.save(user.getId().toString(), token, "");
         return token;
     }
 

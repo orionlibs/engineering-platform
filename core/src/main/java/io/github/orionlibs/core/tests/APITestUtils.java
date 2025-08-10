@@ -3,7 +3,6 @@ package io.github.orionlibs.core.tests;
 import static io.restassured.RestAssured.given;
 
 import io.github.orionlibs.core.Logger;
-import io.github.orionlibs.core.api.key.ApiKeyService;
 import io.github.orionlibs.core.json.JSONService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -25,7 +24,6 @@ import org.springframework.stereotype.Component;
 public class APITestUtils
 {
     @Autowired JSONService jsonService;
-    @Autowired ApiKeyService apiKeyService;
     @Value("${jwt.secret}")
     String base64Secret;
 
@@ -47,7 +45,6 @@ public class APITestUtils
                         .setExpiration(new Date(System.currentTimeMillis() + 3600_000))
                         .signWith(getSigningKey(), SignatureAlgorithm.HS512)
                         .compact();
-        apiKeyService.save(subject, apiKey, "");
         return apiKey;
     }
 

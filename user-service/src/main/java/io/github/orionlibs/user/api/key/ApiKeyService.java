@@ -1,7 +1,7 @@
-package io.github.orionlibs.core.api.key;
+package io.github.orionlibs.user.api.key;
 
-import io.github.orionlibs.core.api.key.model.ApiKeyDAO;
-import io.github.orionlibs.core.api.key.model.ApiKeyModel;
+import io.github.orionlibs.user.api.key.model.ApiKeyDAO;
+import io.github.orionlibs.user.api.key.model.ApiKeyModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
