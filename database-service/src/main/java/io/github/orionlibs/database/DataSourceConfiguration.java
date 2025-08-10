@@ -1,14 +1,19 @@
 package io.github.orionlibs.database;
 
+import io.github.orionlibs.database.connectivity.DatabaseConnectivityMonitor;
+import io.github.orionlibs.database.connectivity.DatabaseConnectivityRegistry;
+import java.sql.SQLException;
 import java.util.List;
 import javax.sql.DataSource;
 import net.ttddyy.dsproxy.ExecutionInfo;
 import net.ttddyy.dsproxy.QueryInfo;
 import net.ttddyy.dsproxy.listener.QueryExecutionListener;
 import net.ttddyy.dsproxy.support.ProxyDataSourceBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -16,6 +21,10 @@ import org.springframework.context.annotation.Primary;
 @Configuration
 public class DataSourceConfiguration
 {
+    @Autowired private ApplicationContext context;
+    @Autowired private DatabaseConnectivityRegistry databaseConnectivityRegistry;
+
+
     @Bean
     @Primary
     @ConfigurationProperties("spring.datasource")
@@ -35,9 +44,13 @@ public class DataSourceConfiguration
 
     @Bean
     @Primary
-    public DataSource primaryDataSource(@Qualifier("primaryDataSourceProperties") DataSourceProperties props)
+    public DataSource primaryDataSource(@Qualifier("primaryDataSourceProperties") DataSourceProperties props) throws SQLException
     {
         DataSource realDs = props.initializeDataSourceBuilder().build();
+        DatabaseWrapper wrapper = new DatabaseWrapper(realDs.getConnection(), databaseConnectivityRegistry);
+        DatabaseConnectivityMonitor databaseConnectivityMonitor = new DatabaseConnectivityMonitor(databaseConnectivityRegistry, wrapper);
+        context.getAutowireCapableBeanFactory().initializeBean(databaseConnectivityMonitor, "DatabaseServiceDatabaseConnectionMonitor");
+        context.getAutowireCapableBeanFactory().autowireBean(databaseConnectivityMonitor);
         return ProxyDataSourceBuilder
                         .create(realDs)
                         .name("DB-PROXY")
@@ -74,8 +87,13 @@ public class DataSourceConfiguration
 
 
     @Bean
-    public DataSource loggingDataSource(@Qualifier("loggingDataSourceProperties") DataSourceProperties props)
+    public DataSource loggingDataSource(@Qualifier("loggingDataSourceProperties") DataSourceProperties props) throws SQLException
     {
-        return props.initializeDataSourceBuilder().build();
+        DataSource realDs = props.initializeDataSourceBuilder().build();
+        DatabaseWrapper wrapper = new DatabaseWrapper(realDs.getConnection(), databaseConnectivityRegistry);
+        DatabaseConnectivityMonitor databaseConnectivityMonitor = new DatabaseConnectivityMonitor(databaseConnectivityRegistry, wrapper);
+        context.getAutowireCapableBeanFactory().initializeBean(databaseConnectivityMonitor, "DatabaseServiceLggingDatabaseConnectionMonitor");
+        context.getAutowireCapableBeanFactory().autowireBean(databaseConnectivityMonitor);
+        return realDs;
     }
 }
