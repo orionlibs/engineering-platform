@@ -4,7 +4,6 @@ import io.github.orionlibs.core.api.header.HeaderService;
 import io.github.orionlibs.core.user.UserService;
 import io.github.orionlibs.core.user.authentication.JWTService;
 import io.github.orionlibs.core.user.authentication.JWTToken;
-import io.github.orionlibs.core.user.authentication.UserSessionDataService;
 import io.github.orionlibs.core.user.model.UserModel;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

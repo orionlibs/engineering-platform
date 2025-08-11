@@ -3,7 +3,7 @@ package io.github.orionlibs.user.authentication;
 import io.github.orionlibs.core.data.ResourceNotFoundException;
 import io.github.orionlibs.core.event.Publishable;
 import io.github.orionlibs.core.user.UserService;
-import io.github.orionlibs.core.user.authentication.JWTService;
+import io.github.orionlibs.core.user.authentication.JWTGenerator;
 import io.github.orionlibs.core.user.model.OrionUserDetails;
 import io.github.orionlibs.user.api.key.APIKeyService;
 import io.github.orionlibs.user.authentication.api.LoginRequest;
@@ -21,11 +21,10 @@ public class LoginService implements Publishable
     @Autowired
     private AuthenticationManager authenticationManager;
     @Autowired
-    private JWTService jwtService;
-    @Autowired
     private UserService userService;
     @Autowired
     private APIKeyService apiKeyService;
+    @Autowired private JWTGenerator jwtGenerator;
 
 
     public String loginUserAndGetToken(LoginRequest requestBean) throws ResourceNotFoundException
@@ -35,7 +34,7 @@ public class LoginService implements Publishable
         {
             OrionUserDetails user = userService.loadUserByUsername(requestBean.getUsername());
             authenticationManager.authenticate(auth);
-            String token = jwtService.generateToken(user.getUserID().toString(), user.getAuthorities());
+            String token = jwtGenerator.generateToken(user.getUserID().toString(), user.getAuthorities());
             apiKeyService.save(user.getUserID().toString(), token, "");
             publish(EventUserLoggedIn.EVENT_NAME, EventUserLoggedIn.builder()
                             .username(requestBean.getUsername())

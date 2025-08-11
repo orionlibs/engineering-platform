@@ -1,7 +1,8 @@
-package io.github.orionlibs.core.user.authentication;
+package io.github.orionlibs.user.authentication;
 
 import io.github.orionlibs.core.user.SessionAttribute;
 import io.github.orionlibs.core.user.SessionService;
+import io.github.orionlibs.core.user.authentication.JWTToken;
 import io.github.orionlibs.core.user.model.UserModel;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

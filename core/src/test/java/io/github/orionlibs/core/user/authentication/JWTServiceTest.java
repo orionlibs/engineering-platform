@@ -30,6 +30,8 @@ public class JWTServiceTest
     @Autowired JWTService jwtService;
     @Autowired UserService userService;
     @Autowired HMACSHAEncryptionKeyProvider hmacSHAEncryptionKeyProvider;
+    @Autowired JWTSigningKeyToSecretKeyConverter signingKeyToSecretKeyConverter;
+    @Autowired JWTGenerator jwtGenerator;
 
 
     @BeforeEach
@@ -50,7 +52,7 @@ public class JWTServiceTest
     @Test
     void convertSigningKeyToSecretKeyObject()
     {
-        Key key = jwtService.convertSigningKeyToSecretKeyObject(SIGNING_KEY_BASE64);
+        Key key = signingKeyToSecretKeyConverter.convert(SIGNING_KEY_BASE64);
         assertThat(key).isNotNull();
         assertThat(key).isInstanceOf(SecretKey.class);
         assertThat(key.getAlgorithm()).isEqualTo(SignatureAlgorithm.HS512.getJcaName());
@@ -65,7 +67,7 @@ public class JWTServiceTest
                         "4528",
                         List.of(new SimpleGrantedAuthority("USER"))
         );
-        String token = jwtService.generateToken(user);
+        String token = jwtGenerator.generateToken(user);
         assertThat(token).isNotNull();
         String extracted = jwtService.extractUserID(token);
         assertThat(extracted.length()).isGreaterThan(20);
@@ -94,7 +96,7 @@ public class JWTServiceTest
         newUser2.setLastName("Emilson");
         newUser2.setPhoneNumber("07896620211");
         newUser2 = userService.saveUser(newUser2);
-        String token = jwtService.generateToken(user1);
+        String token = jwtGenerator.generateToken(user1);
         assertThat(token).isNotNull();
         assertThat(jwtService.isTokenValid(token, user2)).isFalse();
     }
@@ -110,7 +112,7 @@ public class JWTServiceTest
                         "4528",
                         List.of(new SimpleGrantedAuthority("USER"))
         );
-        String expiredToken = jwtService.generateToken(user, now, past);
+        String expiredToken = jwtGenerator.generateToken(user, now, past);
         assertThat(expiredToken).isNotNull();
         assertThat(jwtService.isTokenValid(expiredToken, user)).isFalse();
     }
