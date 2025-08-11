@@ -1,6 +1,6 @@
 package io.github.orionlibs.core.api.key;
 
-import io.github.orionlibs.core.api.header.HTTPHeader;
+import io.github.orionlibs.core.api.header.HeaderService;
 import io.github.orionlibs.core.user.SessionAttribute;
 import io.github.orionlibs.core.user.SessionService;
 import io.github.orionlibs.core.user.model.UserDetailsWithUserID;
@@ -21,26 +21,20 @@ import org.springframework.web.filter.OncePerRequestFilter;
 public class ApiKeyAuthFilter extends OncePerRequestFilter
 {
     private final AuthenticationManager authManager;
+    private final HeaderService headerService;
 
 
-    public ApiKeyAuthFilter(AuthenticationManager authManager)
+    public ApiKeyAuthFilter(AuthenticationManager authManager, HeaderService headerService)
     {
         this.authManager = authManager;
+        this.headerService = headerService;
     }
 
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException
     {
-        String accessKey = request.getHeader(HTTPHeader.XAPIKey.get());
-        if(accessKey == null)
-        {
-            accessKey = request.getHeader(HTTPHeader.Authorization.get());
-            if(accessKey != null)
-            {
-                accessKey = accessKey.substring(7);
-            }
-        }
+        String accessKey = headerService.extractAuthorisationBearerToken(request);
         if(accessKey != null && SecurityContextHolder.getContext().getAuthentication() == null)
         {
             ApiKeyAuthenticationToken token = new ApiKeyAuthenticationToken(accessKey, "");
