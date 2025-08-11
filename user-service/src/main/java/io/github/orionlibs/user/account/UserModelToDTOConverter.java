@@ -1,4 +1,4 @@
-package io.github.orionlibs.core.user.converter;
+package io.github.orionlibs.user.account;
 
 import io.github.orionlibs.core.Converter;
 import io.github.orionlibs.core.user.AccountDetailsDTO;

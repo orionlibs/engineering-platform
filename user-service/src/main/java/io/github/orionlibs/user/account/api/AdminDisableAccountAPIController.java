@@ -1,8 +1,8 @@
 package io.github.orionlibs.user.account.api;
 
 import io.github.orionlibs.core.api.WebService;
-import io.github.orionlibs.core.user.UserService;
 import io.github.orionlibs.user.ControllerUtils;
+import io.github.orionlibs.user.account.AccountService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AdminDisableAccountAPIController extends WebService
 {
     @Autowired
-    private UserService userService;
+    private AccountService accountService;
 
 
     @Operation(
@@ -47,7 +47,7 @@ public class AdminDisableAccountAPIController extends WebService
     @PreAuthorize("hasAuthority('ADMINISTRATOR')")
     public ResponseEntity<?> adminDisableAccount(@Valid @RequestBody AdminEnableAccountRequest request)
     {
-        boolean accountDisabled = userService.disable(request.getUserID());
+        boolean accountDisabled = accountService.disable(request.getUserID());
         if(accountDisabled)
         {
             return ResponseEntity.ok(Map.of());

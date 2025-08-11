@@ -2,8 +2,8 @@ package io.github.orionlibs.user.account.api;
 
 import io.github.orionlibs.core.api.WebService;
 import io.github.orionlibs.core.user.AccountDetailsDTO;
-import io.github.orionlibs.core.user.UserService;
 import io.github.orionlibs.user.ControllerUtils;
+import io.github.orionlibs.user.account.AccountService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class GetAccountDetailsAPIController extends WebService
 {
     @Autowired
-    private UserService userService;
+    private AccountService accountService;
 
 
     @Operation(
@@ -34,6 +34,6 @@ public class GetAccountDetailsAPIController extends WebService
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<AccountDetailsDTO> getAccountDetails(HttpServletRequest request)
     {
-        return ResponseEntity.ok(userService.getDetailsByUserID(getUserID(request)));
+        return ResponseEntity.ok(accountService.getDetailsByUserID(getUserID(request)));
     }
 }

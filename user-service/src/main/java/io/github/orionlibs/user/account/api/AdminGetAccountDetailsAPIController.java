@@ -2,8 +2,8 @@ package io.github.orionlibs.user.account.api;
 
 import io.github.orionlibs.core.api.WebService;
 import io.github.orionlibs.core.user.AccountDetailsDTO;
-import io.github.orionlibs.core.user.UserService;
 import io.github.orionlibs.user.ControllerUtils;
+import io.github.orionlibs.user.account.AccountService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AdminGetAccountDetailsAPIController extends WebService
 {
     @Autowired
-    private UserService userService;
+    private AccountService accountService;
 
 
     @Operation(
@@ -43,6 +43,6 @@ public class AdminGetAccountDetailsAPIController extends WebService
     @PreAuthorize("hasAuthority('ADMINISTRATOR')")
     public ResponseEntity<AccountDetailsDTO> adminGetAccountDetails(@PathVariable String userID)
     {
-        return ResponseEntity.ok(userService.getDetailsByUserID(userID));
+        return ResponseEntity.ok(accountService.getDetailsByUserID(userID));
     }
 }
