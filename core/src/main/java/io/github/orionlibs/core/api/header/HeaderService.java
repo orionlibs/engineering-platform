@@ -12,10 +12,10 @@ public class HeaderService
         if(accessKey == null)
         {
             accessKey = request.getHeader(HTTPHeader.XAPIKey.get());
-            if(accessKey != null && accessKey.startsWith(HTTPHeaderValue.Bearer.get()))
-            {
-                accessKey = accessKey.substring(7);
-            }
+        }
+        if(accessKey != null && accessKey.startsWith(HTTPHeaderValue.Bearer.get()))
+        {
+            accessKey = accessKey.substring(7);
         }
         return accessKey;
     }

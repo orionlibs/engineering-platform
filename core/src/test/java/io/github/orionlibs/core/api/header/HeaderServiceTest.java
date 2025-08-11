@@ -16,10 +16,20 @@ public class HeaderServiceTest
 
 
     @Test
-    void convertSigningKeyToSecretKeyObject()
+    void extractAuthorisationBearerToken_fromAuthorizationHeader()
     {
         MockHttpServletRequest request = new MockHttpServletRequest();
         request.addHeader(HTTPHeader.Authorization.get(), HTTPHeaderValue.Bearer.get() + "mytoken");
+        String token = headerService.extractAuthorisationBearerToken(request);
+        assertThat(token).isEqualTo("mytoken");
+    }
+
+
+    @Test
+    void extractAuthorisationBearerToken_fromXAPIKeyHeader()
+    {
+        MockHttpServletRequest request = new MockHttpServletRequest();
+        request.addHeader(HTTPHeader.XAPIKey.get(), HTTPHeaderValue.Bearer.get() + "mytoken");
         String token = headerService.extractAuthorisationBearerToken(request);
         assertThat(token).isEqualTo("mytoken");
     }
