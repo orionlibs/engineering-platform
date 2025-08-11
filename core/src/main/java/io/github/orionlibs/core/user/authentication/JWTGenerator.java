@@ -1,20 +1,23 @@
 package io.github.orionlibs.core.user.authentication;
 
 import io.github.orionlibs.core.cryptology.HMACSHAEncryptionKeyProvider;
+import io.github.orionlibs.core.user.UserService;
+import io.github.orionlibs.core.user.model.UserModel;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import java.util.Collection;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 @Component
 public class JWTGenerator
 {
     private static final long EXPIRATION_IN_MILLISECONDS = 3_600_000L;
-    //@Autowired
-    //private UserService userService;
+    @Autowired
+    private UserService userService;
     @Autowired
     private HMACSHAEncryptionKeyProvider hmacSHAEncryptionKeyProvider;
     @Autowired
@@ -39,7 +42,7 @@ public class JWTGenerator
     }
 
 
-    /*public String generateToken(UserDetails userDetails)
+    public String generateToken(UserDetails userDetails)
     {
         UserModel user = userService.loadUserAsModelByUsername(userDetails.getUsername());
         String token = Jwts.builder()
@@ -70,5 +73,5 @@ public class JWTGenerator
                         .signWith(signingKeyToSecretKeyConverter.convert(hmacSHAEncryptionKeyProvider.getJwtSigningKey()), SignatureAlgorithm.HS512)
                         .compact();
         return token;
-    }*/
+    }
 }
