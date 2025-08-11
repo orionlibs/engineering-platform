@@ -1,6 +1,6 @@
 package io.github.orionlibs.user.setting.converter;
 
-import io.github.orionlibs.core.converter.Converter;
+import io.github.orionlibs.core.Converter;
 import io.github.orionlibs.core.user.setting.model.UserSettingsModel;
 import io.github.orionlibs.user.setting.api.UserSettingDTO;
 import java.util.Optional;

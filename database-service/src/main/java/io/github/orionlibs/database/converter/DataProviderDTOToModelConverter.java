@@ -1,6 +1,6 @@
 package io.github.orionlibs.database.converter;
 
-import io.github.orionlibs.core.converter.Converter;
+import io.github.orionlibs.core.Converter;
 import io.github.orionlibs.database.api.SaveDataProviderRequest;
 import io.github.orionlibs.database.model.DataProviderModel;
 import org.springframework.stereotype.Component;
