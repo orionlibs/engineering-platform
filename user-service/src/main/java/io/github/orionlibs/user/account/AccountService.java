@@ -2,7 +2,6 @@ package io.github.orionlibs.user.account;
 
 import io.github.orionlibs.core.user.AccountDetailsDTO;
 import io.github.orionlibs.core.user.UserService;
-import io.github.orionlibs.core.user.converter.UserModelToDTOConverter;
 import io.github.orionlibs.core.user.model.UserDAO;
 import io.github.orionlibs.core.user.model.UserModel;
 import java.util.Optional;
