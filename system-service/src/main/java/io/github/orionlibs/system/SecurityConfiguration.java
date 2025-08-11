@@ -1,5 +1,6 @@
 package io.github.orionlibs.system;
 
+import io.github.orionlibs.core.api.header.HeaderService;
 import io.github.orionlibs.core.api.key.ApiKeyAuthFilter;
 import io.github.orionlibs.system.api.authentication.SystemServiceAPIKeyAuthenticationProvider;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -66,9 +67,9 @@ public class SecurityConfiguration
 
 
     @Bean
-    public ApiKeyAuthFilter apiKeyAuthFilter(AuthenticationManager apiKeyAuthenticationManager)
+    public ApiKeyAuthFilter apiKeyAuthFilter(AuthenticationManager apiKeyAuthenticationManager, HeaderService headerService)
     {
-        return new ApiKeyAuthFilter(apiKeyAuthenticationManager);
+        return new ApiKeyAuthFilter(apiKeyAuthenticationManager, headerService);
     }
 
 

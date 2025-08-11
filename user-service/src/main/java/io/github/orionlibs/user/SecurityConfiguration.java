@@ -1,5 +1,6 @@
 package io.github.orionlibs.user;
 
+import io.github.orionlibs.core.api.header.HeaderService;
 import io.github.orionlibs.core.api.key.ApiKeyAuthFilter;
 import io.github.orionlibs.core.user.UserService;
 import io.github.orionlibs.core.user.authentication.JWTService;
@@ -94,9 +95,9 @@ public class SecurityConfiguration
 
 
     @Bean
-    public ApiKeyAuthFilter apiKeyAuthFilter(AuthenticationManager apiKeyAuthenticationManager)
+    public ApiKeyAuthFilter apiKeyAuthFilter(AuthenticationManager apiKeyAuthenticationManager, HeaderService headerService)
     {
-        return new ApiKeyAuthFilter(apiKeyAuthenticationManager);
+        return new ApiKeyAuthFilter(apiKeyAuthenticationManager, headerService);
     }
 
 

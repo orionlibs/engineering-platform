@@ -21,9 +21,9 @@ public class JWTToken
     private Collection<? extends GrantedAuthority> authorities;
     private LocalDateTime tokenExpirationDateTime;
     //private String refreshToken;
-    private LocalDateTime refreshTokenExpirationDateTime;
+    //private LocalDateTime refreshTokenExpirationDateTime;
     private boolean expiredToken;
-    private boolean expiredRefreshToken;
-    private boolean doesRefreshTokenExistInDatabase;
+    //private boolean expiredRefreshToken;
+    //private boolean doesRefreshTokenExistInDatabase;
     private boolean hasErrors;
 }
