@@ -1,4 +1,4 @@
-package io.github.orionlibs.core.user;
+package io.github.orionlibs.user.account;
 
 import java.io.Serializable;
 

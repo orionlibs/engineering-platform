@@ -1,6 +1,6 @@
 package io.github.orionlibs.user.password.api;
 
-import io.github.orionlibs.core.user.Password;
+import io.github.orionlibs.user.password.Password;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

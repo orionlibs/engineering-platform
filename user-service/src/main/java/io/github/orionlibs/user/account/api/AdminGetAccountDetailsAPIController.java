@@ -1,8 +1,8 @@
 package io.github.orionlibs.user.account.api;
 
 import io.github.orionlibs.core.api.WebService;
-import io.github.orionlibs.core.user.AccountDetailsDTO;
 import io.github.orionlibs.user.ControllerUtils;
+import io.github.orionlibs.user.account.AccountDetailsDTO;
 import io.github.orionlibs.user.account.AccountService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;

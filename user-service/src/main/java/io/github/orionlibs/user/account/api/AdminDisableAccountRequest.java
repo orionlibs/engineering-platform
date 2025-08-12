@@ -1,6 +1,6 @@
 package io.github.orionlibs.user.account.api;
 
-import io.github.orionlibs.core.user.ValidUUID;
+import io.github.orionlibs.core.uuid.ValidUUID;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,4 +1,4 @@
-package io.github.orionlibs.core.user;
+package io.github.orionlibs.user.password;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
@@ -9,12 +9,12 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 @Documented
-@Constraint(validatedBy = UUIDConstraintValidator.class)
+@Constraint(validatedBy = PasswordConstraintValidator.class)
 @Target({ElementType.FIELD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ValidUUID
+public @interface Password
 {
-    String message() default "The value is not a valid UUID";
+    String message() default "Password does not meet security requirements";
 
 
     Class<?>[] groups() default {};

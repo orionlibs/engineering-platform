@@ -1,7 +1,6 @@
 package io.github.orionlibs.user.account;
 
 import io.github.orionlibs.core.Converter;
-import io.github.orionlibs.core.user.AccountDetailsDTO;
 import io.github.orionlibs.core.user.model.UserModel;
 import org.springframework.stereotype.Component;
 

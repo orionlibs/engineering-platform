@@ -1,4 +1,4 @@
-package io.github.orionlibs.core.user;
+package io.github.orionlibs.user.password;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;

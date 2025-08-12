@@ -1,6 +1,6 @@
 package io.github.orionlibs.user.registration.api;
 
-import io.github.orionlibs.core.user.Password;
+import io.github.orionlibs.user.password.Password;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
