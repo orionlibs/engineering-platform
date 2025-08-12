@@ -40,6 +40,18 @@ public class DatabaseConnectivityRegistry
     }
 
 
+    public long getNumberOfConnectedDatabases()
+    {
+        return databaseToStatusMapper.values().stream().filter(v -> v.booleanValue() == true).count();
+    }
+
+
+    public long getNumberOfDisconnectedDatabases()
+    {
+        return databaseToStatusMapper.values().stream().filter(v -> v.booleanValue() == false).count();
+    }
+
+
     public void setStatusAndNotify(String databaseName, boolean isConnected)
     {
         databaseToStatusMapper.put(databaseName, isConnected);

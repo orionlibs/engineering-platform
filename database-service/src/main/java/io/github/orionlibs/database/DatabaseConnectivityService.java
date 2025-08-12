@@ -26,4 +26,16 @@ public class DatabaseConnectivityService
         EventDatabaseDisconnected event = (EventDatabaseDisconnected)jsonService.fromJson(eventContextAsJSON, EventDatabaseDisconnected.class);
         databaseConnectivityRegistry.setStatusAndNotify(event.getDatabaseName(), false);
     }
+
+
+    public long getNumberOfConnectedDataProviders()
+    {
+        return databaseConnectivityRegistry.getNumberOfConnectedDatabases();
+    }
+
+
+    public long getNumberOfDisconnectedDataProviders()
+    {
+        return databaseConnectivityRegistry.getNumberOfDisconnectedDatabases();
+    }
 }
