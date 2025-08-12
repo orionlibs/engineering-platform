@@ -16,16 +16,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class ForgotPasswordService
 {
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private ForgotPasswordRequestsDAO dao;
-    @Autowired
-    private EmailService emailer;
-    @Autowired
-    private ForgotPasswordCodeGenerator forgotPasswordCodeGenerator;
-    @Autowired
-    private ForgotPasswordCodeValidator forgotPasswordCodeValidator;
+    @Autowired private UserService userService;
+    @Autowired private ForgotPasswordRequestsDAO dao;
+    @Autowired private EmailService emailer;
+    @Autowired private ForgotPasswordCodeGenerator forgotPasswordCodeGenerator;
+    @Autowired private ForgotPasswordCodeValidator forgotPasswordCodeValidator;
 
 
     public boolean process(CreateForgotPasswordRequestRequest request)

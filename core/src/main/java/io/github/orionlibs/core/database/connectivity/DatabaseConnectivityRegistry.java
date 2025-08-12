@@ -15,10 +15,8 @@ import org.springframework.stereotype.Component;
 public class DatabaseConnectivityRegistry
 {
     private static final String TOPIC = "/topic/databases/connections";
-    @Autowired
-    private SimpMessagingTemplate messagingTemplate;
-    @Autowired
-    private JSONService jsonService;
+    @Autowired private SimpMessagingTemplate messagingTemplate;
+    @Autowired private JSONService jsonService;
     //private final ConcurrentMap<String, DatabaseConnectivityStatus> databaseToStatusMapper;
     //mapper of database name to true (connected) or false (disconnected)
     private final ConcurrentMap<String, Boolean> databaseToStatusMapper;

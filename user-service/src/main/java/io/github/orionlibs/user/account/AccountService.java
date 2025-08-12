@@ -12,12 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class AccountService
 {
-    @Autowired
-    private UserDAO dao;
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private UserModelToDTOConverter userModelToDTOConverter;
+    @Autowired private UserDAO dao;
+    @Autowired private UserService userService;
+    @Autowired private UserModelToDTOConverter userModelToDTOConverter;
 
 
     @Transactional

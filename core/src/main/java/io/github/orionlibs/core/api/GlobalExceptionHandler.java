@@ -34,16 +34,11 @@ public class GlobalExceptionHandler implements Publishable
     private String accessDeniedErrorMessage;
     @Value("${error.api.generic_error.message:An unexpected error occurred}")
     private String genericErrorErrorMessage;
-    @Autowired
-    private MetricNumberOfAPIInputValidationErrors metricNumberOfAPIInputValidationErrors;
-    @Autowired
-    private MetricNumberOfDuplicateRecordErrors metricNumberOfDuplicateRecordErrors;
-    @Autowired
-    private MetricNumberOfResourceNotFoundErrors metricNumberOfResourceNotFoundErrors;
-    @Autowired
-    private MetricNumberOfAccessDeniedErrors metricNumberOfAccessDeniedErrors;
-    @Autowired
-    private MetricNumberOfUnknownErrors metricNumberOfUnknownErrors;
+    @Autowired private MetricNumberOfAPIInputValidationErrors metricNumberOfAPIInputValidationErrors;
+    @Autowired private MetricNumberOfDuplicateRecordErrors metricNumberOfDuplicateRecordErrors;
+    @Autowired private MetricNumberOfResourceNotFoundErrors metricNumberOfResourceNotFoundErrors;
+    @Autowired private MetricNumberOfAccessDeniedErrors metricNumberOfAccessDeniedErrors;
+    @Autowired private MetricNumberOfUnknownErrors metricNumberOfUnknownErrors;
 
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

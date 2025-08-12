@@ -10,8 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CoreAPIKeyValidationService
 {
-    @Autowired
-    private JWTService jwtService;
+    @Autowired private JWTService jwtService;
 
 
     public UserDetailsWithUserID validate(String apiKey, String apiSecret) throws AuthenticationException

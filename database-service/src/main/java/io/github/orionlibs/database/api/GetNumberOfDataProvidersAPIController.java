@@ -20,8 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "Data provider", description = "Data provider manager")
 public class GetNumberOfDataProvidersAPIController extends WebService
 {
-    @Autowired
-    private DatabaseService databaseService;
+    @Autowired private DatabaseService databaseService;
 
 
     @Operation(

@@ -12,8 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserServiceAPIKeyAuthenticationProvider implements AuthenticationProvider
 {
-    @Autowired
-    private UserServiceAPIKeyValidationService validationService;
+    @Autowired private UserServiceAPIKeyValidationService validationService;
 
 
     @Override

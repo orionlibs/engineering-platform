@@ -23,8 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "Users", description = "User manager")
 public class AdminDeleteAccountAPIController extends WebService
 {
-    @Autowired
-    private AccountService accountService;
+    @Autowired private AccountService accountService;
 
 
     @Operation(

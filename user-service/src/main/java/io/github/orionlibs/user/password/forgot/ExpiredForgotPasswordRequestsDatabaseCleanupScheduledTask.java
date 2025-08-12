@@ -11,8 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Component
 public class ExpiredForgotPasswordRequestsDatabaseCleanupScheduledTask
 {
-    @Autowired
-    private ForgotPasswordRequestsDAO dao;
+    @Autowired private ForgotPasswordRequestsDAO dao;
 
 
     @PostConstruct

@@ -22,8 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "User logout", description = "User manager")
 public class LogoutAPIController extends WebService
 {
-    @Autowired
-    private LogoutService logoutService;
+    @Autowired private LogoutService logoutService;
 
 
     @Operation(

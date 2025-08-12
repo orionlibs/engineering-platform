@@ -26,8 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "Users", description = "User manager")
 public class CreateForgotPasswordRequestAPIController extends WebService
 {
-    @Autowired
-    private ForgotPasswordService forgotPasswordService;
+    @Autowired private ForgotPasswordService forgotPasswordService;
 
 
     @Operation(

@@ -28,10 +28,8 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "Data provider", description = "Data provider manager")
 public class SaveDataProviderAPIController extends WebService
 {
-    @Autowired
-    private DatabaseService databaseService;
-    @Autowired
-    private DataProviderDTOToModelConverter dataProviderDTOToModelConverter;
+    @Autowired private DatabaseService databaseService;
+    @Autowired private DataProviderDTOToModelConverter dataProviderDTOToModelConverter;
 
 
     @Operation(

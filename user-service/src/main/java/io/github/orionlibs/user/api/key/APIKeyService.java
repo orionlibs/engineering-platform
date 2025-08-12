@@ -9,8 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class APIKeyService
 {
-    @Autowired
-    private ApiKeyDAO apiKeyDAO;
+    @Autowired private ApiKeyDAO apiKeyDAO;
 
 
     @Transactional

@@ -29,8 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "Users", description = "User manager")
 public class UpdateUserSettingByNameAPIController extends WebService
 {
-    @Autowired
-    private UserSettingsService userSettingsService;
+    @Autowired private UserSettingsService userSettingsService;
 
 
     @Operation(

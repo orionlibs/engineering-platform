@@ -10,8 +10,7 @@ import org.springframework.stereotype.Component;
 //GET /actuator/health
 public class HealthCheckerForUser implements HealthChecker
 {
-    @Autowired
-    private UserDAORepository dao;
+    @Autowired private UserDAORepository dao;
 
 
     @Override

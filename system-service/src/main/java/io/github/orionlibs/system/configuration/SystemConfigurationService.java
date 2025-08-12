@@ -12,10 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class SystemConfigurationService
 {
-    @Autowired
-    private ConfigurationDAO dao;
-    @Autowired
-    private ConfigurationDTOToModelConverter configurationDTOToModelConverter;
+    @Autowired private ConfigurationDAO dao;
+    @Autowired private ConfigurationDTOToModelConverter configurationDTOToModelConverter;
 
 
     @Transactional(readOnly = true)

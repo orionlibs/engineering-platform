@@ -14,8 +14,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class EventNameScanner
 {
-    @Autowired
-    private MetricNumberOfRegisteredEvents metricNumberOfRegisteredEvents;
+    @Autowired private MetricNumberOfRegisteredEvents metricNumberOfRegisteredEvents;
 
 
     public List<String> scanEventNames(String basePackage)

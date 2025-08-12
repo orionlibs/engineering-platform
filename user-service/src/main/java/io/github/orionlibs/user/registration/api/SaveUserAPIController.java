@@ -26,8 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "Users", description = "User manager")
 public class SaveUserAPIController extends WebService
 {
-    @Autowired
-    private UserRegistrationService userRegistrationService;
+    @Autowired private UserRegistrationService userRegistrationService;
 
 
     @Operation(

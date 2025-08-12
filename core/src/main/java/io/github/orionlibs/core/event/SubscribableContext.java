@@ -6,14 +6,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class SubscribableContext
 {
-    private EventSubscriber eventSubscriber;
-
-
-    @Autowired
-    public void setEventSubscriber(EventSubscriber subscriber)
-    {
-        this.eventSubscriber = subscriber;
-    }
+    @Autowired private EventSubscriber eventSubscriber;
 
 
     public EventSubscriber subscriber()

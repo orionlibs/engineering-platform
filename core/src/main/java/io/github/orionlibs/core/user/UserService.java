@@ -14,8 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class UserService implements UserDetailsService
 {
-    @Autowired
-    private UserDAO dao;
+    @Autowired private UserDAO dao;
 
 
     @Override

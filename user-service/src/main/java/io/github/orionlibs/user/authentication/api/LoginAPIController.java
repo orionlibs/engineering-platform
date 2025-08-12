@@ -26,8 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "User login", description = "User manager")
 public class LoginAPIController extends WebService
 {
-    @Autowired
-    private LoginService loginService;
+    @Autowired private LoginService loginService;
 
 
     @Operation(

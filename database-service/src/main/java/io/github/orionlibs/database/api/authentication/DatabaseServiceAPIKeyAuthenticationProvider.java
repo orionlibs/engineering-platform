@@ -12,8 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class DatabaseServiceAPIKeyAuthenticationProvider implements AuthenticationProvider
 {
-    @Autowired
-    private DatabaseServiceAPIKeyValidationService validationService;
+    @Autowired private DatabaseServiceAPIKeyValidationService validationService;
 
 
     @Override

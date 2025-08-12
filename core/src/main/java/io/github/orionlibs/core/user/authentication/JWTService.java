@@ -21,12 +21,9 @@ import org.springframework.stereotype.Service;
 public class JWTService
 {
     private static final long EXPIRATION_IN_MILLISECONDS = 3_600_000L;
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private HMACSHAEncryptionKeyProvider hmacSHAEncryptionKeyProvider;
-    @Autowired
-    private JWTSigningKeyToSecretKeyConverter signingKeyToSecretKeyConverter;
+    @Autowired private UserService userService;
+    @Autowired private HMACSHAEncryptionKeyProvider hmacSHAEncryptionKeyProvider;
+    @Autowired private JWTSigningKeyToSecretKeyConverter signingKeyToSecretKeyConverter;
 
 
     public boolean isTokenValid(String token)

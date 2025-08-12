@@ -9,8 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class SystemServiceAPIKeyValidationService
 {
-    @Autowired
-    private JWTService jwtService;
+    @Autowired private JWTService jwtService;
 
 
     public UserDetailsWithUserID validate(String apiKey, String apiSecret)

@@ -14,10 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class UserSettingsService
 {
-    @Autowired
-    private UserSettingsDAORepository dao;
-    @Autowired
-    private DefaultUserSettings defaultUserSettings;
+    @Autowired private UserSettingsDAORepository dao;
+    @Autowired private DefaultUserSettings defaultUserSettings;
 
 
     @Transactional(readOnly = true)

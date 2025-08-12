@@ -26,8 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "Users", description = "User manager")
 public class AdminUpdatePasswordAPIController extends WebService
 {
-    @Autowired
-    private PasswordService passwordService;
+    @Autowired private PasswordService passwordService;
 
 
     @Operation(

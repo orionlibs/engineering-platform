@@ -48,12 +48,9 @@ import org.springframework.web.cors.CorsUtils;
 @EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration
 {
-    @Autowired
-    private JWTService jwtService;
-    @Autowired
-    private UserDetailsService userDetailsService;
-    @Autowired
-    private UserService userService;
+    @Autowired private JWTService jwtService;
+    @Autowired private UserDetailsService userDetailsService;
+    @Autowired private UserService userService;
 
 
     @Bean

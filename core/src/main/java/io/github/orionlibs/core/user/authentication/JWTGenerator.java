@@ -14,12 +14,9 @@ import org.springframework.stereotype.Component;
 public class JWTGenerator
 {
     private static final long EXPIRATION_IN_MILLISECONDS = 3_600_000L;
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private HMACSHAEncryptionKeyProvider hmacSHAEncryptionKeyProvider;
-    @Autowired
-    private JWTSigningKeyToSecretKeyConverter signingKeyToSecretKeyConverter;
+    @Autowired private UserService userService;
+    @Autowired private HMACSHAEncryptionKeyProvider hmacSHAEncryptionKeyProvider;
+    @Autowired private JWTSigningKeyToSecretKeyConverter signingKeyToSecretKeyConverter;
 
 
     public String generateToken(String userID, Collection<? extends GrantedAuthority> authorities)

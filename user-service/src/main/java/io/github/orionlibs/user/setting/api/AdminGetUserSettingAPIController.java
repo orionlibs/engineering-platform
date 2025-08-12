@@ -25,10 +25,8 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "Users", description = "User manager")
 public class AdminGetUserSettingAPIController extends WebService
 {
-    @Autowired
-    private UserSettingsService userSettingsService;
-    @Autowired
-    private UserSettingModelToDTOConverter userSettingModelToDTOConverter;
+    @Autowired private UserSettingsService userSettingsService;
+    @Autowired private UserSettingModelToDTOConverter userSettingModelToDTOConverter;
 
 
     @Operation(

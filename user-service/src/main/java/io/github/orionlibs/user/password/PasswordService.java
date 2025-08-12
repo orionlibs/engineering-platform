@@ -14,10 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class PasswordService
 {
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private ForgotPasswordService forgotPasswordService;
+    @Autowired private UserService userService;
+    @Autowired private ForgotPasswordService forgotPasswordService;
 
 
     @Transactional

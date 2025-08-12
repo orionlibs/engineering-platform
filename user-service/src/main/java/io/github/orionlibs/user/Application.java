@@ -37,8 +37,7 @@ public class Application extends SpringBootServletInitializer implements WebMvcC
     private String version;
     @Value("${environment}")
     private String environment;
-    @Autowired
-    private ApiMetricsInterceptor apiMetricsInterceptor;
+    @Autowired private ApiMetricsInterceptor apiMetricsInterceptor;
 
 
     public static void main(String[] args)

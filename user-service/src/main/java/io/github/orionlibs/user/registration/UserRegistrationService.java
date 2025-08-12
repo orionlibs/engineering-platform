@@ -17,12 +17,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class UserRegistrationService implements Publishable
 {
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private UserSettingsService userSettingsService;
-    @Autowired
-    private HMACSHAEncryptionKeyProvider hmacSHAEncryptionKeyProvider;
+    @Autowired private UserService userService;
+    @Autowired private UserSettingsService userSettingsService;
+    @Autowired private HMACSHAEncryptionKeyProvider hmacSHAEncryptionKeyProvider;
 
 
     @Transactional

@@ -7,31 +7,17 @@ import org.springframework.stereotype.Component;
 @Component
 public class PublishableContext
 {
-    private JSONService jsonService;
-    private EventPublisher eventPublisher;
+    @Autowired private JSONService jsonService;
+    @Autowired private EventPublisher eventPublisher;
 
 
-    @Autowired
-    public void setJsonService(JSONService jsonService)
-    {
-        this.jsonService = jsonService;
-    }
-
-
-    @Autowired
-    public void setEventPublisher(EventPublisher publisher)
-    {
-        this.eventPublisher = publisher;
-    }
-
-
-    public JSONService json()
+    public JSONService getJsonService()
     {
         return jsonService;
     }
 
 
-    public EventPublisher publisher()
+    public EventPublisher getEventPublisher()
     {
         return eventPublisher;
     }

@@ -11,8 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class LogoutService implements Publishable
 {
-    @Autowired
-    private APIKeyService apiKeyService;
+    @Autowired private APIKeyService apiKeyService;
 
 
     public String logoutUser(HttpServletRequest request, HttpServletResponse response, String token)

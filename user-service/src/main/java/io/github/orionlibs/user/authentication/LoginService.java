@@ -18,12 +18,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class LoginService implements Publishable
 {
-    @Autowired
-    private AuthenticationManager authenticationManager;
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private APIKeyService apiKeyService;
+    @Autowired private AuthenticationManager authenticationManager;
+    @Autowired private UserService userService;
+    @Autowired private APIKeyService apiKeyService;
     @Autowired private JWTGenerator jwtGenerator;
 
 

@@ -24,10 +24,8 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "System", description = "Configuration")
 public class GetConfigurationAPIController extends WebService
 {
-    @Autowired
-    private SystemConfigurationService configurationService;
-    @Autowired
-    private ConfigurationModelToDTOConverter configurationModelToDTOConverter;
+    @Autowired private SystemConfigurationService configurationService;
+    @Autowired private ConfigurationModelToDTOConverter configurationModelToDTOConverter;
 
 
     @Operation(

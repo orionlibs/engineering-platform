@@ -3,6 +3,7 @@ package io.github.orionlibs.core.database.connectivity.api;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
@@ -10,19 +11,13 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class DatabaseConnectivityWebsocketController
 {
-    private final SimpMessagingTemplate messagingTemplate;
+    @Autowired private SimpMessagingTemplate messagingTemplate;
     public static final ConcurrentMap<String, String> lastMessages;
 
     static
     {
         lastMessages = new ConcurrentHashMap<>();
     }
-
-    public DatabaseConnectivityWebsocketController(SimpMessagingTemplate messagingTemplate)
-    {
-        this.messagingTemplate = messagingTemplate;
-    }
-
 
     // Store the last message for each topic when sending messages
     public void sendMessage(String topic, String message)

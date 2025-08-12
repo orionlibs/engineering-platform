@@ -16,12 +16,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceAPIKeyValidationService
 {
-    @Autowired
-    private ApiKeyDAO apiKeyDAO;
-    @Autowired
-    private UserDAO userDAO;
-    @Autowired
-    private UserDetailsService userService;
+    @Autowired private ApiKeyDAO apiKeyDAO;
+    @Autowired private UserDAO userDAO;
+    @Autowired private UserDetailsService userService;
 
 
     public UserDetailsWithUserID validate(String apiKey, String apiSecret) throws AuthenticationException

@@ -27,8 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "System", description = "Configuration")
 public class SaveConfigurationAPIController extends WebService
 {
-    @Autowired
-    private SystemConfigurationService configurationService;
+    @Autowired private SystemConfigurationService configurationService;
 
 
     @Operation(
