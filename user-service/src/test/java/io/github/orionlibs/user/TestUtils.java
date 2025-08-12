@@ -1,15 +1,15 @@
-package io.github.orionlibs.core.tests;
+package io.github.orionlibs.user;
 
 import io.github.orionlibs.core.user.model.UserModel;
-import io.github.orionlibs.core.user.registration.UserRegistrationService;
-import io.github.orionlibs.core.user.registration.api.UserRegistrationRequest;
+import io.github.orionlibs.user.registration.UserRegistrationService;
+import io.github.orionlibs.user.registration.api.UserRegistrationRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class TestUtils
 {
-    @Autowired private UserRegistrationService userRegistrationService;
+    @Autowired UserRegistrationService userRegistrationService;
 
 
     public UserModel registerUser(String username, String authority)

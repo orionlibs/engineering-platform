@@ -4,8 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import io.github.orionlibs.core.user.model.UserDAO;
 import io.github.orionlibs.user.authentication.api.LoginRequest;
-import io.github.orionlibs.core.user.registration.UserRegistrationService;
-import io.github.orionlibs.core.user.registration.api.UserRegistrationRequest;
+import io.github.orionlibs.user.registration.UserRegistrationService;
+import io.github.orionlibs.user.registration.api.UserRegistrationRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

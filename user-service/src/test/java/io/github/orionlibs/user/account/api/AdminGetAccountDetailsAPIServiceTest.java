@@ -2,7 +2,7 @@ package io.github.orionlibs.user.account.api;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import io.github.orionlibs.core.tests.TestUtils;
+import io.github.orionlibs.user.TestUtils;
 import io.github.orionlibs.core.user.AccountDetailsDTO;
 import io.github.orionlibs.core.user.UserAuthority;
 import io.github.orionlibs.core.user.model.UserDAO;

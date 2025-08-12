@@ -1,4 +1,4 @@
-package io.github.orionlibs.core.user.registration;
+package io.github.orionlibs.user.registration;
 
 import io.github.orionlibs.core.Logger;
 import io.github.orionlibs.core.cryptology.HMACSHAEncryptionKeyProvider;
@@ -6,8 +6,8 @@ import io.github.orionlibs.core.data.DuplicateRecordException;
 import io.github.orionlibs.core.event.Publishable;
 import io.github.orionlibs.core.user.UserService;
 import io.github.orionlibs.core.user.model.UserModel;
-import io.github.orionlibs.core.user.registration.api.UserRegistrationRequest;
 import io.github.orionlibs.core.user.setting.UserSettingsService;
+import io.github.orionlibs.user.registration.api.UserRegistrationRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;

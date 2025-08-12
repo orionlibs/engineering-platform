@@ -1,4 +1,4 @@
-package io.github.orionlibs.core.user.registration;
+package io.github.orionlibs.user.registration;
 
 import io.github.orionlibs.core.event.Event;
 import java.io.Serializable;

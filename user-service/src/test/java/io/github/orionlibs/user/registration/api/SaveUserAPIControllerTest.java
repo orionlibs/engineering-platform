@@ -1,11 +1,11 @@
-package io.github.orionlibs.core.user.registration.api;
+package io.github.orionlibs.user.registration.api;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import io.github.orionlibs.core.api.APIError;
-import io.github.orionlibs.core.tests.APITestUtils;
 import io.github.orionlibs.core.user.UserAuthority;
 import io.github.orionlibs.core.user.model.UserDAO;
+import io.github.orionlibs.user.UserServiceAPITestUtils;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import java.util.Set;
@@ -23,7 +23,7 @@ import org.springframework.test.context.ActiveProfiles;
 class SaveUserAPIControllerTest
 {
     @LocalServerPort int port;
-    @Autowired APITestUtils apiUtils;
+    @Autowired UserServiceAPITestUtils apiUtils;
     String basePath;
     @Autowired UserDAO dao;
     HttpHeaders headers;

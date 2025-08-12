@@ -1,4 +1,4 @@
-package io.github.orionlibs.core.user.registration.api;
+package io.github.orionlibs.user.registration.api;
 
 import io.github.orionlibs.core.user.Password;
 import jakarta.validation.constraints.Email;
