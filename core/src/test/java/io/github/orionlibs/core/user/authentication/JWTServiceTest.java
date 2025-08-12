@@ -28,7 +28,6 @@ public class JWTServiceTest
     @Autowired JWTSigningKeyToSecretKeyConverter signingKeyToSecretKeyConverter;
     @Autowired JWTGenerator jwtGenerator;
     UserModel user;
-    UserModel wrongUser;
 
 
     @BeforeEach
@@ -43,14 +42,6 @@ public class JWTServiceTest
         newUser.setLastName("Emilson");
         newUser.setPhoneNumber("07896620211");
         user = userService.saveUser(newUser);
-        UserModel newWrongUser = new UserModel(hmacSHAEncryptionKeyProvider);
-        newWrongUser.setUsername("memememe@email.com");
-        newWrongUser.setPassword("4528");
-        newWrongUser.setAuthority("USER");
-        newWrongUser.setFirstName("Jimmy");
-        newWrongUser.setLastName("Emilson");
-        newWrongUser.setPhoneNumber("07896620211");
-        wrongUser = userService.saveUser(newWrongUser);
     }
 
 
@@ -65,22 +56,12 @@ public class JWTServiceTest
 
 
     @Test
-    void generateToken_extractUsername_shouldMatchUser()
+    void generateToken_extractUserID()
     {
         String token = jwtGenerator.generateToken(user.getId().toString(), user.getAuthorities());
         assertThat(token).isNotNull();
         String extracted = jwtService.extractUserID(token);
         assertThat(extracted.length()).isGreaterThan(20);
-        assertThat(jwtService.isTokenValid(token, user)).isTrue();
-    }
-
-
-    @Test
-    void isToken_Valid_wrongUser()
-    {
-        String token = jwtGenerator.generateToken(user.getId().toString(), user.getAuthorities());
-        assertThat(token).isNotNull();
-        assertThat(jwtService.isTokenValid(token, wrongUser)).isFalse();
     }
 
 

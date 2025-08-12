@@ -3,7 +3,6 @@ package io.github.orionlibs.core.user.authentication;
 import io.github.orionlibs.core.cryptology.HMACSHAEncryptionKeyProvider;
 import io.github.orionlibs.core.user.UserAuthority;
 import io.github.orionlibs.core.user.UserService;
-import io.github.orionlibs.core.user.model.UserModel;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -50,7 +49,7 @@ public class JWTService
     }
 
 
-    public boolean isTokenValid(String token, UserModel userDetails)
+    /*public boolean isTokenValid(String token, UserModel userDetails)
     {
         String userID = extractUserID(token);
         UserModel user = userService.loadUserAsModelByUsername(userDetails.getUsername());
@@ -68,7 +67,7 @@ public class JWTService
             isTokenExpired = false;
         }
         return userID.equals(user.getId().toString()) && !isTokenExpired;
-    }
+    }*/
 
 
     /*public boolean isTokenValid(String token, UserDetails userDetails)

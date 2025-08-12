@@ -43,7 +43,7 @@ public class JWTFilter extends OncePerRequestFilter
             if(userWrap.isPresent())
             {
                 UserModel user = userWrap.get();
-                if(jwtService.isTokenValid(token, user))
+                if(jwtService.isTokenValid(token))
                 {
                     userSessionDataService.saveUserInSession(req, user, tokenData);
                 }
