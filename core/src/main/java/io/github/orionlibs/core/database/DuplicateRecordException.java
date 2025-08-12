@@ -1,4 +1,4 @@
-package io.github.orionlibs.core.data;
+package io.github.orionlibs.core.database;
 
 import io.github.orionlibs.core.asserts.UncheckedException;
 

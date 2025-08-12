@@ -2,7 +2,7 @@ package io.github.orionlibs.user.registration;
 
 import io.github.orionlibs.core.Logger;
 import io.github.orionlibs.core.cryptology.HMACSHAEncryptionKeyProvider;
-import io.github.orionlibs.core.data.DuplicateRecordException;
+import io.github.orionlibs.core.database.DuplicateRecordException;
 import io.github.orionlibs.core.event.Publishable;
 import io.github.orionlibs.core.user.UserService;
 import io.github.orionlibs.core.user.model.UserModel;

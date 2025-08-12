@@ -1,6 +1,6 @@
 package io.github.orionlibs.user.authentication;
 
-import io.github.orionlibs.core.data.ResourceNotFoundException;
+import io.github.orionlibs.core.database.ResourceNotFoundException;
 import io.github.orionlibs.core.event.Publishable;
 import io.github.orionlibs.core.user.UserService;
 import io.github.orionlibs.core.user.authentication.JWTGenerator;
