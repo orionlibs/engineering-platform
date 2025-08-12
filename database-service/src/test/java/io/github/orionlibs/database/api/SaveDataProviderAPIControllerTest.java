@@ -6,6 +6,7 @@ import io.github.orionlibs.core.api.APIError;
 import io.github.orionlibs.core.tests.APITestUtils;
 import io.github.orionlibs.core.user.model.UserDAO;
 import io.github.orionlibs.database.ControllerUtils;
+import io.github.orionlibs.database.model.DataProviderType.Type;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import java.util.UUID;
@@ -41,6 +42,7 @@ class SaveDataProviderAPIControllerTest
         RestAssured.baseURI = basePath;
         SaveDataProviderRequest request = SaveDataProviderRequest.builder()
                         .databaseName("uns")
+                        .type(Type.DATABASE)
                         .connectionURL("jdbc:mysql://localhost:3306")
                         .username("me@email.com")
                         .password("bunkzh3Z!")
@@ -56,6 +58,7 @@ class SaveDataProviderAPIControllerTest
         RestAssured.baseURI = basePath;
         SaveDataProviderRequest request = SaveDataProviderRequest.builder()
                         .databaseName("")
+                        .type(Type.DATABASE)
                         .connectionURL("jdbc:mysql://localhost:3306")
                         .username("me@email.com")
                         .password("bunkzh3Z!")
@@ -69,11 +72,31 @@ class SaveDataProviderAPIControllerTest
 
 
     @Test
+    void saveDataProvider_invalidType()
+    {
+        RestAssured.baseURI = basePath;
+        SaveDataProviderRequest request = SaveDataProviderRequest.builder()
+                        .databaseName("uns")
+                        .type(null)
+                        .connectionURL("jdbc:mysql://localhost:3306")
+                        .username("me@email.com")
+                        .password("bunkzh3Z!")
+                        .build();
+        Response response = apiUtils.makePostAPICall(request, headers, UUID.randomUUID().toString(), "DATABASE_MANAGER");
+        assertThat(response.statusCode()).isEqualTo(400);
+        APIError body = response.as(APIError.class);
+        assertThat(body.message()).isEqualTo("Validation failed for one or more fields");
+        assertThat(body.fieldErrors().get(0).message()).isEqualTo("data provider type must be provided");
+    }
+
+
+    @Test
     void saveDataProvider_invalidConnectionURL()
     {
         RestAssured.baseURI = basePath;
         SaveDataProviderRequest request = SaveDataProviderRequest.builder()
                         .databaseName("uns")
+                        .type(Type.DATABASE)
                         .connectionURL("")
                         .username("me@email.com")
                         .password("bunkzh3Z!")

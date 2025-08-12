@@ -7,12 +7,10 @@
 
 
 Create project "databases-service" with API:
-4--get configured databases
 5--get currently running queries per database
 6--get long-running queries per database
 7--get queries per second per database
 8--get queries per second fro all databases
-9--Data sources can be databases, APIs (using spring data REST)
 We can register MySQL databases, configure if the system will automatically connect to each when it starts. We can also update config for each database
 
 

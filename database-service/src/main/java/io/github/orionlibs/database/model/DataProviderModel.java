@@ -24,6 +24,8 @@ public class DataProviderModel
     private UUID id;
     @Column(nullable = false)
     private String name;
+    @Column(nullable = false)
+    private String type;
     @Column(name = "connection_url", nullable = false)
     private String connectionURL;
     @Column(nullable = true)
@@ -43,9 +45,10 @@ public class DataProviderModel
     }
 
 
-    public DataProviderModel(String name, String connectionURL, String username, String password)
+    public DataProviderModel(String name, DataProviderType.Type type, String connectionURL, String username, String password)
     {
         this.name = name;
+        this.type = type.name();
         this.connectionURL = connectionURL;
         this.username = username;
         this.password = password;
@@ -133,5 +136,17 @@ public class DataProviderModel
     public void setUpdatedAt(LocalDateTime updatedAt)
     {
         this.updatedAt = updatedAt;
+    }
+
+
+    public String getType()
+    {
+        return type;
+    }
+
+
+    public void setType(String type)
+    {
+        this.type = type;
     }
 }

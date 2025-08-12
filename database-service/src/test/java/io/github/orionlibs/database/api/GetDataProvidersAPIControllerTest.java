@@ -6,6 +6,8 @@ import io.github.orionlibs.core.tests.APITestUtils;
 import io.github.orionlibs.database.ControllerUtils;
 import io.github.orionlibs.database.DatabaseService;
 import io.github.orionlibs.database.model.DataProviderModel;
+import io.github.orionlibs.database.model.DataProviderType;
+import io.github.orionlibs.database.model.DataProviderType.Type;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import java.util.UUID;
@@ -33,9 +35,9 @@ class GetDataProvidersAPIControllerTest
     {
         basePath = "http://localhost:" + port + ControllerUtils.baseAPIPath + "/databases";
         databaseService.deleteAll();
-        DataProviderModel model = new DataProviderModel("uns1", "jdbc:mysql://localhost1:3306", "me1@email.com", "bunkzh3Z!");
+        DataProviderModel model = new DataProviderModel("uns1", Type.DATABASE, "jdbc:mysql://localhost1:3306", "me1@email.com", "bunkzh3Z!");
         model = databaseService.saveDataProvider(model);
-        model = new DataProviderModel("uns2", "jdbc:mysql://localhost2:3306", "me2@email.com", "bunkzh3Z!");
+        model = new DataProviderModel("uns2", Type.DATABASE, "jdbc:mysql://localhost2:3306", "me2@email.com", "bunkzh3Z!");
         model = databaseService.saveDataProvider(model);
     }
 
