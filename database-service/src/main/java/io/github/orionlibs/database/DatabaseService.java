@@ -42,7 +42,6 @@ public class DatabaseService
         Class.forName("com.mysql.cj.jdbc.Driver");
         Connection connection = DriverManager.getConnection(databaseURL, databaseUsername, databasePassword);
         DatabaseWrapper wrapper = new DatabaseWrapper(connection, databaseConnectivityRegistry);
-
         //JDBCTemplateWrapper wrapper = new JDBCTemplateWrapper("core", coreDataSource, new JdbcTemplate(coreDataSource), databaseConnectivityRegistry);
         //DB.registerDatabaseConnection("core", bean);
         //Runtime.getRuntime().addShutdownHook(new Thread(SpringDataConfiguration::shutdownCoreDatabase));
