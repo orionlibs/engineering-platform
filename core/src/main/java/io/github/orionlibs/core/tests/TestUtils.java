@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class TestUtils
 {
-    @Autowired UserRegistrationService userRegistrationService;
+    @Autowired private UserRegistrationService userRegistrationService;
 
 
     public UserModel registerUser(String username, String authority)

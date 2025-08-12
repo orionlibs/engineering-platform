@@ -18,7 +18,7 @@ public class APITestUtils implements JWTBuilderForTests
 {
     @Autowired JSONService jsonService;
     @Value("${jwt.secret}")
-    String base64Secret;
+    private String base64Secret;
 
 
     public Response makeGetAPICall(HttpHeaders headers)
