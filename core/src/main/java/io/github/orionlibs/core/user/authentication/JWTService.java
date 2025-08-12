@@ -16,7 +16,6 @@ import javax.crypto.SecretKey;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -51,7 +50,7 @@ public class JWTService
     }
 
 
-    public boolean isTokenValid(String token, UserDetails userDetails)
+    public boolean isTokenValid(String token, UserModel userDetails)
     {
         String userID = extractUserID(token);
         UserModel user = userService.loadUserAsModelByUsername(userDetails.getUsername());
@@ -70,6 +69,27 @@ public class JWTService
         }
         return userID.equals(user.getId().toString()) && !isTokenExpired;
     }
+
+
+    /*public boolean isTokenValid(String token, UserDetails userDetails)
+    {
+        String userID = extractUserID(token);
+        UserModel user = userService.loadUserAsModelByUsername(userDetails.getUsername());
+        boolean isTokenExpired = false;
+        try
+        {
+            isTokenExpired = isTokenExpired(token);
+        }
+        catch(ExpiredJwtException e)
+        {
+            isTokenExpired = true;
+        }
+        catch(Exception e)
+        {
+            isTokenExpired = false;
+        }
+        return userID.equals(user.getId().toString()) && !isTokenExpired;
+    }*/
 
 
     public String extractUserID(String token)

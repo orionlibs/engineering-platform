@@ -1,8 +1,8 @@
 package io.github.orionlibs.user.account.api;
 
 import io.github.orionlibs.core.api.WebService;
-import io.github.orionlibs.core.user.UserService;
 import io.github.orionlibs.user.ControllerUtils;
+import io.github.orionlibs.user.account.AccountService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AdminDeleteAccountAPIController extends WebService
 {
     @Autowired
-    private UserService userService;
+    private AccountService accountService;
 
 
     @Operation(
@@ -44,7 +44,7 @@ public class AdminDeleteAccountAPIController extends WebService
     @PreAuthorize("hasAuthority('ADMINISTRATOR')")
     public ResponseEntity<Map> adminDeleteAccount(@PathVariable String userID)
     {
-        userService.delete(userID);
+        accountService.delete(userID);
         return ResponseEntity.ok(Map.of());
     }
 }

@@ -67,4 +67,18 @@ public class AccountService
         }
         return new AccountDetailsDTO("");
     }
+
+
+    @Transactional
+    public void delete(UUID userID)
+    {
+        dao.delete(userID);
+    }
+
+
+    @Transactional
+    public void delete(String userID)
+    {
+        delete(UUID.fromString(userID));
+    }
 }

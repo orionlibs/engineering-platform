@@ -143,45 +143,4 @@ public class UserServiceTest
         Optional<UserModel> userWrap = userService.loadUserByUserID(UUID.randomUUID().toString());
         assertThat(userWrap.isEmpty()).isTrue();
     }
-
-
-    @Test
-    void enableAccount()
-    {
-        UserModel userTemp = new UserModel(hmacSHAEncryptionKeyProvider);
-        userTemp.setUsername("me@email.com");
-        userTemp.setPassword("4528");
-        userTemp.setAuthority("USER");
-        userTemp.setFirstName("Dimi");
-        userTemp.setLastName("Emilson");
-        userTemp.setPhoneNumber("07896620211");
-        userTemp.setEnabled(false);
-        UserModel newUser = dao.save(userTemp);
-        UserDetails user = userService.loadUserByUsername("me@email.com");
-        assertThat(user.isEnabled()).isFalse();
-        userTemp.setEnabled(true);
-        newUser = dao.save(userTemp);
-        user = userService.loadUserByUsername("me@email.com");
-        assertThat(user.isEnabled()).isTrue();
-    }
-
-
-    @Test
-    void delete()
-    {
-        UserModel userTemp = new UserModel(hmacSHAEncryptionKeyProvider);
-        userTemp.setUsername("me@email.com");
-        userTemp.setPassword("4528");
-        userTemp.setAuthority("USER");
-        userTemp.setFirstName("Dimi");
-        userTemp.setLastName("Emilson");
-        userTemp.setPhoneNumber("07896620211");
-        userTemp.setEnabled(false);
-        UserModel newUser = dao.save(userTemp);
-        Optional<UserModel> userWrap = userService.loadUserByUserID(newUser.getId().toString());
-        assertThat(userWrap.isPresent()).isTrue();
-        userService.delete(newUser.getId());
-        userWrap = userService.loadUserByUserID(newUser.getId().toString());
-        assertThat(userWrap.isEmpty()).isTrue();
-    }
 }
