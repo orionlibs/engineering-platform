@@ -5,7 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import io.github.orionlibs.user.TestUtils;
 import io.github.orionlibs.core.user.model.UserDAO;
 import io.github.orionlibs.core.user.model.UserModel;
-import io.github.orionlibs.core.user.setting.UserSettingsService;
+import io.github.orionlibs.user.setting.UserSettingsService;
 import io.github.orionlibs.core.user.setting.model.UserSettingsModel;
 import io.github.orionlibs.user.ControllerUtils;
 import io.github.orionlibs.user.UserServiceAPITestUtils;

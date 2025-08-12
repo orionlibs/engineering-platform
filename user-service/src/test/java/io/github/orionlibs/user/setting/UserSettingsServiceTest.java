@@ -1,4 +1,4 @@
-package io.github.orionlibs.core.user.setting;
+package io.github.orionlibs.user.setting;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;

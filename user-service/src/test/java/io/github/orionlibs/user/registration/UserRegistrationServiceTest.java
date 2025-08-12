@@ -7,7 +7,7 @@ import io.github.orionlibs.core.data.DuplicateRecordException;
 import io.github.orionlibs.core.user.model.UserDAO;
 import io.github.orionlibs.core.user.model.UserModel;
 import io.github.orionlibs.user.registration.api.UserRegistrationRequest;
-import io.github.orionlibs.core.user.setting.UserSettingsService;
+import io.github.orionlibs.user.setting.UserSettingsService;
 import io.github.orionlibs.core.user.setting.model.UserSettingsModel;
 import java.util.List;
 import java.util.Set;

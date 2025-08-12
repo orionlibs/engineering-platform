@@ -1,4 +1,4 @@
-package io.github.orionlibs.core.user.setting;
+package io.github.orionlibs.user.setting;
 
 import java.util.ArrayList;
 import java.util.List;
