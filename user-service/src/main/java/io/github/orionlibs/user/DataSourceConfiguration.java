@@ -2,12 +2,7 @@ package io.github.orionlibs.user;
 
 import io.github.orionlibs.core.database.connectivity.EventDatabaseConnected;
 import io.github.orionlibs.core.event.Publishable;
-import java.util.List;
 import javax.sql.DataSource;
-import net.ttddyy.dsproxy.ExecutionInfo;
-import net.ttddyy.dsproxy.QueryInfo;
-import net.ttddyy.dsproxy.listener.QueryExecutionListener;
-import net.ttddyy.dsproxy.support.ProxyDataSourceBuilder;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -43,38 +38,7 @@ public class DataSourceConfiguration implements Publishable
         publish(EventDatabaseConnected.EVENT_NAME, EventDatabaseConnected.builder()
                         .databaseName(props.determineDatabaseName())
                         .build());
-        return ProxyDataSourceBuilder
-                        .create(realDs)
-                        .name("DB-PROXY")
-                        .listener(new QueryExecutionListener()
-                        {
-                            @Override
-                            public void beforeQuery(ExecutionInfo execInfo, List<QueryInfo> queryInfoList)
-                            {
-                                //Instant now = Instant.now();
-                                for(QueryInfo qi : queryInfoList)
-                                {
-                                    String sql = qi.getQuery();
-                                    //System.out.println("-------SQL running: " + sql);
-                                }
-                            }
-
-
-                            @Override
-                            public void afterQuery(ExecutionInfo execInfo, List<QueryInfo> queryInfoList)
-                            {
-                                //long durationMs = execInfo.getElapsedTime(); // in ms
-                                //Instant now = Instant.now();
-                                for(QueryInfo qi : queryInfoList)
-                                {
-                                    String sql = qi.getQuery();
-                                    // persist asynchronously to avoid blocking the thread that’s doing your business logic
-                                    //System.out.println("-------SQL ran: " + sql);
-                                    //repo.save(new QueryLog(null, sql, now, durationMs));
-                                }
-                            }
-                        })
-                        .build();
+        return realDs;
     }
 
 
