@@ -1,15 +1,12 @@
-package io.github.orionlibs.database;
+package io.github.orionlibs.core.database;
 
-import io.github.orionlibs.database.connectivity.DatabaseConnectivityRegistry;
-import io.github.orionlibs.database.connectivity.DatabaseConnectivityStatus;
+import io.github.orionlibs.core.database.connectivity.DatabaseConnectivityRegistry;
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.time.LocalDateTime;
 
 public class DatabaseWrapper
 {
+    private String databaseName;
     private String connectionURL;
     //private DataSource dataSource;
     private Connection connection;
@@ -24,15 +21,16 @@ public class DatabaseWrapper
     }*/
 
 
-    public DatabaseWrapper(Connection connection, DatabaseConnectivityRegistry databaseConnectivityRegistry) throws SQLException
+    public DatabaseWrapper(String databaseName, Connection connection, DatabaseConnectivityRegistry databaseConnectivityRegistry) throws SQLException
     {
+        this.databaseName = databaseName;
         this.connection = connection;
         this.connectionURL = connection.getMetaData().getURL();
         this.databaseConnectivityRegistry = databaseConnectivityRegistry;
     }
 
 
-    public boolean isConnected()
+    /*public boolean isConnected()
     {
         if(getConnection() == null)
         {
@@ -68,10 +66,10 @@ public class DatabaseWrapper
         {
             return false;
         }
-    }
+    }*/
 
 
-    private void setConnectivityStatus()
+    /*private void setConnectivityStatus()
     {
         databaseConnectivityRegistry.setStatusAndNotify("", DatabaseConnectivityStatus.builder()
                         .databaseName("")
@@ -81,6 +79,12 @@ public class DatabaseWrapper
                         .datetimeConnectionLost(LocalDateTime.now())
                         .errorMessage("Cannot connect to the database server")
                         .build());
+    }*/
+
+
+    public String getDatabaseName()
+    {
+        return databaseName;
     }
 
 

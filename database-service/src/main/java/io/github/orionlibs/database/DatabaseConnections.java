@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-public class DB
+public class DatabaseConnections
 {
     private static final ConcurrentMap<String, Connection> databaseConnections;
 

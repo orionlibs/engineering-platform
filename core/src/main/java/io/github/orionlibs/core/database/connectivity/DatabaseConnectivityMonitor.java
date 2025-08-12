@@ -1,13 +1,13 @@
-package io.github.orionlibs.database.connectivity;
+package io.github.orionlibs.core.database.connectivity;
 
-import io.github.orionlibs.database.DatabaseWrapper;
+import io.github.orionlibs.core.database.DatabaseWrapper;
+import io.github.orionlibs.core.event.Publishable;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 
-public class DatabaseConnectivityMonitor
+public class DatabaseConnectivityMonitor implements Publishable
 {
     private DatabaseWrapper wrapper;
     private DatabaseConnectivityRegistry databaseConnectivityRegistry;
@@ -64,29 +64,35 @@ public class DatabaseConnectivityMonitor
 
     private void notifyConnectionLost()
     {
+        publish(EventDatabaseDisconnected.EVENT_NAME, EventDatabaseDisconnected.builder()
+                        .databaseName(wrapper.getDatabaseName())
+                        .build());
         //System.out.println(wrapper.getDatabaseName() + " Database connection lost!");
-        databaseConnectivityRegistry.setStatusAndNotify(wrapper.getConnectionURL(), DatabaseConnectivityStatus.builder()
+        /*databaseConnectivityRegistry.setStatusAndNotify(wrapper.getConnectionURL(), DatabaseConnectivityStatus.builder()
                         //.databaseName(wrapper.getDatabaseName())
                         .connectionURL(wrapper.getConnectionURL())
                         .isConnected(Boolean.FALSE)
                         .datetimeConnectionEstablished(null)
                         .datetimeConnectionLost(LocalDateTime.now())
                         .errorMessage("Cannot connect to the database server")
-                        .build());
+                        .build());*/
     }
 
 
     private void notifyConnectionRestored()
     {
+        publish(EventDatabaseConnected.EVENT_NAME, EventDatabaseConnected.builder()
+                        .databaseName(wrapper.getDatabaseName())
+                        .build());
         //System.out.println(wrapper.getDatabaseName() + " Database connection restored!");
-        databaseConnectivityRegistry.setStatusAndNotify(wrapper.getConnectionURL(), DatabaseConnectivityStatus.builder()
+        /*databaseConnectivityRegistry.setStatusAndNotify(wrapper.getConnectionURL(), DatabaseConnectivityStatus.builder()
                         //.databaseName(wrapper.getDatabaseName())
                         .connectionURL(wrapper.getConnectionURL())
                         .isConnected(Boolean.TRUE)
                         .datetimeConnectionEstablished(LocalDateTime.now())
                         .datetimeConnectionLost(null)
                         .errorMessage("")
-                        .build());
+                        .build());*/
     }
 
 

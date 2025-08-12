@@ -1,4 +1,4 @@
-package io.github.orionlibs.database.connectivity;
+package io.github.orionlibs.core.database.connectivity;
 
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;

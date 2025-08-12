@@ -1,4 +1,4 @@
-package io.github.orionlibs.database.connectivity.api;
+package io.github.orionlibs.core.database.connectivity.api;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

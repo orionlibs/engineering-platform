@@ -1,5 +1,7 @@
 package io.github.orionlibs.user;
 
+import io.github.orionlibs.core.database.connectivity.EventDatabaseConnected;
+import io.github.orionlibs.core.event.Publishable;
 import java.util.List;
 import javax.sql.DataSource;
 import net.ttddyy.dsproxy.ExecutionInfo;
@@ -14,7 +16,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
 @Configuration
-public class DataSourceConfiguration
+public class DataSourceConfiguration implements Publishable
 {
     @Bean
     @Primary
@@ -38,6 +40,9 @@ public class DataSourceConfiguration
     public DataSource primaryDataSource(@Qualifier("primaryDataSourceProperties") DataSourceProperties props)
     {
         DataSource realDs = props.initializeDataSourceBuilder().build();
+        publish(EventDatabaseConnected.EVENT_NAME, EventDatabaseConnected.builder()
+                        .databaseName(props.determineDatabaseName())
+                        .build());
         return ProxyDataSourceBuilder
                         .create(realDs)
                         .name("DB-PROXY")

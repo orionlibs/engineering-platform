@@ -4,6 +4,8 @@ import io.github.orionlibs.core.api.GlobalExceptionHandler;
 import io.github.orionlibs.core.api.metric.ApiMetricsInterceptor;
 import io.github.orionlibs.core.event.EventPublisher;
 import io.github.orionlibs.core.event.EventPublisher.EventPublisherFake;
+import io.github.orionlibs.core.event.EventSubscriber;
+import io.github.orionlibs.core.event.EventSubscriber.EventSubscriberFake;
 import io.github.orionlibs.core.json.JSONService;
 import io.github.orionlibs.core.json.JsonObjectMapper;
 import io.github.orionlibs.core.observability.BuildInfo;
@@ -54,9 +56,16 @@ public class Application extends SpringBootServletInitializer implements WebMvcC
 
 
     @Bean
-    public EventPublisher eventPublisherFake()
+    public EventPublisher eventPublisher()
     {
         return new EventPublisherFake();
+    }
+
+
+    @Bean
+    public EventSubscriber eventSubscriber()
+    {
+        return new EventSubscriberFake();
     }
 
 

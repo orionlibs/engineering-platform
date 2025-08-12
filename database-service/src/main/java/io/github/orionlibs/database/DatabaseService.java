@@ -1,7 +1,8 @@
 package io.github.orionlibs.database;
 
-import io.github.orionlibs.database.connectivity.DatabaseConnectivityMonitor;
-import io.github.orionlibs.database.connectivity.DatabaseConnectivityRegistry;
+import io.github.orionlibs.core.database.DatabaseWrapper;
+import io.github.orionlibs.core.database.connectivity.DatabaseConnectivityMonitor;
+import io.github.orionlibs.core.database.connectivity.DatabaseConnectivityRegistry;
 import io.github.orionlibs.database.model.DataProviderModel;
 import io.github.orionlibs.database.model.DataProvidersDAO;
 import java.sql.Connection;
@@ -37,11 +38,11 @@ public class DatabaseService
     }
 
 
-    public Connection getDatabaseConnection(String databaseURL, String databaseUsername, String databasePassword) throws ClassNotFoundException, SQLException
+    public Connection getDatabaseConnection(String databaseName, String databaseURL, String databaseUsername, String databasePassword) throws ClassNotFoundException, SQLException
     {
         Class.forName("com.mysql.cj.jdbc.Driver");
         Connection connection = DriverManager.getConnection(databaseURL, databaseUsername, databasePassword);
-        DatabaseWrapper wrapper = new DatabaseWrapper(connection, databaseConnectivityRegistry);
+        DatabaseWrapper wrapper = new DatabaseWrapper(databaseName, connection, databaseConnectivityRegistry);
         //JDBCTemplateWrapper wrapper = new JDBCTemplateWrapper("core", coreDataSource, new JdbcTemplate(coreDataSource), databaseConnectivityRegistry);
         //DB.registerDatabaseConnection("core", bean);
         //Runtime.getRuntime().addShutdownHook(new Thread(SpringDataConfiguration::shutdownCoreDatabase));

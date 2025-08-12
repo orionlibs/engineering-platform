@@ -1,10 +1,10 @@
-package io.github.orionlibs.database.connectivity;
+package io.github.orionlibs.core.database.connectivity;
 
+import io.github.orionlibs.core.database.connectivity.api.DatabaseConnectivityWebsocketController;
 import io.github.orionlibs.core.json.JSONService;
-import io.github.orionlibs.database.connectivity.api.DatabaseConnectivityWebsocketController;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +14,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class DatabaseConnectivityRegistry
 {
+    private static final String TOPIC = "/topic/databases/connections";
     @Autowired
     private SimpMessagingTemplate messagingTemplate;
     @Autowired
     private JSONService jsonService;
-    private final ConcurrentMap<String, DatabaseConnectivityStatus> databaseToStatusMapper;
+    //private final ConcurrentMap<String, DatabaseConnectivityStatus> databaseToStatusMapper;
+    //mapper of database name to true (connected) or false (disconnected)
+    private final ConcurrentMap<String, Boolean> databaseToStatusMapper;
 
 
     public DatabaseConnectivityRegistry()
@@ -27,13 +30,24 @@ public class DatabaseConnectivityRegistry
     }
 
 
-    public List<DatabaseConnectivityStatus> getDatabases()
+    /*public List<DatabaseConnectivityStatus> getDatabases()
+    {
+        return List.copyOf(databaseToStatusMapper.values());
+    }*/
+    public List<Boolean> getDatabases()
     {
         return List.copyOf(databaseToStatusMapper.values());
     }
 
 
-    public void setStatusAndNotify(String databaseName, DatabaseConnectivityStatus status)
+    public void setStatusAndNotify(String databaseName, boolean isConnected)
+    {
+        databaseToStatusMapper.put(databaseName, isConnected);
+        publishConnectivityStats();
+    }
+
+
+    /*public void setStatusAndNotify(String databaseName, DatabaseConnectivityStatus status)
     {
         if(databaseToStatusMapper.get(databaseName) != null)
         {
@@ -48,10 +62,41 @@ public class DatabaseConnectivityRegistry
             databaseToStatusMapper.put(databaseName, status);
             publishConnectivityStats();
         }
+    }*/
+    public void publishConnectivityStats()
+    {
+        int numberOfConnectedDatabases = 0;
+        int numberOfNotConnectedDatabases = 0;
+        List<DatabaseConnectivityStats.DatabaseStats> databasesStats = new ArrayList<>();
+        for(Map.Entry<String, Boolean> status : databaseToStatusMapper.entrySet())
+        {
+            if(status.getValue().booleanValue())
+            {
+                numberOfConnectedDatabases++;
+            }
+            else
+            {
+                numberOfNotConnectedDatabases++;
+            }
+            databasesStats.add(DatabaseConnectivityStats.DatabaseStats.builder()
+                            .databaseName(status.getKey())
+                            .isConnected(status.getValue())
+                            //.connectionURL(status.getConnectionURL())
+                            //.datetimeConnectionEstablished(datetimeConnectionEstablished)
+                            //.datetimeConnectionLost(datetimeConnectionLost)
+                            //.errorMessage(status.getErrorMessage())
+                            .build());
+        }
+        String message = jsonService.toJson(DatabaseConnectivityStats.builder()
+                        .numberOfConnectedDatabases(numberOfConnectedDatabases)
+                        .numberOfNotConnectedDatabases(numberOfNotConnectedDatabases)
+                        .databasesStats(databasesStats)
+                        .build());
+        DatabaseConnectivityWebsocketController.lastMessages.put(TOPIC, message);
+        messagingTemplate.convertAndSend(TOPIC, message);
     }
 
-
-    public void publishConnectivityStats()
+    /*public void publishConnectivityStats()
     {
         int numberOfConnectedDatabases = 0;
         int numberOfNotConnectedDatabases = 0;
@@ -90,7 +135,7 @@ public class DatabaseConnectivityRegistry
                         .numberOfNotConnectedDatabases(numberOfNotConnectedDatabases)
                         .databasesStats(databasesStats)
                         .build());
-        DatabaseConnectivityWebsocketController.lastMessages.put("/topic/databases/connections", message);
-        messagingTemplate.convertAndSend("/topic/databases/connections", message);
-    }
+        DatabaseConnectivityWebsocketController.lastMessages.put(TOPIC, message);
+        messagingTemplate.convertAndSend(TOPIC, message);
+    }*/
 }
