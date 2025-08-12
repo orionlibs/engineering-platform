@@ -8,7 +8,6 @@ import io.github.orionlibs.database.DatabaseService;
 import io.github.orionlibs.database.model.DataProviderModel;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import java.util.Map;
 import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,7 +19,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
-class GetNumberOfDataProvidersAPIControllerTest
+class GetDataProvidersAPIControllerTest
 {
     @LocalServerPort int port;
     @Autowired APITestUtils apiUtils;
@@ -32,7 +31,7 @@ class GetNumberOfDataProvidersAPIControllerTest
     @BeforeEach
     public void setUp()
     {
-        basePath = "http://localhost:" + port + ControllerUtils.baseAPIPath + "/databases/count";
+        basePath = "http://localhost:" + port + ControllerUtils.baseAPIPath + "/databases";
         databaseService.deleteAll();
         DataProviderModel model = new DataProviderModel("uns1", "jdbc:mysql://localhost1:3306", "me1@email.com", "bunkzh3Z!");
         model = databaseService.saveDataProvider(model);
@@ -42,12 +41,12 @@ class GetNumberOfDataProvidersAPIControllerTest
 
 
     @Test
-    void getNumberOfDataProviders()
+    void getDataProvidersDetails()
     {
         RestAssured.baseURI = basePath;
         Response response = apiUtils.makeGetAPICall(headers, UUID.randomUUID().toString(), "USER");
         assertThat(response.statusCode()).isEqualTo(200);
-        Map body = response.as(Map.class);
-        assertThat(body.get("number_of_data_providers")).isEqualTo(2);
+        DataProvidersDetailsDTO body = response.as(DataProvidersDetailsDTO.class);
+        assertThat(body.databases().size()).isEqualTo(2);
     }
 }

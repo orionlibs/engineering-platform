@@ -7,8 +7,6 @@
 
 
 Create project "databases-service" with API:
-2--get number of connected databases
-3--get number of databases the system failed to connect to
 4--get configured databases
 5--get currently running queries per database
 6--get long-running queries per database

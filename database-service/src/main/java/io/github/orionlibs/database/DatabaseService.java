@@ -8,6 +8,9 @@ import io.github.orionlibs.database.model.DataProvidersDAO;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
@@ -18,6 +21,18 @@ public class DatabaseService
     @Autowired private DataProvidersDAO dao;
     @Autowired private ApplicationContext context;
     @Autowired private DatabaseConnectivityRegistry databaseConnectivityRegistry;
+
+
+    public Optional<DataProviderModel> getDataProvider(String dataProviderID)
+    {
+        return dao.findById(UUID.fromString(dataProviderID));
+    }
+
+
+    public List<DataProviderModel> getDataProviders()
+    {
+        return dao.findAll();
+    }
 
 
     public DataProviderModel saveDataProvider(DataProviderModel model)
@@ -72,24 +87,8 @@ public class DatabaseService
                             .build());
         }*/
         DatabaseConnectivityMonitor databaseConnectivityMonitor = new DatabaseConnectivityMonitor(databaseConnectivityRegistry, wrapper);
-        context.getAutowireCapableBeanFactory().initializeBean(databaseConnectivityMonitor, "CoreDatabaseConnectionMonitor");
+        context.getAutowireCapableBeanFactory().initializeBean(databaseConnectivityMonitor, databaseName + "DatabaseConnectionMonitor");
         context.getAutowireCapableBeanFactory().autowireBean(databaseConnectivityMonitor);
         return connection;
-    }
-
-
-    public void closeConnection(Connection connection)
-    {
-        try
-        {
-            if(connection != null)
-            {
-                connection.close();
-            }
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-        }
     }
 }

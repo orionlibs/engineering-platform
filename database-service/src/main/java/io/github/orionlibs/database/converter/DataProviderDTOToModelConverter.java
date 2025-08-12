@@ -15,6 +15,6 @@ public class DataProviderDTOToModelConverter implements Converter<SaveDataProvid
         {
             return null;
         }
-        return new DataProviderModel(objectToConvert.getConnectionURL(), objectToConvert.getUsername(), objectToConvert.getPassword());
+        return new DataProviderModel(objectToConvert.getDatabaseName(), objectToConvert.getConnectionURL(), objectToConvert.getUsername(), objectToConvert.getPassword());
     }
 }

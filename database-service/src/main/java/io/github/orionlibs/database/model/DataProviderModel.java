@@ -22,6 +22,8 @@ public class DataProviderModel
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(updatable = false, nullable = false)
     private UUID id;
+    @Column(nullable = false)
+    private String name;
     @Column(name = "connection_url", nullable = false)
     private String connectionURL;
     @Column(nullable = true)
@@ -41,8 +43,9 @@ public class DataProviderModel
     }
 
 
-    public DataProviderModel(String connectionURL, String username, String password)
+    public DataProviderModel(String name, String connectionURL, String username, String password)
     {
+        this.name = name;
         this.connectionURL = connectionURL;
         this.username = username;
         this.password = password;
@@ -58,6 +61,18 @@ public class DataProviderModel
     public void setId(UUID id)
     {
         this.id = id;
+    }
+
+
+    public String getName()
+    {
+        return name;
+    }
+
+
+    public void setName(String name)
+    {
+        this.name = name;
     }
 
 

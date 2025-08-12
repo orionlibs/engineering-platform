@@ -14,6 +14,8 @@ import lombok.Setter;
 @Setter
 public class SaveDataProviderRequest
 {
+    @NotBlank(message = "database_name must not be blank")
+    private String databaseName;
     @NotBlank(message = "connectionURL must not be blank")
     private String connectionURL;
     private String username;

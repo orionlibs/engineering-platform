@@ -26,7 +26,7 @@ public class DatabaseServiceTest
     @Test
     void saveDataProvider()
     {
-        DataProviderModel model = new DataProviderModel("jdbc:mysql://localhost:3306", "me@email.com", "bunkzh3Z!");
+        DataProviderModel model = new DataProviderModel("uns1", "jdbc:mysql://localhost:3306", "me@email.com", "bunkzh3Z!");
         model = databaseService.saveDataProvider(model);
         assertThat(model.getId().toString().length()).isGreaterThan(10);
     }
