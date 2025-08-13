@@ -1,4 +1,4 @@
-package io.github.orionlibs.core.database;
+package io.github.orionlibs.core.uuid;
 
 import java.util.UUID;
 
