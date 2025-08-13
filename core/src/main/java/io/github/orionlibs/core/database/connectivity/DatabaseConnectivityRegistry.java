@@ -147,4 +147,10 @@ public class DatabaseConnectivityRegistry
         DatabaseConnectivityWebsocketController.lastMessages.put(TOPIC, message);
         messagingTemplate.convertAndSend(TOPIC, message);
     }*/
+
+
+    public void resetConnectivityNumbers()
+    {
+        databaseToStatusMapper.clear();
+    }
 }

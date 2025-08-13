@@ -37,4 +37,10 @@ public class DatabaseConnectivityService
     {
         return databaseConnectivityRegistry.getNumberOfDisconnectedDatabases();
     }
+
+
+    public void resetConnectivityNumbers()
+    {
+        databaseConnectivityRegistry.resetConnectivityNumbers();
+    }
 }
