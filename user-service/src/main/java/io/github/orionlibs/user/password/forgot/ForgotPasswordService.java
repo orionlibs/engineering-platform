@@ -62,6 +62,6 @@ public class ForgotPasswordService
 
     public String getUserIDByForgotPasswordCode(String forgotPasswordCode)
     {
-        return dao.findUsesrIDByForgotPasswordCode(forgotPasswordCode);
+        return dao.findUsersIDByForgotPasswordCode(forgotPasswordCode);
     }
 }

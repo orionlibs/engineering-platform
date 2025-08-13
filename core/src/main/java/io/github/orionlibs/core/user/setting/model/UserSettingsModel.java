@@ -127,4 +127,10 @@ public class UserSettingsModel
     {
         this.updatedAt = updatedAt;
     }
+
+
+    public void setId(UUID id)
+    {
+        this.id = id;
+    }
 }

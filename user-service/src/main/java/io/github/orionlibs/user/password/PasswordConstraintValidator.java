@@ -12,6 +12,12 @@ public class PasswordConstraintValidator implements ConstraintValidator<Password
     private final Pattern regex;
 
 
+    @Override
+    public void initialize(Password constraintAnnotation)
+    {
+    }
+
+
     public PasswordConstraintValidator(Environment env)
     {
         String pattern = env.getProperty("password.pattern", "^(?=.{8,})(?=.*[A-Z])(?=.*\\d).*$");

@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public interface ForgotPasswordRequestsDAO extends JpaRepository<ForgotPasswordRequestModel, UUID>
@@ -18,12 +19,14 @@ public interface ForgotPasswordRequestsDAO extends JpaRepository<ForgotPasswordR
     Optional<ForgotPasswordRequestModel> findByForgotPasswordCode(String forgotPasswordCode);
 
 
+    @Transactional
     void deleteByForgotPasswordCode(String forgotPasswordCode);
 
 
     @Query("SELECT c.userID FROM ForgotPasswordRequestModel c WHERE c.forgotPasswordCode = :forgot_password_code")
-    String findUsesrIDByForgotPasswordCode(@Param("forgot_password_code") String forgotPasswordCode);
+    String findUsersIDByForgotPasswordCode(@Param("forgot_password_code") String forgotPasswordCode);
 
 
+    @Transactional
     long deleteByExpiresAtBefore(LocalDateTime cutoff);
 }
