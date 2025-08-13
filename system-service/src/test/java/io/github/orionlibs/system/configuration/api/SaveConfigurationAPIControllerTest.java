@@ -1,13 +1,10 @@
-package io.github.orionlibs.system.api;
+package io.github.orionlibs.system.configuration.api;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import io.github.orionlibs.core.tests.APITestUtils;
 import io.github.orionlibs.core.user.UserAuthority;
 import io.github.orionlibs.system.ControllerUtils;
-import io.github.orionlibs.system.configuration.api.ConfigurationDTO;
-import io.github.orionlibs.system.configuration.api.ConfigurationsDTO;
-import io.github.orionlibs.system.configuration.api.SaveConfigurationRequest;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import java.util.UUID;
