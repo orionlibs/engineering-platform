@@ -4,7 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 
 public class SessionService
 {
-    static Object getAttribute(HttpServletRequest request, String attributeName)
+    public static Object getAttribute(HttpServletRequest request, String attributeName)
     {
         return request.getAttribute(attributeName);
     }
