@@ -43,7 +43,7 @@ public class JSONServiceTest
                         """;
         JsonNode tree1 = mapper.readTree(formattedJSON);
         JsonNode tree2 = mapper.readTree(beanAsJSON);
-        assertThat(tree1).isEqualTo(tree2);
+        assertThat(tree2).isEqualTo(tree1);
     }
 
 
