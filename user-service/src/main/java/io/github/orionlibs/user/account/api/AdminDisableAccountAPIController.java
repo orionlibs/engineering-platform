@@ -1,6 +1,6 @@
 package io.github.orionlibs.user.account.api;
 
-import io.github.orionlibs.core.api.WebService;
+import io.github.orionlibs.core.api.APIService;
 import io.github.orionlibs.user.ControllerUtils;
 import io.github.orionlibs.user.account.AccountService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(ControllerUtils.baseAPIPath)
 @Validated
 @Tag(name = "Users", description = "User manager")
-public class AdminDisableAccountAPIController extends WebService
+public class AdminDisableAccountAPIController extends APIService
 {
     @Autowired private AccountService accountService;
 

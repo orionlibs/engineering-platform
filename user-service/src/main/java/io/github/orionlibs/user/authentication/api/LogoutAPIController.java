@@ -1,6 +1,6 @@
 package io.github.orionlibs.user.authentication.api;
 
-import io.github.orionlibs.core.api.WebService;
+import io.github.orionlibs.core.api.APIService;
 import io.github.orionlibs.user.ControllerUtils;
 import io.github.orionlibs.user.authentication.LogoutService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(ControllerUtils.baseAPIPath)
 @Tag(name = "User logout", description = "User manager")
-public class LogoutAPIController extends WebService
+public class LogoutAPIController extends APIService
 {
     @Autowired private LogoutService logoutService;
 

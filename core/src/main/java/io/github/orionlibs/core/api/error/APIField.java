@@ -1,4 +1,4 @@
-package io.github.orionlibs.core.api;
+package io.github.orionlibs.core.api.error;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

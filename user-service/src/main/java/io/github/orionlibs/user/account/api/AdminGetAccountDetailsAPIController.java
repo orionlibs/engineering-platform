@@ -1,6 +1,6 @@
 package io.github.orionlibs.user.account.api;
 
-import io.github.orionlibs.core.api.WebService;
+import io.github.orionlibs.core.api.APIService;
 import io.github.orionlibs.user.ControllerUtils;
 import io.github.orionlibs.user.account.AccountDetailsDTO;
 import io.github.orionlibs.user.account.AccountService;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(ControllerUtils.baseAPIPath)
 @Tag(name = "Users", description = "User manager")
-public class AdminGetAccountDetailsAPIController extends WebService
+public class AdminGetAccountDetailsAPIController extends APIService
 {
     @Autowired private AccountService accountService;
 

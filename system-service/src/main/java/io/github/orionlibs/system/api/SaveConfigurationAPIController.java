@@ -1,6 +1,6 @@
 package io.github.orionlibs.system.api;
 
-import io.github.orionlibs.core.api.WebService;
+import io.github.orionlibs.core.api.APIService;
 import io.github.orionlibs.system.ControllerUtils;
 import io.github.orionlibs.system.configuration.SystemConfigurationService;
 import io.github.orionlibs.system.configuration.model.ConfigurationModel;
@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(ControllerUtils.baseAPIPath)
 @Validated
 @Tag(name = "System", description = "Configuration")
-public class SaveConfigurationAPIController extends WebService
+public class SaveConfigurationAPIController extends APIService
 {
     @Autowired private SystemConfigurationService configurationService;
 

@@ -1,6 +1,6 @@
 package io.github.orionlibs.user.password.forgot.api;
 
-import io.github.orionlibs.core.api.WebService;
+import io.github.orionlibs.core.api.APIService;
 import io.github.orionlibs.user.ControllerUtils;
 import io.github.orionlibs.user.password.forgot.ForgotPasswordService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(ControllerUtils.baseAPIPath)
 @Tag(name = "Users", description = "User manager")
-public class ValidateForgotPasswordRequestAPIController extends WebService
+public class ValidateForgotPasswordRequestAPIController extends APIService
 {
     @Autowired private ForgotPasswordService forgotPasswordService;
 

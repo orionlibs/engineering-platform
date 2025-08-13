@@ -1,4 +1,4 @@
-package io.github.orionlibs.core.api;
+package io.github.orionlibs.core.api.error;
 
 import io.github.orionlibs.core.Logger;
 import io.github.orionlibs.core.api.metric.MetricNumberOfAPIInputValidationErrors;

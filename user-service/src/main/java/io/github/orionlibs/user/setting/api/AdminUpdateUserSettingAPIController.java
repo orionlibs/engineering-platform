@@ -1,6 +1,6 @@
 package io.github.orionlibs.user.setting.api;
 
-import io.github.orionlibs.core.api.WebService;
+import io.github.orionlibs.core.api.APIService;
 import io.github.orionlibs.user.ControllerUtils;
 import io.github.orionlibs.user.setting.UserSettingsService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(ControllerUtils.baseAPIPath)
 @Validated
 @Tag(name = "Users", description = "User manager")
-public class AdminUpdateUserSettingAPIController extends WebService
+public class AdminUpdateUserSettingAPIController extends APIService
 {
     @Autowired private UserSettingsService userSettingsService;
 

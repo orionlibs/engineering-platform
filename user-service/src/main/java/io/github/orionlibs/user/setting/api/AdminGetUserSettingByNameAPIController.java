@@ -1,6 +1,6 @@
 package io.github.orionlibs.user.setting.api;
 
-import io.github.orionlibs.core.api.WebService;
+import io.github.orionlibs.core.api.APIService;
 import io.github.orionlibs.core.user.setting.model.UserSettingsModel;
 import io.github.orionlibs.user.ControllerUtils;
 import io.github.orionlibs.user.setting.UserSettingsService;
@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(ControllerUtils.baseAPIPath)
 @Tag(name = "Users", description = "User manager")
-public class AdminGetUserSettingByNameAPIController extends WebService
+public class AdminGetUserSettingByNameAPIController extends APIService
 {
     @Autowired private UserSettingsService userSettingsService;
     @Autowired private UserSettingModelToDTOConverter userSettingModelToDTOConverter;

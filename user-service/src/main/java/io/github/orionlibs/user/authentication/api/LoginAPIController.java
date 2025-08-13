@@ -1,6 +1,6 @@
 package io.github.orionlibs.user.authentication.api;
 
-import io.github.orionlibs.core.api.WebService;
+import io.github.orionlibs.core.api.APIService;
 import io.github.orionlibs.user.ControllerUtils;
 import io.github.orionlibs.user.authentication.LoginService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(ControllerUtils.baseAPIPath)
 @Validated
 @Tag(name = "User login", description = "User manager")
-public class LoginAPIController extends WebService
+public class LoginAPIController extends APIService
 {
     @Autowired private LoginService loginService;
 

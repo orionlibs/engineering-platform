@@ -1,6 +1,6 @@
 package io.github.orionlibs.database.api;
 
-import io.github.orionlibs.core.api.WebService;
+import io.github.orionlibs.core.api.APIService;
 import io.github.orionlibs.database.ControllerUtils;
 import io.github.orionlibs.database.DatabaseService;
 import io.github.orionlibs.database.converter.DataProviderModelToDTOConverter;
@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(ControllerUtils.baseAPIPath)
 @Tag(name = "Data provider", description = "Data provider manager")
-public class GetDataProvidersAPIController extends WebService
+public class GetDataProvidersAPIController extends APIService
 {
     @Autowired private DatabaseService databaseService;
     @Autowired private DataProviderModelToDTOConverter dataProviderModelToDTOConverter;

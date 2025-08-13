@@ -1,6 +1,6 @@
 package io.github.orionlibs.database.api;
 
-import io.github.orionlibs.core.api.WebService;
+import io.github.orionlibs.core.api.APIService;
 import io.github.orionlibs.database.ControllerUtils;
 import io.github.orionlibs.database.DatabaseService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(ControllerUtils.baseAPIPath)
 @Tag(name = "Data provider", description = "Data provider manager")
-public class GetNumberOfDataProvidersAPIController extends WebService
+public class GetNumberOfDataProvidersAPIController extends APIService
 {
     @Autowired private DatabaseService databaseService;
 
