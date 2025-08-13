@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import io.github.orionlibs.core.tests.APITestUtils;
 import io.github.orionlibs.system.ControllerUtils;
+import io.github.orionlibs.system.configuration.api.ConfigurationDTO;
+import io.github.orionlibs.system.configuration.api.ConfigurationsDTO;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import java.util.UUID;

@@ -1,4 +1,4 @@
-package io.github.orionlibs.system.api;
+package io.github.orionlibs.system.configuration.api;
 
 import io.github.orionlibs.core.api.APIService;
 import io.github.orionlibs.system.ControllerUtils;

@@ -1,4 +1,4 @@
-package io.github.orionlibs.system.api;
+package io.github.orionlibs.system.configuration.api;
 
 import jakarta.validation.constraints.NotBlank;
 import java.io.Serializable;

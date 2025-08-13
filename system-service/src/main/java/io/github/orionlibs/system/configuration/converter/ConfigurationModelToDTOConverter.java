@@ -1,7 +1,7 @@
 package io.github.orionlibs.system.configuration.converter;
 
 import io.github.orionlibs.core.Converter;
-import io.github.orionlibs.system.api.ConfigurationDTO;
+import io.github.orionlibs.system.configuration.api.ConfigurationDTO;
 import io.github.orionlibs.system.configuration.model.ConfigurationModel;
 import org.springframework.stereotype.Component;
 

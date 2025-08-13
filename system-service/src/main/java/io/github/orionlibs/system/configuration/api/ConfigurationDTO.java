@@ -1,4 +1,4 @@
-package io.github.orionlibs.system.api;
+package io.github.orionlibs.system.configuration.api;
 
 import java.io.Serializable;
 

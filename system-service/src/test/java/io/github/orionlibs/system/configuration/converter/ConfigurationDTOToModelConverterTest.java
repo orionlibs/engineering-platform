@@ -2,7 +2,7 @@ package io.github.orionlibs.system.configuration.converter;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import io.github.orionlibs.system.api.SaveConfigurationRequest;
+import io.github.orionlibs.system.configuration.api.SaveConfigurationRequest;
 import io.github.orionlibs.system.configuration.model.ConfigurationModel;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.context.ActiveProfiles;
