@@ -1,13 +1,11 @@
 package io.github.orionlibs.user;
 
 import io.github.orionlibs.core.api.error.GlobalExceptionHandler;
-import io.github.orionlibs.core.api.metric.ApiMetricsInterceptor;
+import io.github.orionlibs.core.api.metric.APIMetricsInterceptor;
 import io.github.orionlibs.core.event.EventPublisher;
 import io.github.orionlibs.core.event.EventPublisher.EventPublisherFake;
 import io.github.orionlibs.core.event.EventSubscriber;
 import io.github.orionlibs.core.event.EventSubscriber.EventSubscriberFake;
-import io.github.orionlibs.core.json.JSONService;
-import io.github.orionlibs.core.json.JsonObjectMapper;
 import io.github.orionlibs.core.observability.BuildInfo;
 import java.util.TimeZone;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,20 +35,13 @@ public class Application extends SpringBootServletInitializer implements WebMvcC
     private String version;
     @Value("${environment}")
     private String environment;
-    @Autowired private ApiMetricsInterceptor apiMetricsInterceptor;
+    @Autowired private APIMetricsInterceptor apiMetricsInterceptor;
 
 
     public static void main(String[] args)
     {
         SpringApplication.run(Application.class, args);
         TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
-    }
-
-
-    @Bean
-    public JSONService jsonService(JsonObjectMapper objectMapper)
-    {
-        return new JSONService(objectMapper.getMapper());
     }
 
 

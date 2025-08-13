@@ -1,18 +1,16 @@
 package io.github.orionlibs.core.json;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nimbusds.jose.shaded.gson.Gson;
 
 public class JSONService
 {
-    private final ObjectMapper objectMapper;
+    /*private final ObjectMapper objectMapper;
 
 
     public JSONService(ObjectMapper objectMapper)
     {
         this.objectMapper = objectMapper;
-    }
+    }*/
 
 
     public static String convertObjectToJSON(Object objectToConvert)
@@ -27,7 +25,7 @@ public class JSONService
     }
 
 
-    public String toJson(Object pojo)
+    /*public String toJson(Object pojo)
     {
         try
         {
@@ -50,5 +48,5 @@ public class JSONService
         {
             throw new IllegalStateException("Failed to serialize object to JSON", e);
         }
-    }
+    }*/
 }

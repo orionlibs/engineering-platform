@@ -8,12 +8,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 @Component
-public class ApiMetricsInterceptor implements HandlerInterceptor
+public class APIMetricsInterceptor implements HandlerInterceptor
 {
     private final MetricNumberOfAPICalls metric;
 
 
-    public ApiMetricsInterceptor(MetricNumberOfAPICalls metric)
+    public APIMetricsInterceptor(MetricNumberOfAPICalls metric)
     {
         this.metric = metric;
     }

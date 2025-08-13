@@ -11,19 +11,18 @@ import org.springframework.stereotype.Service;
 public class DatabaseConnectivityService
 {
     @Autowired private DatabaseConnectivityRegistry databaseConnectivityRegistry;
-    @Autowired private JSONService jsonService;
 
 
     public void markDatabaseAsConnected(String eventContextAsJSON)
     {
-        EventDatabaseConnected event = (EventDatabaseConnected)jsonService.fromJson(eventContextAsJSON, EventDatabaseConnected.class);
+        EventDatabaseConnected event = (EventDatabaseConnected)JSONService.convertJSONToObject(eventContextAsJSON, EventDatabaseConnected.class);
         databaseConnectivityRegistry.setStatusAndNotify(event.getDatabaseName(), true);
     }
 
 
     public void markDatabaseAsDisconnected(String eventContextAsJSON)
     {
-        EventDatabaseDisconnected event = (EventDatabaseDisconnected)jsonService.fromJson(eventContextAsJSON, EventDatabaseDisconnected.class);
+        EventDatabaseDisconnected event = (EventDatabaseDisconnected)JSONService.convertJSONToObject(eventContextAsJSON, EventDatabaseDisconnected.class);
         databaseConnectivityRegistry.setStatusAndNotify(event.getDatabaseName(), false);
     }
 

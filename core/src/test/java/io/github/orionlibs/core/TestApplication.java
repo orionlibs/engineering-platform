@@ -4,8 +4,6 @@ import io.github.orionlibs.core.event.EventPublisher;
 import io.github.orionlibs.core.event.EventPublisher.EventPublisherFake;
 import io.github.orionlibs.core.event.EventSubscriber;
 import io.github.orionlibs.core.event.EventSubscriber.EventSubscriberFake;
-import io.github.orionlibs.core.json.JSONService;
-import io.github.orionlibs.core.json.JsonObjectMapper;
 import java.util.TimeZone;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,13 +20,6 @@ public class TestApplication extends SpringBootServletInitializer implements Web
     {
         SpringApplication.run(TestApplication.class, args);
         TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
-    }
-
-
-    @Bean
-    public JSONService jsonService(JsonObjectMapper objectMapper)
-    {
-        return new JSONService(objectMapper.getMapper());
     }
 
 

@@ -8,7 +8,6 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.parsing.Parser;
 import io.restassured.response.Response;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
@@ -16,7 +15,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class APITestUtils implements JWTBuilderForTests
 {
-    @Autowired JSONService jsonService;
     @Value("${jwt.secret}")
     private String base64Secret;
 
@@ -65,7 +63,7 @@ public class APITestUtils implements JWTBuilderForTests
                         .contentType(ContentType.JSON)
                         .headers(headers)
                         .accept(ContentType.JSON)
-                        .body(jsonService.toJson(objectToSave))
+                        .body(JSONService.convertObjectToJSON(objectToSave))
                         .when()
                         .post()
                         .then()
@@ -84,7 +82,7 @@ public class APITestUtils implements JWTBuilderForTests
                         .contentType(ContentType.JSON)
                         .headers(headers)
                         .accept(ContentType.JSON)
-                        .body(jsonService.toJson(objectToSave))
+                        .body(JSONService.convertObjectToJSON(objectToSave))
                         .when()
                         .post()
                         .then()
@@ -102,7 +100,7 @@ public class APITestUtils implements JWTBuilderForTests
                         .contentType(ContentType.JSON)
                         .headers(headers)
                         .accept(ContentType.JSON)
-                        .body(jsonService.toJson(objectToSave))
+                        .body(JSONService.convertObjectToJSON(objectToSave))
                         .when()
                         .put()
                         .then()
@@ -121,7 +119,7 @@ public class APITestUtils implements JWTBuilderForTests
                         .contentType(ContentType.JSON)
                         .headers(headers)
                         .accept(ContentType.JSON)
-                        .body(jsonService.toJson(objectToSave))
+                        .body(JSONService.convertObjectToJSON(objectToSave))
                         .when()
                         .put()
                         .then()
@@ -139,7 +137,7 @@ public class APITestUtils implements JWTBuilderForTests
                         .contentType(ContentType.JSON)
                         .headers(headers)
                         .accept(ContentType.JSON)
-                        .body(jsonService.toJson(objectToSave))
+                        .body(JSONService.convertObjectToJSON(objectToSave))
                         .when()
                         .patch()
                         .then()
@@ -158,7 +156,7 @@ public class APITestUtils implements JWTBuilderForTests
                         .contentType(ContentType.JSON)
                         .headers(headers)
                         .accept(ContentType.JSON)
-                        .body(jsonService.toJson(objectToSave))
+                        .body(JSONService.convertObjectToJSON(objectToSave))
                         .when()
                         .patch()
                         .then()

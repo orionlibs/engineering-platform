@@ -16,7 +16,6 @@ public class DatabaseConnectivityRegistry
 {
     private static final String TOPIC = "/topic/databases/connections";
     @Autowired private SimpMessagingTemplate messagingTemplate;
-    @Autowired private JSONService jsonService;
     //private final ConcurrentMap<String, DatabaseConnectivityStatus> databaseToStatusMapper;
     //mapper of database name to true (connected) or false (disconnected)
     private final ConcurrentMap<String, Boolean> databaseToStatusMapper;
@@ -97,7 +96,7 @@ public class DatabaseConnectivityRegistry
                             //.errorMessage(status.getErrorMessage())
                             .build());
         }
-        String message = jsonService.toJson(DatabaseConnectivityStats.builder()
+        String message = JSONService.convertObjectToJSON(DatabaseConnectivityStats.builder()
                         .numberOfConnectedDatabases(numberOfConnectedDatabases)
                         .numberOfNotConnectedDatabases(numberOfNotConnectedDatabases)
                         .databasesStats(databasesStats)

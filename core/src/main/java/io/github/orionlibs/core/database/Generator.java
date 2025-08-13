@@ -4,7 +4,7 @@ import java.util.UUID;
 
 public interface Generator
 {
-    default String generateString()
+    default String generateUUID()
     {
         return UUID.randomUUID().toString();
     }

@@ -27,7 +27,7 @@ public class DatabaseConnectivityWebsocketController
     }
 
 
-    @MessageMapping("/lastMessage") //client sends to /app/lastMessage
+    @MessageMapping("/lastMessage") //client calls /app/lastMessage
     public void getLastMessage(Map<String, String> payload)
     {
         String topic = payload.get("topic");

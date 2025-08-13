@@ -28,7 +28,7 @@ public class ForgotPasswordService
         try
         {
             OrionUserDetails user = userService.loadUserByUsername(request.getUsername());
-            String forgotPasswordCode = forgotPasswordCodeGenerator.generateString();
+            String forgotPasswordCode = forgotPasswordCodeGenerator.generateUUID();
             request.setForgotPasswordCodeGenerated(forgotPasswordCode);
             ForgotPasswordRequestModel model = new ForgotPasswordRequestModel();
             model.setUserID(user.getUserID());

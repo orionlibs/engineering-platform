@@ -12,7 +12,6 @@ import org.junit.jupiter.api.Test;
 
 public class JSONServiceTest
 {
-    JSONService jsonService;
     ObjectMapper mapper;
 
 
@@ -20,7 +19,6 @@ public class JSONServiceTest
     public void setup()
     {
         mapper = new JsonObjectMapper().getMapper();
-        jsonService = new JSONService(mapper);
     }
 
 
@@ -30,7 +28,7 @@ public class JSONServiceTest
         // given
         Pojo bean = new Pojo(64, "some message", List.of("one", "two"));
         // when
-        String beanAsJSON = jsonService.toJson(bean);
+        String beanAsJSON = JSONService.convertObjectToJSON(bean);
         // then
         assertThat(beanAsJSON).isNotNull();
         String formattedJSON = """
