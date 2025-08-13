@@ -2,7 +2,7 @@ package io.github.orionlibs.system.configuration;
 
 import io.github.orionlibs.system.configuration.model.ConfigurationDAO;
 import io.github.orionlibs.system.configuration.model.ConfigurationModel;
-import io.github.orionlibs.system.converter.ConfigurationDTOToModelConverter;
+import io.github.orionlibs.system.configuration.converter.ConfigurationDTOToModelConverter;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;

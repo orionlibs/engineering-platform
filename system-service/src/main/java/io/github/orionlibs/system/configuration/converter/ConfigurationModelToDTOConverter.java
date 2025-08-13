@@ -1,4 +1,4 @@
-package io.github.orionlibs.system.converter;
+package io.github.orionlibs.system.configuration.converter;
 
 import io.github.orionlibs.core.Converter;
 import io.github.orionlibs.system.api.ConfigurationDTO;

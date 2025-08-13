@@ -4,7 +4,7 @@ import io.github.orionlibs.core.api.APIService;
 import io.github.orionlibs.system.ControllerUtils;
 import io.github.orionlibs.system.configuration.SystemConfigurationService;
 import io.github.orionlibs.system.configuration.model.ConfigurationModel;
-import io.github.orionlibs.system.converter.ConfigurationModelToDTOConverter;
+import io.github.orionlibs.system.configuration.converter.ConfigurationModelToDTOConverter;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
