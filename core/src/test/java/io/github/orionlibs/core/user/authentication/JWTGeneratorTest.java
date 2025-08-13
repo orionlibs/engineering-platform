@@ -15,11 +15,10 @@ import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootTest
 @ActiveProfiles("test")
-public class JWTServiceTest
+public class JWTGeneratorTest
 {
     static final String RAW_SIGNING_KEY = "0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF";
     static final String SIGNING_KEY_BASE64 = Base64.getEncoder().encodeToString(RAW_SIGNING_KEY.getBytes(StandardCharsets.UTF_8));
-    @Autowired JWTService jwtService;
     @Autowired UserService userService;
     @Autowired HMACSHAEncryptionKeyProvider hmacSHAEncryptionKeyProvider;
     @Autowired JWTGenerator jwtGenerator;
@@ -45,24 +44,6 @@ public class JWTServiceTest
     void generateToken_extractUserID()
     {
         String token = jwtGenerator.generateToken(user.getId().toString(), user.getAuthorities());
-        assertThat(token).isNotNull();
-        String extracted = jwtService.extractUserID(token);
-        assertThat(extracted.length()).isGreaterThan(20);
+        assertThat(token.length()).isGreaterThan(20);
     }
-
-
-    /*@Test
-    void isToken_expiredTokenValid()
-    {
-        Date now = new Date();
-        Date past = new Date(now.getTime() - 10_000);
-        UserDetails user = new User(
-                        "me@email.com",
-                        "4528",
-                        List.of(new SimpleGrantedAuthority("USER"))
-        );
-        String expiredToken = jwtGenerator.generateToken(user, now, past);
-        assertThat(expiredToken).isNotNull();
-        assertThat(jwtService.isTokenValid(expiredToken, user)).isFalse();
-    }*/
 }

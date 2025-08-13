@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserSettingsDAORepository extends JpaRepository<UserSettingsModel, UUID>
+public interface UserSettingsDAO extends JpaRepository<UserSettingsModel, UUID>
 {
     List<UserSettingsModel> findAllByUserId(UUID userID);
 

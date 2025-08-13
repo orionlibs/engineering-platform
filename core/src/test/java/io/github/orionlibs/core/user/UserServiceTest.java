@@ -72,6 +72,43 @@ public class UserServiceTest
 
 
     @Test
+    void loadUserAsModelByUsername()
+    {
+        UserModel userTemp = new UserModel(hmacSHAEncryptionKeyProvider);
+        userTemp.setUsername("me@email.com");
+        userTemp.setPassword("4528");
+        userTemp.setAuthority("USER");
+        userTemp.setFirstName("Dimi");
+        userTemp.setLastName("Emilson");
+        userTemp.setPhoneNumber("07896620211");
+        UserModel newUser = dao.save(userTemp);
+        assertThat(newUser.getCreatedAt()).isNotNull();
+        assertThat(newUser.getUpdatedAt()).isNotNull();
+        UserModel user = userService.loadUserAsModelByUsername("me@email.com");
+        assertThat(user).isNotNull();
+        assertThat(user.getUsername()).isEqualTo("me@email.com");
+        assertThat(user.getPassword().isEmpty()).isFalse();
+        assertThat(user.getAuthorities()).isEqualTo(Set.of(new SimpleGrantedAuthority("USER")));
+    }
+
+
+    @Test
+    void loadUserAsModelByUsername_notFound()
+    {
+        UserModel userTemp = new UserModel(hmacSHAEncryptionKeyProvider);
+        userTemp.setUsername("me@email.com");
+        userTemp.setPassword("4528");
+        userTemp.setAuthority("USER");
+        userTemp.setFirstName("Dimi");
+        userTemp.setLastName("Emilson");
+        userTemp.setPhoneNumber("07896620211");
+        UserModel newUser = dao.save(userTemp);
+        assertThatThrownBy(() -> userService.loadUserAsModelByUsername("nonexistentemail@email.com")).isInstanceOf(UsernameNotFoundException.class)
+                        .hasMessage("User not found");
+    }
+
+
+    @Test
     void loadUserByUserID()
     {
         UserModel userTemp = new UserModel(hmacSHAEncryptionKeyProvider);

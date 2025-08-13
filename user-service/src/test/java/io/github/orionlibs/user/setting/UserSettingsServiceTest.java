@@ -6,7 +6,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import io.github.orionlibs.core.cryptology.HMACSHAEncryptionKeyProvider;
 import io.github.orionlibs.core.user.model.UserDAO;
 import io.github.orionlibs.core.user.model.UserModel;
-import io.github.orionlibs.core.user.setting.model.UserSettingsDAORepository;
+import io.github.orionlibs.core.user.setting.model.UserSettingsDAO;
 import io.github.orionlibs.core.user.setting.model.UserSettingsModel;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,7 +21,7 @@ import org.springframework.test.context.ActiveProfiles;
 public class UserSettingsServiceTest
 {
     @Autowired UserDAO userDAO;
-    @Autowired UserSettingsDAORepository dao;
+    @Autowired UserSettingsDAO dao;
     @Autowired UserSettingsService userSettingsService;
     @Autowired HMACSHAEncryptionKeyProvider hmacSHAEncryptionKeyProvider;
 

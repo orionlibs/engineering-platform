@@ -2,7 +2,7 @@ package io.github.orionlibs.user.setting;
 
 import io.github.orionlibs.core.Logger;
 import io.github.orionlibs.core.user.model.UserModel;
-import io.github.orionlibs.core.user.setting.model.UserSettingsDAORepository;
+import io.github.orionlibs.core.user.setting.model.UserSettingsDAO;
 import io.github.orionlibs.core.user.setting.model.UserSettingsModel;
 import java.util.List;
 import java.util.Optional;
@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class UserSettingsService
 {
-    @Autowired private UserSettingsDAORepository dao;
+    @Autowired private UserSettingsDAO dao;
     @Autowired private DefaultUserSettings defaultUserSettings;
 
 
