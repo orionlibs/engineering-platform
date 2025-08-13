@@ -2,7 +2,7 @@ package io.github.orionlibs.core.uuid;
 
 import java.util.UUID;
 
-public interface Generator
+public interface UUIDGenerator
 {
     default String generateUUID()
     {
