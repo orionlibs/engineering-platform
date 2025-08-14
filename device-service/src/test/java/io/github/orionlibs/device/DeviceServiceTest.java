@@ -19,6 +19,21 @@ public class DeviceServiceTest
 
 
     @Test
+    void getNumberOfDevices()
+    {
+        DeviceModel model1 = deviceService.save(SaveDeviceRequest.builder()
+                        .deviceName("device1")
+                        .deviceDescription("desc1")
+                        .build());
+        DeviceModel model2 = deviceService.save(SaveDeviceRequest.builder()
+                        .deviceName("device2")
+                        .deviceDescription("desc2")
+                        .build());
+        assertThat(2).isEqualTo(deviceService.getNumberOfDevices());
+    }
+
+
+    @Test
     void getAll()
     {
         DeviceModel model1 = deviceService.save(SaveDeviceRequest.builder()

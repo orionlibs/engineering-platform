@@ -19,6 +19,13 @@ public class DeviceService
 
 
     @Transactional(readOnly = true)
+    public long getNumberOfDevices()
+    {
+        return dao.count();
+    }
+
+
+    @Transactional(readOnly = true)
     public List<DeviceModel> getAll()
     {
         return dao.findAll();
