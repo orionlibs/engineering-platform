@@ -48,7 +48,7 @@ class SaveDataProviderAPIControllerTest
                         .password("bunkzh3Z!")
                         .build();
         Response response = apiUtils.makePostAPICall(request, headers, UUID.randomUUID().toString(), "DATABASE_MANAGER");
-        assertThat(response.statusCode()).isEqualTo(200);
+        assertThat(response.statusCode()).isEqualTo(201);
     }
 
 

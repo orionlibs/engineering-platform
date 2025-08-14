@@ -3,6 +3,8 @@ package io.github.orionlibs.database;
 import io.github.orionlibs.core.database.DatabaseWrapper;
 import io.github.orionlibs.core.database.connectivity.DatabaseConnectivityMonitor;
 import io.github.orionlibs.core.database.connectivity.DatabaseConnectivityRegistry;
+import io.github.orionlibs.database.api.SaveDataProviderRequest;
+import io.github.orionlibs.database.converter.DataProviderDTOToModelConverter;
 import io.github.orionlibs.database.model.DataProviderModel;
 import io.github.orionlibs.database.model.DataProvidersDAO;
 import java.sql.Connection;
@@ -21,6 +23,7 @@ public class DatabaseService
     @Autowired private DataProvidersDAO dao;
     @Autowired private ApplicationContext context;
     @Autowired private DatabaseConnectivityRegistry databaseConnectivityRegistry;
+    @Autowired private DataProviderDTOToModelConverter dataProviderDTOToModelConverter;
 
 
     public Optional<DataProviderModel> getDataProvider(String dataProviderID)
@@ -32,6 +35,13 @@ public class DatabaseService
     public List<DataProviderModel> getDataProviders()
     {
         return dao.findAll();
+    }
+
+
+    public DataProviderModel saveDataProvider(SaveDataProviderRequest requestBean)
+    {
+        DataProviderModel model = dataProviderDTOToModelConverter.convert(requestBean);
+        return dao.saveAndFlush(model);
     }
 
 

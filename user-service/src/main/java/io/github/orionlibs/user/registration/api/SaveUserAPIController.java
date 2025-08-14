@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -47,6 +48,6 @@ public class SaveUserAPIController extends APIService
     public ResponseEntity<?> saveUser(@Valid @RequestBody UserRegistrationRequest userToSave)
     {
         userRegistrationService.registerUser(userToSave);
-        return created(null).build();
+        return created(null).body(Map.of());
     }
 }

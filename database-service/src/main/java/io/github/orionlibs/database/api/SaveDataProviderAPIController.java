@@ -3,8 +3,6 @@ package io.github.orionlibs.database.api;
 import io.github.orionlibs.core.api.APIService;
 import io.github.orionlibs.database.ControllerUtils;
 import io.github.orionlibs.database.DatabaseService;
-import io.github.orionlibs.database.converter.DataProviderDTOToModelConverter;
-import io.github.orionlibs.database.model.DataProviderModel;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -29,7 +27,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class SaveDataProviderAPIController extends APIService
 {
     @Autowired private DatabaseService databaseService;
-    @Autowired private DataProviderDTOToModelConverter dataProviderDTOToModelConverter;
 
 
     @Operation(
@@ -41,15 +38,14 @@ public class SaveDataProviderAPIController extends APIService
                                                     schema = @Schema(implementation = SaveDataProviderRequest.class)
                                     )
                     ),
-                    responses = {@ApiResponse(responseCode = "200", description = "Data provider saved"),
+                    responses = {@ApiResponse(responseCode = "201", description = "Data provider saved"),
                                     @ApiResponse(responseCode = "400", description = "Invalid input")}
     )
     @PostMapping(value = "/databases", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAuthority('DATABASE_MANAGER')")
     public ResponseEntity<?> saveDataProvider(@Valid @RequestBody SaveDataProviderRequest requestBean)
     {
-        DataProviderModel model = dataProviderDTOToModelConverter.convert(requestBean);
-        databaseService.saveDataProvider(model);
-        return ResponseEntity.ok(Map.of());
+        databaseService.saveDataProvider(requestBean);
+        return ResponseEntity.created(null).body(Map.of());
     }
 }
