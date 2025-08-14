@@ -6,6 +6,9 @@
 --update README.md
 
 
+make all APIs that save a record to return 201
+
+
 Create project "device-service":
 1--get number of configured devices
 

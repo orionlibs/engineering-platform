@@ -24,7 +24,7 @@ management:
         #GET /actuator/prometheus
 
 springdoc:
-  packagesToScan: io.github.orionlibs.user.api,io.github.orionlibs.user.authentication.api,io.github.orionlibs.user.registration.api
+  packagesToScan: io.github.orionlibs.user.account.api,io.github.orionlibs.user.authentication.api,io.github.orionlibs.user.registration.api,io.github.orionlibs.user.password.api,io.github.orionlibs.user.password.forgot.api,io.github.orionlibs.user.password.reset.api,io.github.orionlibs.user.setting.api
   writer-with-order-by-keys: true
   api-docs:
     path: /api/docs
@@ -160,7 +160,7 @@ spring:
         format_sql: true
 
   springdoc:
-    packagesToScan: io.github.orionlibs.user.api,io.github.orionlibs.user.authentication.api,io.github.orionlibs.user.registration.api
+    packagesToScan: io.github.orionlibs.user.account.api,io.github.orionlibs.user.authentication.api,io.github.orionlibs.user.registration.api,io.github.orionlibs.user.password.api,io.github.orionlibs.user.password.forgot.api,io.github.orionlibs.user.password.reset.api,io.github.orionlibs.user.setting.api
     writer-with-order-by-keys: true
     api-docs:
       enabled: true

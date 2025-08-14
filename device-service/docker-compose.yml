@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: ../
+      dockerfile: device-service/Dockerfile
+      args:
+        serviceName: device-service
+    image: device-service:latest
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SYSTEM_DATABASE_URL: "${DEVICE_DATABASE_URL}"
+      SYSTEM_DATABASE_USERNAME: "${DEVICE_DATABASE_USERNAME}"
+      SYSTEM_DATABASE_PASSWORD: "${DEVICE_DATABASE_PASSWORD}"

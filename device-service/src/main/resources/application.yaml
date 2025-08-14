@@ -24,7 +24,7 @@ management:
         #GET /actuator/prometheus
 
 springdoc:
-  packagesToScan: io.github.orionlibs.system.configuration.api
+  packagesToScan: io.github.orionlibs.device.api
   writer-with-order-by-keys: true
   api-docs:
     path: /api/docs
@@ -33,7 +33,7 @@ springdoc:
 
 spring:
   application:
-    name: System Service
+    name: Device Service
   main:
     banner-mode: off
   jackson:
@@ -66,9 +66,9 @@ crypto:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: ${SYSTEM_DATABASE_URL}
-    username: ${SYSTEM_DATABASE_USERNAME}
-    password: ${SYSTEM_DATABASE_PASSWORD}
+    url: ${DEVICE_DATABASE_URL}
+    username: ${DEVICE_DATABASE_USERNAME}
+    password: ${DEVICE_DATABASE_PASSWORD}
     hikari:
       minimumIdle: 2
       maximumPoolSize: 10
@@ -77,9 +77,9 @@ crypto:
       connectionTimeout: 30000
   logging-datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: ${SYSTEM_DATABASE_URL}
-    username: ${SYSTEM_DATABASE_USERNAME}
-    password: ${SYSTEM_DATABASE_PASSWORD}
+    url: ${DEVICE_DATABASE_URL}
+    username: ${DEVICE_DATABASE_USERNAME}
+    password: ${DEVICE_DATABASE_PASSWORD}
     hikari:
       minimumIdle: 2
       maximumPoolSize: 10
@@ -137,7 +137,7 @@ spring:
       hibernate.format_sql: true
 
   springdoc:
-    packagesToScan: io.github.orionlibs.system.configuration.api
+    packagesToScan: io.github.orionlibs.device.api
     writer-with-order-by-keys: true
     api-docs:
       enabled: true
