@@ -51,4 +51,11 @@ public class DeviceService
     {
         return dao.saveAndFlush(model);
     }
+
+
+    @Transactional
+    public void deleteAll()
+    {
+        dao.deleteAll();
+    }
 }

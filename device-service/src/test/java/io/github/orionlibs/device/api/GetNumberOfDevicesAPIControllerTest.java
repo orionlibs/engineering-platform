@@ -31,6 +31,7 @@ public class GetNumberOfDevicesAPIControllerTest
     @BeforeEach
     public void setUp()
     {
+        deviceService.deleteAll();
         headers = new HttpHeaders();
         RestAssured.baseURI = "http://localhost:" + port + ControllerUtils.baseAPIPath + "/devices/count";
     }
