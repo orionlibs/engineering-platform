@@ -6,19 +6,6 @@
 --update README.md
 
 
-Create project "databases-service" with API:
-5--get currently running queries per database
-6--get long-running queries per database
-7--get queries per second per database
-8--get queries per second fro all databases
-We can register MySQL databases, configure if the system will automatically connect to each when it starts. We can also update config for each database
-
-
-Create project "mqtt-service":
-1--get number of MQTT connections
-We can connect to our own MQTT broker or the one on AWS
-
-
 Create project "device-service":
 1--get number of configured devices
 
@@ -274,6 +261,13 @@ Create support service for users to create support requests and support users to
 
 
 Create a command line utility project allowing users to run certain tasks by calling (internally) the APIs. Find how to generate a client SDK in java from all APIs. The utility will use this SDK
+
+
+Create project "databases-service" with API:
+5--get currently running queries per database
+6--get long-running queries per database
+7--get queries per second per database
+8--get queries per second from all databases
 
 
 https://openautomationsoftware.com/knowledge-base/options-reference/
