@@ -16,7 +16,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 @Table(name = "alarms", schema = "uns", indexes = {
-                @Index(name = "idx_uns_alarms", columnList = "id")
+                @Index(name = "idx_uns_alarms", columnList = "id,is_enabled,tag_id")
 })
 public class AlarmModel implements OrionModel, Comparable<AlarmModel>
 {
@@ -28,6 +28,8 @@ public class AlarmModel implements OrionModel, Comparable<AlarmModel>
     private String name;
     @Column
     private String description;
+    @Column(name = "tag_id")
+    private String tagID;
     @Column(name = "is_enabled")
     private boolean isEnabled;
     @Column(name = "string_setpoint")
@@ -77,6 +79,18 @@ public class AlarmModel implements OrionModel, Comparable<AlarmModel>
     public void setDescription(String description)
     {
         this.description = description;
+    }
+
+
+    public String getTagID()
+    {
+        return tagID;
+    }
+
+
+    public void setTagID(String tagID)
+    {
+        this.tagID = tagID;
     }
 
 

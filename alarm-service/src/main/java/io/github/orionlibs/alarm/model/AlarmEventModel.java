@@ -39,6 +39,8 @@ public class AlarmEventModel implements OrionModel
                     )
     )
     private AlarmModel alarm;
+    @Column(name = "tag_id")
+    private String tagID;
     @Column(name = "is_acknowledged")
     private boolean isAcknowledged;
     @Column
@@ -72,6 +74,18 @@ public class AlarmEventModel implements OrionModel
     public void setAlarm(AlarmModel alarm)
     {
         this.alarm = alarm;
+    }
+
+
+    public String getTagID()
+    {
+        return tagID;
+    }
+
+
+    public void setTagID(String tagID)
+    {
+        this.tagID = tagID;
     }
 
 

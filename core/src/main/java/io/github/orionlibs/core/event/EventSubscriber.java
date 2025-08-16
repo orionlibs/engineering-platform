@@ -7,6 +7,9 @@ public interface EventSubscriber
     void subscribe(String topic);
 
 
+    void process(EventData event);
+
+
     class EventSubscriberFake implements EventSubscriber
     {
         @Override
@@ -14,6 +17,13 @@ public interface EventSubscriber
         {
             //fake implementation
             Logger.info("subscribing to event topic {}", topic);
+        }
+
+
+        @Override
+        public void process(EventData event)
+        {
+            Logger.info("processing event {}", event.getEventID());
         }
     }
 }

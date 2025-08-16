@@ -1,8 +1,7 @@
 package io.github.orionlibs.alarm;
 
-import io.github.orionlibs.alarm.model.AlarmModel;
-import io.github.orionlibs.alarm.model.AlarmsDAO;
-import java.util.List;
+import io.github.orionlibs.alarm.model.AlarmEventModel;
+import io.github.orionlibs.alarm.model.AlarmEventsDAO;
 import java.util.Optional;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,34 +9,27 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class AlarmService
+public class AlarmEventService
 {
-    @Autowired private AlarmsDAO dao;
+    @Autowired private AlarmEventsDAO dao;
 
 
     @Transactional(readOnly = true)
-    public Optional<AlarmModel> getByID(String alarmEventID)
+    public Optional<AlarmEventModel> getByID(String alarmEventID)
     {
         return dao.findById(UUID.fromString(alarmEventID));
     }
 
 
-    @Transactional(readOnly = true)
-    public List<AlarmModel> getEnabledAlarmsByTagID(String tagID)
-    {
-        return dao.findByTagIDAndIsEnabledTrue(tagID);
-    }
-
-
     @Transactional
-    public AlarmModel save(AlarmModel model)
+    public AlarmEventModel save(AlarmEventModel model)
     {
         return dao.saveAndFlush(model);
     }
 
 
     @Transactional
-    public AlarmModel update(AlarmModel model)
+    public AlarmEventModel update(AlarmEventModel model)
     {
         return dao.saveAndFlush(model);
     }
