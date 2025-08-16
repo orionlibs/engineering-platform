@@ -1,5 +1,6 @@
 package io.github.orionlibs.database.model;
 
+import io.github.orionlibs.core.database.OrionModel;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,7 +17,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 @Table(name = "data_providers", schema = "uns", indexes = {
                 @Index(name = "idx_uns_data_providers", columnList = "id")
 })
-public class DataProviderModel
+public class DataProviderModel implements OrionModel
 {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

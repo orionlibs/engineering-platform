@@ -2,6 +2,7 @@ package io.github.orionlibs.core.user.model;
 
 import io.github.orionlibs.core.cryptology.HMACSHAEncryptionKeyProvider;
 import io.github.orionlibs.core.cryptology.SHAEncodingKeyProvider;
+import io.github.orionlibs.core.database.OrionModel;
 import io.github.orionlibs.core.user.setting.model.UserSettingsModel;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -33,7 +34,7 @@ import org.springframework.security.core.userdetails.UserDetails;
                 @Index(name = "idx_uns_users", columnList = "id,username")
 },
                 uniqueConstraints = @UniqueConstraint(name = "uq_users_username", columnNames = "username_hash"))
-public class UserModel implements UserDetails
+public class UserModel implements UserDetails, OrionModel
 {
     @Transient
     private HMACSHAEncryptionKeyProvider hmacSHAEncryptionKeyProvider;

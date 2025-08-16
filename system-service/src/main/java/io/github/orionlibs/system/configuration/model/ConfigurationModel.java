@@ -1,5 +1,6 @@
 package io.github.orionlibs.system.configuration.model;
 
+import io.github.orionlibs.core.database.OrionModel;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -14,7 +15,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 @Table(name = "configuration", schema = "uns", indexes = {
                 @Index(name = "idx_uns_configuration", columnList = "configuration_key")
 })
-public class ConfigurationModel implements Comparable<ConfigurationModel>
+public class ConfigurationModel implements Comparable<ConfigurationModel>, OrionModel
 {
     @Id
     @Column(name = "configuration_key", updatable = false, unique = true, nullable = false)

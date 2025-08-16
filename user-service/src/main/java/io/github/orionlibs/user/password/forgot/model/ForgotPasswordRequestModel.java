@@ -1,5 +1,6 @@
 package io.github.orionlibs.user.password.forgot.model;
 
+import io.github.orionlibs.core.database.OrionModel;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -14,7 +15,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 @Table(name = "forgot_password_requests", schema = "uns", indexes = {
                 @Index(name = "idx_uns_forgot_password_requests", columnList = "forgot_password_code")
 })
-public class ForgotPasswordRequestModel
+public class ForgotPasswordRequestModel implements OrionModel
 {
     @Id
     @Column(name = "user_id", nullable = false)

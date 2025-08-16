@@ -1,5 +1,6 @@
 package io.github.orionlibs.user.api.key.model;
 
+import io.github.orionlibs.core.database.OrionModel;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -11,7 +12,7 @@ import java.util.UUID;
 @Table(name = "api_keys", schema = "uns", indexes = {
                 @Index(name = "idx_uns_api_keys", columnList = "api_key,user_id")
 })
-public class ApiKeyModel
+public class ApiKeyModel implements OrionModel
 {
     @Id
     @Column(name = "api_key", length = 700, nullable = false, updatable = false)

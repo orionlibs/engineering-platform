@@ -1,5 +1,6 @@
 package io.github.orionlibs.core.user.setting.model;
 
+import io.github.orionlibs.core.database.OrionModel;
 import io.github.orionlibs.core.user.model.UserModel;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -21,7 +22,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 @Table(name = "user_settings", schema = "uns", indexes = {
                 @Index(name = "idx_uns_user_settings", columnList = "id,user_id")
 })
-public class UserSettingsModel
+public class UserSettingsModel implements OrionModel
 {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
