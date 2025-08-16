@@ -6,11 +6,6 @@
 --update README.md
 
 
-Create project "store-and-forward-engine-service":
-1--get store-and-forward engines that have quarantined items along with the number of quarantined items for each engine
-2--get engines along with number of stored commands
-
-
 Create project "alarms-service":
 1--get number of active alarms
 2--get active alarms

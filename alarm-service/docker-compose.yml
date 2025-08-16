@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: ../
+      dockerfile: alarm-service/Dockerfile
+      args:
+        serviceName: alarm-service
+    image: alarm-service:latest
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      ALARM_DATABASE_URL: "${ALARM_DATABASE_URL}"
+      ALARM_DATABASE_USERNAME: "${ALARM_DATABASE_USERNAME}"
+      ALARM_DATABASE_PASSWORD: "${ALARM_DATABASE_PASSWORD}"
