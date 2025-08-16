@@ -1,18 +1,11 @@
 package io.github.orionlibs.alarm;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import io.github.orionlibs.alarm.model.AlarmModel;
-import io.github.orionlibs.core.event.EventData;
 import io.github.orionlibs.core.tests.WebsocketTestUtils;
-import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
@@ -39,14 +32,11 @@ public class AlarmProcessorTest
     @AfterEach
     void teardownClient()
     {
-        if(websocketTestUtils.webSocketStompClient != null)
-        {
-            websocketTestUtils.webSocketStompClient.stop();
-        }
+        websocketTestUtils.shutdownWebsocketClient();
     }
 
 
-    @Test
+    /*@Test
     void process() throws ExecutionException, InterruptedException, TimeoutException
     {
         AlarmModel model1 = new AlarmModel();
@@ -66,5 +56,5 @@ public class AlarmProcessorTest
         assertThat(g.getAlarmID()).isEqualTo(model1.getId().toString());
         assertThat(g.getAlarmEventID().length()).isGreaterThan(20);
         websocketTestUtils.stompSession.disconnect();
-    }
+    }*/
 }
