@@ -6,14 +6,6 @@
 --update README.md
 
 
-Create project "alarms-service":
-1--get number of active alarms
-2--get active alarms
-3--get inactive alarms
-4--get alarm details
-The alarm service uses websockets to notify about raised alarms. The alarm service subscribes to MQTT and checks if the tag updated should raise an alarm. The alarm subscribes to the event manager so that if an event that just occurred has an attached alarm, it will raise an alarm
-
-
 Create project "tags-service":
 1--get number of tags
 2--get number of realtime tag providers
@@ -259,6 +251,10 @@ Create project "databases-service" with API:
 6--get long-running queries per database
 7--get queries per second per database
 8--get queries per second from all databases
+
+
+Create project "alarms-service":
+The alarm service subscribes to MQTT and checks if the tag updated should raise an alarm. The alarm subscribes to the event manager so that if an event that just occurred has an attached alarm, it will raise an alarm
 
 
 https://openautomationsoftware.com/knowledge-base/options-reference/

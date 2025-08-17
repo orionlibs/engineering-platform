@@ -14,4 +14,18 @@ public interface AlarmsDAO extends JpaRepository<AlarmModel, UUID>
 
 
     List<AlarmModel> findByTagIDAndIsEnabledTrue(String tagID);
+
+
+    List<AlarmModel> findByIsEnabledTrue();
+
+
+    List<AlarmModel> findByIsEnabledFalse();
+
+
+    @Query("SELECT COUNT(1) FROM AlarmModel c WHERE c.isEnabled = true")
+    long findNumberOfEnabledAlarms();
+
+
+    @Query("SELECT COUNT(1) FROM AlarmModel c WHERE c.isEnabled = false")
+    long findNumberOfDisabledAlarms();
 }

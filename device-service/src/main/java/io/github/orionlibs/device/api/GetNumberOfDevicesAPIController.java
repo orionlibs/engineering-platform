@@ -4,8 +4,6 @@ import io.github.orionlibs.core.api.APIService;
 import io.github.orionlibs.device.ControllerUtils;
 import io.github.orionlibs.device.DeviceService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.Map;
@@ -28,11 +26,7 @@ public class GetNumberOfDevicesAPIController extends APIService
     @Operation(
                     summary = "Retrieves number of devices",
                     description = "Retrieves number of devices",
-                    responses = {@ApiResponse(responseCode = "200", description = "Number of devices found",
-                                    content = @Content(
-                                                    mediaType = MediaType.APPLICATION_JSON_VALUE,
-                                                    schema = @Schema(implementation = DeviceDTO.class)
-                                    ))}
+                    responses = {@ApiResponse(responseCode = "200", description = "Number of devices found")}
     )
     @GetMapping(value = "/devices/count", produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("isAuthenticated()")

@@ -85,4 +85,18 @@ public enum ValueConditionMode implements OrionEnumeration
         }
         return null;
     }
+
+
+    public static String getEnumNameForIntegerValue(int valueTemp)
+    {
+        ValueConditionMode[] values = values();
+        for(ValueConditionMode value : values)
+        {
+            if(value.getAsInt() == valueTemp)
+            {
+                return value.name();
+            }
+        }
+        return null;
+    }
 }

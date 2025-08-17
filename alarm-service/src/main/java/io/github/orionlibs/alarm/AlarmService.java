@@ -16,9 +16,44 @@ public class AlarmService
 
 
     @Transactional(readOnly = true)
-    public Optional<AlarmModel> getByID(String alarmEventID)
+    public long getNumberOfAlarms()
     {
-        return dao.findById(UUID.fromString(alarmEventID));
+        return dao.count();
+    }
+
+
+    @Transactional(readOnly = true)
+    public long getNumberOfEnabledAlarms()
+    {
+        return dao.findNumberOfEnabledAlarms();
+    }
+
+
+    @Transactional(readOnly = true)
+    public long getNumberOfDisabledAlarms()
+    {
+        return dao.findNumberOfDisabledAlarms();
+    }
+
+
+    @Transactional(readOnly = true)
+    public Optional<AlarmModel> getByID(String alarmID)
+    {
+        return dao.findById(UUID.fromString(alarmID));
+    }
+
+
+    @Transactional(readOnly = true)
+    public List<AlarmModel> getEnabledAlarms()
+    {
+        return dao.findByIsEnabledTrue();
+    }
+
+
+    @Transactional(readOnly = true)
+    public List<AlarmModel> getDisabledAlarms()
+    {
+        return dao.findByIsEnabledFalse();
     }
 
 
