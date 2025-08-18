@@ -36,6 +36,9 @@ spring:
     name: Alarm Service
   main:
     banner-mode: off
+  threads:
+    virtual:
+      enabled: true
   jackson:
     property-naming-strategy: SNAKE_CASE
 

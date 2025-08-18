@@ -1,6 +1,9 @@
 spring:
   jackson:
     property-naming-strategy: SNAKE_CASE
+  threads:
+    virtual:
+      enabled: true
 
 error:
   api:
